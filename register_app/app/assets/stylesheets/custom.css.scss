@@ -1,0 +1,137 @@
+@import "bootstrap";
+
+/* ==========================================================================
+Typography
+========================================================================== */
+a:focus { 
+	outline: thin dotted; 
+}
+/* * Improves readability when focused and also mouse hovered in all browsers. */
+a:active, a:hover { 
+	outline: 0; 
+}
+a, nav ul li a { 
+	color: #353535;
+	 -webkit-transition: all 0.5s; 
+	 -moz-transition: all 0.5s; 
+	 -o-transition: all 0.5s; 
+	 transition: all 0.5s; 
+}
+a:hover, a:focus { 
+	color: red; 
+	text-decoration: none; 
+}
+.dark{
+	height:1px;border-width:0;background-color:#222
+
+}
+/* ==========================================================================
+Header
+========================================================================== */
+#logo {
+	float: left;
+	margin-right: 10px;
+	font-size: 1.7em;
+	color: #fff;
+	text-transform: uppercase;
+	letter-spacing: -1px;
+	padding-top: 9px;
+	font-weight: bold;
+	&:hover {
+		color: red;
+		-webkit-transition: all 0.5s; 
+		-moz-transition: all 0.5s; 
+		-o-transition: all 0.5s; 
+		transition: all 0.5s; 
+	}
+}
+
+/* ==========================================================================
+Hero
+========================================================================== */
+.hero {
+    color: #222; 	
+ 	opacity: 1;
+
+	background: asset-data-url("cloud.jpg") no-repeat center center; 
+	-webkit-background-size: cover; 
+	-moz-background-size: cover; 
+	-o-background-size: cover; 
+    background-size: cover; 
+	padding: 65px 0 300px 0; height: auto; 
+    
+    -moz-animation-name: backgroundTransition;
+    -moz-animation-iteration-count: once;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 1.3s;
+
+    -webkit-animation-name: backgroundTransition;
+    -webkit-animation-iteration-count: once;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 1.3s;
+
+    animation-name: backgroundTransition;
+    animation-iteration-count: once;
+    animation-timing-function: ease-in;
+    animation-duration: 1.3s;
+	h1 {
+		font-size: 40px; 
+		text-transform: uppercase;
+		letter-spacing: -1px;
+		margin: 10px; 
+		font-weight: bold;
+		span { 
+			color: #000; 
+			display: inline-block; 
+		}
+	}
+	p { 
+		letter-spacing: 1px; 
+	}
+}
+
+@-webkit-keyframes backgroundTransition {
+    0% {
+ 		opacity: 0.2;
+    }
+    100% {
+ 		opacity: 1;
+    }
+}
+
+/* ==========================================================================
+Footer
+========================================================================== */
+footer a { 
+	color: #a1a9b0; 
+}
+footer { 
+	background-color: #222; 
+	padding: 20px 0 30px; 
+}
+footer p { 
+	color: #fff; 
+	font-size: 12px;
+}
+ul.links { 
+	list-style: none; 
+	color: #fff; 
+	line-height: 25px; 
+}
+ul.links li { 
+	display: inline-block; 
+}
+ul.links li::after { 
+	content: " |"; 
+}
+ul.links li:last-child::after { 
+	content: ""; 
+}
+.links { 
+	text-align: left; 
+}
+.credit { 
+	text-align: right; 
+	font-size: 8px;
+}
+
