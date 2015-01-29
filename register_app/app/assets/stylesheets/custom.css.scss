@@ -1,11 +1,9 @@
 @import "bootstrap";
 
 /* ==========================================================================
-Typography
+	Typography
 ========================================================================== */
-
 a {
-	color: #353535;
 	-webkit-transition: all 0.5s; 
 	-moz-transition: all 0.5s; 
 	-o-transition: all 0.5s; 
@@ -18,18 +16,26 @@ a {
 		outline: 0; 
 	}
 	&:hover, &:focus { 
-	color: red; 
-	text-decoration: none; 
+		color: red; 
+		text-decoration: none; 
 	}
 }
-
-.dark{
-	height:1px;border-width:0;background-color:#222
-
+hr{
+	.dark{
+		height: 1px;
+		border-width: 0;
+		background-color: #222
+	}
 }
-/* ==========================================================================
-Header
-========================================================================== */
+/*========================================================================
+  =	Header 
+  ======================================================================== */
+header{
+	background-color: #222;
+	a{
+		color: #999;
+	}
+}
 #logo {
 	float: left;
 	margin-right: 10px;
@@ -49,7 +55,7 @@ Header
 }
 
 /* ==========================================================================
-Hero
+	Hero
 ========================================================================== */
 .hero {
     color: #222; 	
@@ -109,7 +115,7 @@ Hero
 }
 
 /* ==========================================================================
-Footer
+	Footer
 ========================================================================== */
 footer {
 	background-color: #222; 
@@ -123,7 +129,9 @@ footer {
 		line-height: 25px; 
 	}
 	hr {
-		height:1px;border-width:0;background-color:#777
+		height:1px;
+		border-width:0;
+		background-color:#777
 	}
 
 	ul {
