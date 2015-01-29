@@ -5,18 +5,11 @@ class StaticPagesControllerTest < ActionController::TestCase
     	@base_title = "Ruby on Rails Register Api"
 	end
 
-
   	test "should get home" do
     	get :home
     	assert_response :success
 		assert_select "title", "#{@base_title}"
   	end
-
-  	test "should get help" do
-    	get :help
-    	assert_response :success
-		assert_select "title", "Help | #{@base_title}"
-	end
 
 	test "should get about" do
 		get :about

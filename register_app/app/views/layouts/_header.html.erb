@@ -1,11 +1,11 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <%= link_to "Registreringsapp", '#', id: "logo" %>
+    <%= link_to "Registreringsapp", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to "Start",   '#' %></li>
-        <li><%= link_to "Om",   '#' %></li>
-        <li><%= link_to "Registrering", '#' %></li>
+        <li><%= link_to "Start", root_path %></li>
+        <li><%= link_to "Om", about_path %></li>
+        <li><%= link_to "Registrering", signup_path %></li>
       </ul>
     </nav>
   </div>

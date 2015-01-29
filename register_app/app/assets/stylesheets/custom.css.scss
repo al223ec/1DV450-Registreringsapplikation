@@ -3,24 +3,26 @@
 /* ==========================================================================
 Typography
 ========================================================================== */
-a:focus { 
-	outline: thin dotted; 
-}
-/* * Improves readability when focused and also mouse hovered in all browsers. */
-a:active, a:hover { 
-	outline: 0; 
-}
-a, nav ul li a { 
+
+a {
 	color: #353535;
-	 -webkit-transition: all 0.5s; 
-	 -moz-transition: all 0.5s; 
-	 -o-transition: all 0.5s; 
-	 transition: all 0.5s; 
-}
-a:hover, a:focus { 
+	-webkit-transition: all 0.5s; 
+	-moz-transition: all 0.5s; 
+	-o-transition: all 0.5s; 
+	transition: all 0.5s; 
+	&:focus { 
+		outline: thin dotted; 
+	}
+	/* * Improves readability when focused and also mouse hovered in all browsers. */
+	&:active, &:hover { 
+		outline: 0; 
+	}
+	&:hover, &:focus { 
 	color: red; 
 	text-decoration: none; 
+	}
 }
+
 .dark{
 	height:1px;border-width:0;background-color:#222
 
@@ -51,7 +53,7 @@ Hero
 ========================================================================== */
 .hero {
     color: #222; 	
- 	opacity: 1;
+ 	opacity: 0.9;
 
 	background: asset-data-url("cloud.jpg") no-repeat center center; 
 	-webkit-background-size: cover; 
@@ -88,6 +90,13 @@ Hero
 	p { 
 		letter-spacing: 1px; 
 	}
+	.content{
+		background: rgba(255, 255, 255, 0.4);
+		color: #222;
+		h1 {
+			text-transform: none;
+		}
+	}
 }
 
 @-webkit-keyframes backgroundTransition {
@@ -95,43 +104,45 @@ Hero
  		opacity: 0.2;
     }
     100% {
- 		opacity: 1;
+ 		opacity: 0.9;
     }
 }
 
 /* ==========================================================================
 Footer
 ========================================================================== */
-footer a { 
-	color: #a1a9b0; 
-}
-footer { 
+footer {
 	background-color: #222; 
-	padding: 20px 0 30px; 
-}
-footer p { 
-	color: #fff; 
-	font-size: 12px;
-}
-ul.links { 
-	list-style: none; 
-	color: #fff; 
-	line-height: 25px; 
-}
-ul.links li { 
-	display: inline-block; 
-}
-ul.links li::after { 
-	content: " |"; 
-}
-ul.links li:last-child::after { 
-	content: ""; 
-}
-.links { 
-	text-align: left; 
-}
-.credit { 
-	text-align: right; 
-	font-size: 8px;
+	padding-top: 15px;
+	color: #777;
+	a {
+  		color: #999;
+	}
+	small {
+  		float: right;
+		line-height: 25px; 
+	}
+	hr {
+		height:1px;border-width:0;background-color:#777
+	}
+
+	ul {
+  		float: left;
+  		list-style: none;
+  		line-height: 25px; 
+  		margin-top: 0;
+  		padding-top: 0;
+		li {
+			float: left;
+			margin-left: 15px;
+			display: inline-block; 
+			&::after { 
+				content: " |"; 
+			}
+			&:last-child::after { 
+				content: ""; 
+			}
+		}
+	}
 }
 

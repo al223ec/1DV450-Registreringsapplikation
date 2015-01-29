@@ -1,18 +1,16 @@
-<footer>
-      <div class="container">
-        <hr>
-        <div class="row">
-          <div class="col-md-6">
-            <ul class="links">
-              <li><%= link_to "Start",   '#' %></li>
-              <li><%= link_to "Om",   '#' %></li>
-              <li><%= link_to "Registrering", '#' %></li>
-            </ul>
-          </div>
-          <div class="col-md-6 credit">
-            <p>Utvecklad av <a href="http://www.antonledstrom.se/">Anton Ledstörm</a> 
-            I kursen <em>Webbramverk </em>vid Linnéuniversitetet</p>
-          </div>
-        </div>
-      </div>
-    </footer>
+<footer class="footer">
+  <div class="container">
+  <hr>
+    <nav>
+      <ul>
+        <li><%= link_to "Start", root_path %></li>
+        <li><%= link_to "Om", about_path %></li>
+        <li><%= link_to "Registrering", signup_path %></li>
+      </ul>
+    </nav>
+      <small>
+        Utvecklad av <a href="http://www.antonledstrom.se/">Anton Ledstörm</a> 
+        I kursen <em>Webbramverk </em>vid Linnéuniversitetet
+      </small>
+    </div>
+</footer>
