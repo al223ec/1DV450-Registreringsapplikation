@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def full_title(page_title = '')
-    base_title = "Ruby on Rails Register Api"
+    base_title = "Ruby on Rails Register Api TOERH"
     if page_title.empty?
       base_title
     else

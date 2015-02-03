@@ -1,8 +1,9 @@
 require 'test_helper'
 
 class StaticPagesControllerTest < ActionController::TestCase
+	#base_title bör flyttas ut
 	def setup
-    	@base_title = "Ruby on Rails Register Api"
+    	@base_title = "Ruby on Rails Register Api TOERH"
 	end
 
   	test "should get home" do
