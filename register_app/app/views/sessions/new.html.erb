@@ -1,0 +1,29 @@
+<% provide(:title, "Logga in") %>
+<section>
+	<div class="container">
+	  	<div class="col-md-6 col-md-offset-3">
+			<h2>Logga in</h2>
+	    	<%= form_for(:session, url: login_path, :html => {class: "form-horizontal" }) do |f| %>
+
+			<div class="form-group">
+		  		<%= f.label :email, "Email: ", { :class => "control-label col-sm-2"}%>
+		      	<div class="col-sm-10"> 
+		      		<%= f.email_field :email, class: 'form-control' %>
+				</div>
+			</div>
+			<div class="form-group">
+		      	<%= f.label :password, "Lösenord: ", { :class => "control-label col-sm-2"}%>
+		      	<div class="col-sm-10"> 
+		      		<%= f.password_field :password, class: 'form-control' %>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">  
+		    		<%= f.submit "Logga in", class: "btn btn-primary" %>
+		   		</div>
+		    </div>
+	    <% end %>
+	    <p>Ny användare? <%= link_to "Registrera din app!", signup_path %></p>
+	  </div>
+	</div>
+</section>

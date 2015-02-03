@@ -1,3 +1,60 @@
 // Place all the styles related to the StaticPages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+/* ==========================================================================
+	Hero
+========================================================================== */
+.hero {
+    color: #222; 	
+ 	opacity: 0.9;
+
+	background: asset-data-url("cloud.jpg") no-repeat center center; 
+	-webkit-background-size: cover; 
+	-moz-background-size: cover; 
+	-o-background-size: cover; 
+    background-size: cover; 
+	height: auto; 
+    
+    -moz-animation-name: backgroundTransition;
+    -moz-animation-iteration-count: once;
+    -moz-animation-timing-function: ease-in;
+    -moz-animation-duration: 1.3s;
+
+    -webkit-animation-name: backgroundTransition;
+    -webkit-animation-iteration-count: once;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 1.3s;
+
+    animation-name: backgroundTransition;
+    animation-iteration-count: once;
+    animation-timing-function: ease-in;
+    animation-duration: 1.3s;
+	h1 {
+		font-size: 40px; 
+		text-transform: uppercase;
+		letter-spacing: -1px;
+		font-weight: bold;
+		span { 
+			color: #000; 
+			display: inline-block; 
+		}
+	}
+	p { 
+		letter-spacing: 1px; 
+	}
+	.content{
+		background: rgba(255, 255, 255, 0.4);
+		color: #222;
+		h1 {
+			text-transform: none;
+		}
+	}
+}
+@-webkit-keyframes backgroundTransition {
+    0% {
+ 		opacity: 0.2;
+    }
+    100% {
+ 		opacity: 0.9;
+    }
+}

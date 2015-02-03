@@ -1,6 +1,7 @@
-<% provide(:title, 'Sign up') %>
-<section>
+<% provide(:title, 'Registrera app') %>
+<section class="main">
 	<div class="container">
+	  	<div class="col-md-6 col-md-offset-3">
 		<h2>Registrera applikation</h2>
 		<%= form_for(@user, :html => {class: "form-horizontal" }) do |f| %>
 		<%= render 'shared/error_messages' %>
@@ -35,5 +36,6 @@
 				</div>
 			</div>
 	    <% end %>
+	</div>
 	</div>
 </section>
