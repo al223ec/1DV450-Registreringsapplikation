@@ -1,8 +1,22 @@
 @import "bootstrap";
 
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato);
 /* ==========================================================================
 	Typography
 ========================================================================== */
+h1, h2, h3, h4, h5, a {
+	font-family: 'Montserrat', sans-serif;
+}
+body{
+	font-size: 12px;
+	font-family: 'Lato', sans-serif;
+}
+p{
+	 line-height: 16px;
+	 margin-bottom: 15px;
+}
+
 a {
 	-webkit-transition: all 0.5s; 
 	-moz-transition: all 0.5s; 
@@ -74,7 +88,7 @@ header{
 	text-transform: uppercase;
 	letter-spacing: -1px;
 	padding-top: 9px;
-	font-weight: bold;
+	font-weight: 700;
 	&:hover {
 		color: red;
 		-webkit-transition: all 0.5s; 

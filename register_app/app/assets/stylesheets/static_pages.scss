@@ -14,7 +14,7 @@
 	-o-background-size: cover; 
     background-size: cover; 
 	height: auto; 
-    
+	
     -moz-animation-name: backgroundTransition;
     -moz-animation-iteration-count: once;
     -moz-animation-timing-function: ease-in;
@@ -29,6 +29,7 @@
     animation-iteration-count: once;
     animation-timing-function: ease-in;
     animation-duration: 1.3s;
+
 	h1 {
 		font-size: 40px; 
 		text-transform: uppercase;
@@ -50,7 +51,25 @@
 		}
 	}
 }
+/* Chrome, Safari, Opera */ 
 @-webkit-keyframes backgroundTransition {
+    0% {
+ 		opacity: 0.2;
+    }
+    100% {
+ 		opacity: 0.9;
+    }
+}
+@-moz-keyframes backgroundTransition {
+    0% {
+ 		opacity: 0.2;
+    }
+    100% {
+ 		opacity: 0.9;
+    }
+}
+/* Standard syntax */
+@keyframes backgroundTransition {
     0% {
  		opacity: 0.2;
     }
