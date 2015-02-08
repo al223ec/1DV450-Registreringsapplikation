@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	has_many :applications, dependent: :destroy
 	#to create an accessible attribute som ej finns i db
 	attr_accessor :remember_token 
 
