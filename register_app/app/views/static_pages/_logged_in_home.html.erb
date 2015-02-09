@@ -1,0 +1,19 @@
+<section>
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-4">
+                <%= render 'shared/user_info', user: current_user%>
+                <%= render 'shared/application_form' %>
+            </aside>
+            <div class="col-md-8">
+                <h3>Registrerade applikationer</h3>
+                <% if @applications.any? %>
+                <ol class="applications">
+                    <%= render @applications %>
+                </ol>
+                <%= will_paginate @applications %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>

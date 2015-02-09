@@ -1,11 +1,17 @@
 class Application < ActiveRecord::Base
 	#before_create:generateKey
 	belongs_to :user
+	default_scope -> { order(created_at: :desc) }
+	
 	validates :user_id, presence: true
 	validates :key, presence: true, length: { maximum: 140, minimum:31 }, uniqueness: true
 
 	before_validation(on: :create) do 
 		generateKey
+	end
+
+	def Application.new_key
+		SecureRandom.base64(32).tr('+/=', 'Qrt')
 	end
 
 	private 

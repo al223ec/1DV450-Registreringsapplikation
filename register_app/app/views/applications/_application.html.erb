@@ -1,10 +1,15 @@
 <li id="application-<%= application.id %>">
     <span class="appname"><%= application.name %></span>
-    <dl>
-        <dt>Nyckel: </dt>
-        <dd><span class="content"><%= application.key %></span></dd>
-        <span class="timestamp">
-        Skapad <%= time_ago_in_words(application.created_at) %> ago.
-        </span>
-    </dl>
+    <ul>
+        <li>Nyckel: <strong><%= application.key %></strong></li>
+        <li>
+            <span class="timestamp">
+            Skapad <%= time_ago_in_words(application.created_at) %> ago.
+            </span>
+            <% if current_user_or_admin?(current_user) %>
+            	<%= link_to "delete", application, method: :delete,
+            	data: { confirm: "Är du säker att du vill ta bort denna app?" } %>
+            <% end %>
+        </li>
+    </ul>
 </li>

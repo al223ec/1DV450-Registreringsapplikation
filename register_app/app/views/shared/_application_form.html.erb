@@ -1,0 +1,17 @@
+<section class="application_form">
+    <h3>Registrera applikation</h3>
+    <%= form_for(@application, :html => {class: "form-horizontal" }) do |f| %>
+    <%= render 'shared/error_messages', object: f.object %>
+    <div class="form-group">
+        <%= f.label :password, "Namn:", { :class => "control-label col-sm-2"} %>
+        <div class="col-sm-10">
+            <%= f.text_field :name, placeholder: "Namge applikationen(frivilligt)" %>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit "Registrera applikation", class: "btn btn-primary" %>
+        </div>
+    </div>
+    <% end %>
+</section>

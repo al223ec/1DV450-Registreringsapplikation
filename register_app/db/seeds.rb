@@ -24,3 +24,9 @@ User.create!(
     password_confirmation: password
     )
 end
+
+users = User.order(:created_at).take(6)
+50.times do
+  name = Faker::Name.name
+  users.each { |user| user.applications.create!(name: name) }
+end

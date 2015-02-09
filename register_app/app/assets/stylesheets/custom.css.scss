@@ -99,6 +99,23 @@ header{
 }
 
 
+.user_info{
+	h2{
+		margin-bottom: 0;
+	}
+	span{
+		display: block; 
+		font-size: 12px; 
+		color: #222; 
+	}
+	.gravatar {
+		float: left;
+		margin-right: 10px;
+		margin-top: 5px;
+	}
+
+}
+
 /* ==========================================================================
 	Footer
 ========================================================================== */

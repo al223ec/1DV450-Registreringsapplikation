@@ -3,18 +3,18 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <h2>
-                <%= gravatar_for @user %>
-                <%= @user.name %>
-                </h2>
+                <%= render 'shared/user_info', user: @user %>
+                <% if current_user?(@user) %>
+                    <%= render 'shared/application_form' %>
+                <% end %>
             </div>
             <div class="col-md-8">
                 <% if @user.applications.any? %>
-                <h3>Registrerade applikationer (<%= @user.applications.count %>)</h3>
-                <ol class="applications">
-                    <%= render @applications %>
-                </ol>
-                <%= will_paginate @applications %>
+                    <h3>Registrerade applikationer (<%= @user.applications.count %>)</h3>
+                    <ol class="applications">
+                        <%= render @applications %>
+                    </ol>
+                    <%= will_paginate @applications %>
                 <% end %>
             </div>
         </div>
