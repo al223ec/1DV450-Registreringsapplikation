@@ -1,0 +1,10 @@
+<li id="application-<%= application.id %>">
+    <span class="appname"><%= application.name %></span>
+    <dl>
+        <dt>Nyckel: </dt>
+        <dd><span class="content"><%= application.key %></span></dd>
+        <span class="timestamp">
+        Skapad <%= time_ago_in_words(application.created_at) %> ago.
+        </span>
+    </dl>
+</li>

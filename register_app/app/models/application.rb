@@ -4,15 +4,11 @@ class Application < ActiveRecord::Base
 	validates :user_id, presence: true
 	validates :key, presence: true, length: { maximum: 140, minimum:31 }, uniqueness: true
 
-	#detta verkar inte fungera, 
 	before_validation(on: :create) do 
 		generateKey
 	end
 
 	private 
-		def initializeKey
-		end
-
 		def generateKey
 			if self.key.nil?
 				begin

@@ -1,11 +1,22 @@
 <% provide(:title, @user.name) %>
 <section>
     <div class="container">
-        <div class="col-md-8 col-md-offset-1">
-            <h2>
-            <%= gravatar_for @user %>
-            <%= @user.name %>
-            </h2>
+        <div class="row">
+            <div class="col-md-4">
+                <h2>
+                <%= gravatar_for @user %>
+                <%= @user.name %>
+                </h2>
+            </div>
+            <div class="col-md-8">
+                <% if @user.applications.any? %>
+                <h3>Registrerade applikationer (<%= @user.applications.count %>)</h3>
+                <ol class="applications">
+                    <%= render @applications %>
+                </ol>
+                <%= will_paginate @applications %>
+                <% end %>
+            </div>
         </div>
     </div>
 </section>

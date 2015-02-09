@@ -31,6 +31,7 @@ class ApplicationTest < ActiveSupport::TestCase
 	    assert_not @application.valid?
   	end
 
+  	# TODO:Fixa detta test
   	test "key must be unique" do
 		duplicate_application = @application.dup
 		duplicate_application.key = @application.key
