@@ -21,5 +21,15 @@ class ApplicationsControllerTest < ActionController::TestCase
 			delete :destroy, id: @application
 		end
 		assert_redirected_to login_url
+	end
+
+	test "should redirect destroy for wrong application" do
+		log_in_as(users(:archer))
+		application = applications(:cat_video)
+
+		assert_no_difference 'Application.count' do
+	  		delete :destroy, id: application
 		end
+		assert_redirected_to root_url
+	end
 end
