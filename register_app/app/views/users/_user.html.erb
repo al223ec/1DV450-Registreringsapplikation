@@ -1,11 +1,13 @@
 <li>
-	<%= gravatar_for user %>
-	<%= link_to user.name, user %> | 
-	<%= user.email %>
-	
-	<% if current_user.admin? && !current_user?(user) %>
-	| <%= link_to "ta bort användaren", user, method: :delete, data: { confirm: "Du säker?" } %>
-
-
-	<% end %>
+    <section class="user_info">
+        <%= link_to gravatar_for(user), user %>
+        <h2><%=link_to user.name, user %></h2><span><%= user.email %></span>
+        <% if current_user.admin? && !current_user?(user) %>
+        | <%= link_to "ta bort användaren", user, method: :delete, data: { confirm: "Du säker?" } %>
+        
+        	<% if user.applications.any? %>
+        		<span> <%= user.applications.count %> Registrerade applikationer</span>
+        	<% end %>
+        <% end %>
+    </section>
 </li>

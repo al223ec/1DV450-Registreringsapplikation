@@ -3,6 +3,7 @@
 	Byggd i Windows 8.1. 
 </p>
 <ul>
+	<li>bundle install</li>
 	<li>rails --version v 4.2.0</li>
 	<li>ruby 2.0.0p247 [x64-mingw32]</li>
 	<li>
