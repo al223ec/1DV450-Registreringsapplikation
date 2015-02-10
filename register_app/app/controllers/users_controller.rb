@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params) 
 		if @user.save
 			log_in @user
-			flash[:success] = "Du har registrerat en App!"
+			flash[:success] = "Du har registrerat en användare, nu kan du skapa en applikation och få ut en api nyckel!"
 			redirect_to @user
 		else
 			render 'new'
@@ -56,7 +56,6 @@ class UsersController < ApplicationController
 		end
 
 		# Before filters
-
 
 		# Confirms the correct user.
 		def correct_user

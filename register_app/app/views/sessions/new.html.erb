@@ -4,7 +4,7 @@
         <div class="col-md-8 col-md-offset-1">
             <h2>Logga in</h2>
             <p>
-            Om du har registrerat dig kan du logga in och administrera din api-nyckel.
+            Om du redan har registrerat dig kan du logga in och administrera din api-nyckel.
             </p>
             <%= form_for(:session, url: login_path, :html => {class: "form-horizontal" }) do |f| %>
             <div class="form-group">
@@ -33,7 +33,7 @@
                 </div>
             </div>
             <% end %>
-            <p>Ny användare? <%= link_to "Registrera din app!", signup_path %></p>
+            <p>Ny användare? <%= link_to "Registrera en användare!", signup_path %></p>
         </div>
     </div>
 </section>

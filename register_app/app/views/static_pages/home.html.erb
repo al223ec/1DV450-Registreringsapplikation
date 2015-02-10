@@ -1,5 +1,5 @@
 <% if logged_in? %>
-    <%= render 'logged_in_home' %>
+    <%= render 'shared/profile', object: current_user %>
 <% else %>
     <%= render 'default_home' %>
 <% end %>

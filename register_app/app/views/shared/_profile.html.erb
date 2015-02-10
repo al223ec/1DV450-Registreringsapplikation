@@ -1,0 +1,23 @@
+<% provide(:title, object.name) %>
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <%= render 'shared/user_info', user: object %>
+                
+                <% if current_user?(object) %>
+                    <%= render 'shared/application_form' %>
+                <% end %>
+            </div>
+            <div class="col-md-8">
+                <% if object.applications.any? %>
+                    <h3>Registrerade applikationer (<%= object.applications.count %>)</h3>
+                    <ol class="applications">
+                        <%= render @applications %>
+                    </ol>
+                    <%= will_paginate @applications %>
+                <% end %>
+            </div>
+        </div>
+    </div>
+</section>
