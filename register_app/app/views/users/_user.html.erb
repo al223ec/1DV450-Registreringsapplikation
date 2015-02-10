@@ -4,6 +4,8 @@
 	<%= user.email %>
 	
 	<% if current_user.admin? && !current_user?(user) %>
-	| <%= link_to "delete", user, method: :delete, data: { confirm: "Du säker?" } %>
+	| <%= link_to "ta bort användaren", user, method: :delete, data: { confirm: "Du säker?" } %>
+
+
 	<% end %>
 </li>
