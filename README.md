@@ -1,6 +1,6 @@
 <h2>Webbapplikation för API-nyckel</h2>
 <p>
-	Byggd i Windows 8.1. 
+	Byggd i Windows 8.1, för att komma igång och testköra applikationen borde det bara vara att köra bundle install, däerefter bundle exec rake db:migrate och seed om man vill. Utan seed saknas testdata och ingen admin användare finns.   
 </p>
 <ul>
 	<li>bundle install</li>
