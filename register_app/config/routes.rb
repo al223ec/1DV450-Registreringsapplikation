@@ -10,6 +10,15 @@ Rails.application.routes.draw do
   
   resources :users
   resources :applications,          only: [:create, :destroy]
+
+  namespace :api, defaults: { format: :json },
+                              constraints: { subdomain: 'api' }, path: '/'  do
+    scope module: :v1 do
+    # put your routes here
+    # http://api.lvh.me:3000/events/1
+      resources :events, only: [:show]
+    end
+  end
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
