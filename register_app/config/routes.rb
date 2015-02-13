@@ -15,6 +15,7 @@ Rails.application.routes.draw do
                               constraints: { subdomain: 'api' }, path: '/'  do
     scope module: :v1 do
     # put your routes here
+    # https://veerasundaravel.wordpress.com/2011/11/13/localhost-alternates-for-subdomain/
     # http://api.lvh.me:3000/events/1
       resources :events, only: [:show]
     end

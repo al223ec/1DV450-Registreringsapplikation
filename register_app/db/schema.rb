@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150205154121) do
+ActiveRecord::Schema.define(version: 20150213100930) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "key"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20150205154121) do
 
   add_index "applications", ["user_id", "created_at"], name: "index_applications_on_user_id_and_created_at"
   add_index "applications", ["user_id"], name: "index_applications_on_user_id"
+
+  create_table "calls", force: :cascade do |t|
+    t.text     "ip"
+    t.text     "caller"
+    t.integer  "application_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "calls", ["application_id"], name: "index_calls_on_application_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "name"

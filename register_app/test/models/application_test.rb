@@ -38,4 +38,13 @@ class ApplicationTest < ActiveSupport::TestCase
 		@application.save
 		assert_not duplicate_application.key == @application.key
   	end
+
+  	test "associated calls should be destroyed" do
+		@application.save
+		@application.calls.create!(ip: "170.20.145.2")
+		
+		assert_difference 'Call.count', -1 do
+			@application.destroy
+		end
+  	end
 end

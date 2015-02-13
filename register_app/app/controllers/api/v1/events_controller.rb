@@ -4,10 +4,15 @@ class Api::V1::EventsController < ActionController::Base
 	# include ActionController::Rendering        # enables rendering
 	# include ActionController::MimeResponds     # enables serving different content types like :xml or :json
 	# include AbstractController::Callbacks      # callbacks for your authentication logic
-	respond_to :json
 
+	respond_to :json
 	
 	def show
-		respond_with User.find(params[:id])
+		application = Application.find_by(key: params[:id])
+		respond_with application
 	end
+
+	private 
+		def respond_with_errormessage(message)
+		end
 end
