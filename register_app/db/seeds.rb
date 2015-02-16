@@ -25,8 +25,17 @@
 #    )
 #end
 
-users = User.order(:created_at).take(6)
-50.times do
-  name = Faker::Name.name
-  users.each { |user| user.applications.create!(name: name) }
+# users = User.order(:created_at).take(6)
+# 50.times do
+#  name = Faker::Name.name
+#  users.each { |user| user.applications.create!(name: name) }
+# end
+
+20.times do |n|
+	lat = 59.422728
+	lng = 17.973633
+	Event.create!(
+		lat: lat,
+		lng: lng
+		)
 end
