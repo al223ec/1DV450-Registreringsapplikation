@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217110036) do
+ActiveRecord::Schema.define(version: 20150217144135) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "key"
     t.string   "name"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "api_user_id"
   end
 
-  add_index "applications", ["user_id", "created_at"], name: "index_applications_on_user_id_and_created_at"
-  add_index "applications", ["user_id"], name: "index_applications_on_user_id"
+  add_index "applications", ["api_user_id"], name: "index_applications_on_api_user_id"
+  add_index "applications", ["created_at"], name: "index_applications_on_user_id_and_created_at"
 
   create_table "calls", force: :cascade do |t|
     t.text     "ip"
@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 20150217110036) do
     t.string   "password_digest"
     t.string   "remember_digest"
     t.boolean  "admin",           default: false
+    t.string   "type"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

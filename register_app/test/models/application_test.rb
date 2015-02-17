@@ -3,8 +3,8 @@ require 'test_helper'
 class ApplicationTest < ActiveSupport::TestCase
 
 	def setup
-		@user = users(:mikael)
-		@application = @user.applications.build(name: "applicationName")
+		@api_user = users(:mikael)
+		@application = @api_user.applications.build(name: "applicationName")
 	end
 
 	test "should be valid" do
@@ -12,7 +12,7 @@ class ApplicationTest < ActiveSupport::TestCase
 	end
 
 	test "user id must be present" do
-		@application.user_id = nil
+		@application.api_user_id = nil
 		assert_not @application.valid?
 	end
 

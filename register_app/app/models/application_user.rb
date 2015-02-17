@@ -1,0 +1,2 @@
+class ApplicationUser < User
+end

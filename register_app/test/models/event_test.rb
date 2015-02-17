@@ -10,4 +10,5 @@ class EventTest < ActiveSupport::TestCase
   	test "should be valid" do
     	assert @event.valid?
   	end
+  	
 end

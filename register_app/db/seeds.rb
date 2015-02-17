@@ -25,20 +25,27 @@
 #    )
 #end
 
+ApiUser.create!(
+ 	name: "Example api User",
+	email: "api_example@mail.com",
+	password: "foobar",
+	password_confirmation: "foobar",
+)
+
 # users = User.order(:created_at).take(6)
 # 50.times do
 #  name = Faker::Name.name
 #  users.each { |user| user.applications.create!(name: name) }
 # end
-Position.create!(
-	lat: 59.422728,
-	lng: 17.973633
-)
+#Position.create!(
+#	lat: 59.422728,
+#	lng: 17.973633
+#)
 
-position = Position.order(:created_at).first
+#position = Position.order(:created_at).first
 
-20.times do |n|
-	Event.create!(
-		position_id: position.id
-	)
-end
+#20.times do |n|
+#	Event.create!(
+#		position_id: position.id
+#	)
+#end

@@ -1,5 +1,6 @@
 class Api::V1::ApiBaseController < ApplicationController
-	# https://codelation.com/blog/rails-restful-api-just-add-water
+	
+	# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 	protect_from_forgery with: :null_session
 	before_action :authenticate
     before_action :set_resource, only: [:destroy, :show, :update] 
@@ -92,16 +93,23 @@ class Api::V1::ApiBaseController < ApplicationController
 
 		# Use callbacks to share common setup or constraints between actions.
 		def set_resource(resource = nil)
-			resource ||= resource_class.find(params[:id])
+			resource ||= resource_class.find_by(id: params[:id])
+			if !resource
+				respond_with_error(
+					resource_name + " med det id " + params[:id] + " hittades inte", 
+					:not_found)
+			end
+
 			instance_variable_set("@#{resource_name}", resource)
 		end
 
 		def authenticate
 			authenticate_or_request_with_http_token do |token, options|
 				@application = Application.where(key: token).first
+				
 				if !@application.nil?
 					@user = User.where(id: @application.user_id).first
-					if !@user
+					if !@user.nil?
 						call = @application.calls.build
 						call.ip = request.remote_ip
 						call.caller = request.env['HTTP_USER_AGENT'] 
@@ -109,5 +117,17 @@ class Api::V1::ApiBaseController < ApplicationController
 					end
 				end
 			end
+		end
+
+		def respond_with_error(message, status)
+			render(:json => { 
+				:error => 1, 
+				:message => message, 
+				:method => request.method, 
+				:request_url => request.original_url,
+				:query_parameters => request.query_parameters 
+				}, 
+				:status => status)
+			return # behövs detta?  
 		end
 end

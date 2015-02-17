@@ -2,31 +2,31 @@
 orange:
   name: "Orange"
   created_at: <%= 10.minutes.ago %>
-  user: mikael
+  api_user: mikael
   key: <%= Application.new_key %>
 
 tau_manifesto:
   name: "tau_manifesto"
   created_at: <%= 3.years.ago %>
-  user: mikael
+  api_user: mikael
   key: <%= Application.new_key %>
 
 cat_video:
   name: "cat_video"
   created_at: <%= 2.hours.ago %>
-  user: mikael
+  api_user: mikael
   key: <%= Application.new_key %>
 
 most_recent:
   name: "App recent"
   created_at: <%= Time.zone.now %>
-  user: mikael
+  api_user: mikael
   key: <%= Application.new_key %>
 
 <% 30.times do |n| %>
 application_<%= n %>:
   name: <%= Faker::Name.first_name %>
   created_at: <%= 42.days.ago %>
-  user: mikael
+  api_user: mikael
   key: <%= Application.new_key %>
 <% end %>

@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-4">
-                <%= render 'shared/user_info', user: object %>
+                <%= render 'shared/user_info', api_user: object %>
                 
                 <% if current_user?(object) %>
                     <%= render 'shared/application_form' %>

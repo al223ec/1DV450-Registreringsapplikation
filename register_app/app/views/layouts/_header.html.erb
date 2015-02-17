@@ -17,7 +17,7 @@
                         <li><%= link_to "Om", about_path %></li>
                         <% if logged_in? %>
                         <% if is_admin? %>
-                        <li><%= link_to "Users", users_path %></li>  
+                        <li><%= link_to "Users", api_users_path %></li>  
                         <% end %>
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -25,7 +25,7 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><%= link_to "Profil", current_user %></li>
-                                <li><%= link_to "Inställningar", edit_user_path(current_user) %></li>
+                                <li><%= link_to "Inställningar", edit_api_user_path(current_user) %></li>
                                 <li class="divider"></li>
                                 <li>
                                     <%= link_to "Logga ut", logout_path, method: "delete" %>
