@@ -2,7 +2,7 @@ class Api::V1::ApiBaseController < ApplicationController
 	# https://codelation.com/blog/rails-restful-api-just-add-water
 	protect_from_forgery with: :null_session
 	before_action :authenticate
-    before_action :set_resource, only: [:destroy, :show, :update]
+    before_action :set_resource, only: [:destroy, :show, :update] 
 
     respond_to :json
 

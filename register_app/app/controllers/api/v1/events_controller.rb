@@ -5,28 +5,15 @@ class Api::V1::EventsController < Api::V1::ApiBaseController
 	# include ActionController::Rendering        # enables rendering
 	# include ActionController::MimeResponds     # enables serving different content types like :xml or :json
 	# include AbstractController::Callbacks      # callbacks for your authentication logic
-
-	
-	
-	#def show
-		#application = Application.find_by(key: params[:id])
-		
-		#if application.nil? 
-		#	respond_with_errormessage("Felaktig nyckel din tomte!")
-		#	return
+    
+    # Exempel på det som behöver implementeras
+    private
+    	#def album_params
+        	#params.require(:album).permit(:title)
+      	#end
+		#def query_params
+        	# this assumes that an album belongs to an artist and has an :artist_id
+        	# allowing us to filter by this
+        	#params.permit(:artist_id, :title)
 		#end
-
-		# call = @application.calls.build
-		# call.ip = request.remote_ip
-		# call.caller = request.env['HTTP_USER_AGENT'] 
-		# call.save # spara request
-
-		#respond_with @application
-	#end
-
-	private 
-	# http://futureshock-ed.com/2011/03/04/http-status-code-symbols-for-rails/
-		def respond_with_errormessage(message)
-			render :json => { :error => 1, :message => message }, :status => :bad_request
-		end
 end
