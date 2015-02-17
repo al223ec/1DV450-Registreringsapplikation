@@ -30,12 +30,15 @@
 #  name = Faker::Name.name
 #  users.each { |user| user.applications.create!(name: name) }
 # end
+Position.create!(
+	lat: 59.422728,
+	lng: 17.973633
+)
+
+position = Position.order(:created_at).first
 
 20.times do |n|
-	lat = 59.422728
-	lng = 17.973633
 	Event.create!(
-		lat: lat,
-		lng: lng
-		)
+		position_id: position.id
+	)
 end
