@@ -1,2 +1,0 @@
-class ApplicationUser < User
-end

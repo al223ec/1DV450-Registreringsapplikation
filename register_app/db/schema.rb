@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150217144135) do
+ActiveRecord::Schema.define(version: 20150223120618) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "key"
@@ -46,11 +46,17 @@ ActiveRecord::Schema.define(version: 20150217144135) do
   add_index "event_tags", ["tag_id"], name: "index_event_tags_on_tag_id"
 
   create_table "events", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
     t.integer  "position_id"
+    t.integer  "end_user_id"
+    t.integer  "application_id"
+    t.text     "content"
   end
 
+  add_index "events", ["application_id"], name: "index_events_on_application_id"
+  add_index "events", ["end_user_id", "created_at"], name: "index_events_on_end_user_id_and_created_at"
+  add_index "events", ["end_user_id"], name: "index_events_on_end_user_id"
   add_index "events", ["position_id"], name: "index_events_on_position_id"
 
   create_table "positions", force: :cascade do |t|
@@ -75,8 +81,10 @@ ActiveRecord::Schema.define(version: 20150217144135) do
     t.string   "remember_digest"
     t.boolean  "admin",           default: false
     t.string   "type"
+    t.integer  "application_id"
   end
 
+  add_index "users", ["application_id"], name: "index_users_on_application_id"
   add_index "users", ["email"], name: "index_users_on_email", unique: true
 
 end

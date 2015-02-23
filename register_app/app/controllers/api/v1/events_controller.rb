@@ -11,9 +11,9 @@ class Api::V1::EventsController < Api::V1::ApiBaseController
     	#def album_params
         	#params.require(:album).permit(:title)
       	#end
-		#def query_params
+		def query_params
         	# this assumes that an album belongs to an artist and has an :artist_id
         	# allowing us to filter by this
-        	#params.permit(:artist_id, :title)
-		#end
+        	# params.permit(:artist_id, :title)
+		end
 end

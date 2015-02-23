@@ -2,7 +2,8 @@ class Application < ActiveRecord::Base
 	#before_create:generateKey
 	has_many :calls, dependent: :destroy
 	belongs_to :api_user
-	
+	has_many :end_users
+
 	default_scope -> { order(created_at: :desc) }
 	
 	validates :api_user_id, presence: true

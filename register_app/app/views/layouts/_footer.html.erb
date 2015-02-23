@@ -1,18 +1,24 @@
 <footer class="footer">
-  <div class="container">
-  <hr>
-    <nav>
-      <ul>
-        <li><%= link_to "Start", root_path %></li>
-        <li><%= link_to "Om", about_path %></li>
-        <li><%= link_to "Registrering", signup_path %></li>
-      </ul>
-    </nav>
-      <small>
-        Utvecklad av <a href="//www.antonledstrom.se/">Anton Ledstörm</a> 
-        I kursen <em>Webbramverk </em>vid Linnéuniversitetet.
-        Byggd i <a href="//www.rubyonrails.org/">Ruby On Rails</a> med hjälp av 
-        <a href="//www.railstutorial.org/book/"> Railstutorial.org </a>
-      </small>
+    <div class="container">
+        <div class="row">
+            <hr />
+            <div class="col-sm-4">
+                <nav>
+                    <ul>
+                        <li><%= link_to "Start", root_path %></li>
+                        <li><%= link_to "Om", about_path %></li>
+                        <li><%= link_to "Registrering", signup_path %></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-sm-8">
+                <small>
+                Utvecklad av <a href="//www.antonledstrom.se/">Anton Ledstörm</a>
+                I kursen <em>Webbramverk </em>vid Linnéuniversitetet.
+                Byggd i <a href="//www.rubyonrails.org/">Ruby On Rails</a> med hjälp av
+                <a href="//www.railstutorial.org/book/"> Railstutorial.org </a>
+                </small>
+            </div>
+        </div>
     </div>
 </footer>

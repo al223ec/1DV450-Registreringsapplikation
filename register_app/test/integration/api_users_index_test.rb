@@ -9,7 +9,7 @@ class ApiUsersIndexTest < ActionDispatch::IntegrationTest
 	end
 
 	test "index including pagination" do
-		log_in_as(@api_user)
+		log_in_as_api_user(@api_user)
 		get api_users_path
 		assert_template 'api_users/index'
 		assert_select 'div.pagination'
@@ -20,7 +20,7 @@ class ApiUsersIndexTest < ActionDispatch::IntegrationTest
   	end
 
   	test "index as admin including pagination and delete links" do
-		log_in_as(@admin)
+		log_in_as_api_user(@admin)
 		get api_users_path
 
 		assert_template 'api_users/index'
@@ -39,7 +39,7 @@ class ApiUsersIndexTest < ActionDispatch::IntegrationTest
 	end
 
 	test "index as non-admin" do
-		log_in_as(@non_admin)
+		log_in_as_api_user(@non_admin)
 		get api_users_path
 		
 		assert_select 'a', text: 'delete', count: 0

@@ -12,7 +12,7 @@ class ActiveSupport::TestCase
   	end
 
 	# Logs in a test user.
-	def log_in_as(api_user, options = {})
+	def log_in_as_api_user(api_user, options = {})
 		password    = options[:password]    || 'password'
 		remember_me = options[:remember_me] || '1'
 

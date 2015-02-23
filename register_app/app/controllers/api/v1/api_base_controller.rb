@@ -1,13 +1,18 @@
+require 'jwt'
+
 class Api::V1::ApiBaseController < ApplicationController
 	
 	# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 	protect_from_forgery with: :null_session
-	before_action :authenticate
+	before_action :authenticate_application
+    
     before_action :set_resource, only: [:destroy, :show, :update] 
-
     respond_to :json
 
-	# POST /api/{plural_resource_name}
+    @application
+    @payload
+
+	# POST /{plural_resource_name}
 	def create
 	  	set_resource(resource_class.new(resource_params))
 
@@ -18,21 +23,18 @@ class Api::V1::ApiBaseController < ApplicationController
 		end
 	end
 
-	# DELETE /api/{plural_resource_name}/1
+	# DELETE /{plural_resource_name}/1
 	def destroy
 		get_resource.destroy
 		head :no_content
 	end
 
-	# GET /api/{plural_resource_name}
+	# GET /{plural_resource_name}
 	def index
 		plural_resource_name = "@#{resource_name.pluralize}"
-	  	resources = resource_class.where(query_params)
-	                            .page(page_params[:page])
-	                            .per(page_params[:page_size])
-
+	  	resources = resource_class.where("application_id = ?", @application.id).paginate(page: params[:page], per_page: params[:per_page])
 		instance_variable_set(plural_resource_name, resources)
-	  	respond_with instance_variable_get(plural_resource_name)
+	  	respond_with instance_variable_get(plural_resource_name)  
 	end
 
 	# GET /api/{plural_resource_name}/1
@@ -96,26 +98,29 @@ class Api::V1::ApiBaseController < ApplicationController
 			resource ||= resource_class.find_by(id: params[:id])
 			if !resource
 				respond_with_error(
-					resource_name + " med det id " + params[:id] + " hittades inte", 
+					resource_name + " med id " + params[:id] + " hittades inte", 
 					:not_found)
 			end
 
 			instance_variable_set("@#{resource_name}", resource)
 		end
 
-		def authenticate
-			authenticate_or_request_with_http_token do |token, options|
+		def authenticate_application
+			authenticate_or_request_with_http_token do |token|
+
 				@application = Application.where(key: token).first
-				
-				if !@application.nil?
-					@user = User.where(id: @application.user_id).first
-					if !@user.nil?
-						call = @application.calls.build
-						call.ip = request.remote_ip
-						call.caller = request.env['HTTP_USER_AGENT'] 
-						call.save # spara request allt verkar bra
-					end
+
+				if params[:jwt]
+					@payload = JWT.decode(params[:jwt], @application.key)
 				end
+
+				if !@application.nil?
+					call = @application.calls.build
+					call.ip = request.remote_ip
+					call.caller = request.env['HTTP_USER_AGENT'] 
+					call.save # spara request allt verkar bra
+				end
+				#debugger
 			end
 		end
 

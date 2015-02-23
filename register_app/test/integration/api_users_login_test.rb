@@ -55,12 +55,12 @@ class ApiUsersLoginTest < ActionDispatch::IntegrationTest
   	end
 
 	test "login with remembering" do
-		log_in_as(@api_user, remember_me: '1')
+		log_in_as_api_user(@api_user, remember_me: '1')
 		assert_not_nil cookies['remember_token']
 	end
 
 	test "login without remembering" do
-		log_in_as(@api_user, remember_me: '0')
+		log_in_as_api_user(@api_user, remember_me: '0')
 		assert_nil cookies['remember_token']
 	end
 end

@@ -24,6 +24,12 @@ mallory:
   password_digest: <%= ApiUser.digest('password') %>
   type: ApiUser
 
+endUser:
+  name: Sterling Archer
+  email: example@endUser.gov
+  password_digest: <%= EndUser.digest('password') %>
+  type: EndUser
+
 <% 30.times do |n| %>
 api_user_<%= n %>:
   name:  <%= "User #{n}" %>
@@ -31,3 +37,4 @@ api_user_<%= n %>:
   password_digest: <%= ApiUser.digest('password') %>
   type: ApiUser
 <% end %>
+

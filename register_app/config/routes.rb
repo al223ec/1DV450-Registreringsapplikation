@@ -17,7 +17,14 @@ Rails.application.routes.draw do
       # För att denna routing ska fungera kan man inte använda localhost, lvh.me:3000 kan användas ist
       # https://veerasundaravel.wordpress.com/2011/11/13/localhost-alternates-for-subdomain/
       # http://api.lvh.me:3000/events/1
-      resources :events, only: [:show]
+               
+      post 'end_users/login'   =>  'end_users#login'
+
+      resources :end_users, only: [:show, :index] do
+        resources :events, only: [:show]    
+      end
+
+      resources :events, only: [:show, :index]
     end
   end
 end

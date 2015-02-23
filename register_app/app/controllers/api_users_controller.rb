@@ -9,14 +9,14 @@ class ApiUsersController < ApplicationController
 	end
 
 	def show
-		@api_user = User.find(params[:id])
+		@api_user = ApiUser.find(params[:id])
 		@applications = @api_user.applications.paginate(page: params[:page])
 		@application = @api_user.applications.build if current_user?(@api_user)
 		#debugger ctrl+D för att fortsätta; We can treat this like a Rails console
 	end
 
 	def destroy
-		User.find(params[:id]).destroy
+		ApiUser.find(params[:id]).destroy
 		flash[:success] = "Användaren är borttagen"
 		redirect_to api_users_url
 	end

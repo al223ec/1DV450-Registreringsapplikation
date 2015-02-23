@@ -5,6 +5,13 @@ orange:
   api_user: mikael
   key: <%= Application.new_key %>
 
+app:
+  name: "App"
+  created_at: <%= 20.minutes.ago %>
+  api_user: mikael
+  key: <%= Application.new_key %>
+
+
 tau_manifesto:
   name: "tau_manifesto"
   created_at: <%= 3.years.ago %>

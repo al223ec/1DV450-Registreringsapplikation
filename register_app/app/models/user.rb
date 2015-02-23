@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+	# Basklass för api_user och end_user
 	#to create an accessible attribute som ej finns i db
 	attr_accessor :remember_token 
 

@@ -41,9 +41,16 @@ class PositionTest < ActiveSupport::TestCase
 
     test "should not be able to delete position if it's associated to another obj" do
       @position.save
+      end_user = users(:endUser)
+      app = applications(:app)
       event = Event.new(
         position: @position, 
-        position_id: @position.id
+        position_id: @position.id,
+        end_user: end_user,
+        end_user_id: end_user.id,
+        application: app,
+        application_id: app.id,
+        content: "content"
       )
       event.save
 

@@ -6,7 +6,7 @@ class ApiUsersEditTest < ActionDispatch::IntegrationTest
 	end
 
 	test "unsuccessful edit" do
-		log_in_as(@api_user)
+		log_in_as_api_user(@api_user)
 
 		get edit_api_user_path(@api_user)
 		assert_template 'api_users/edit'
@@ -20,7 +20,7 @@ class ApiUsersEditTest < ActionDispatch::IntegrationTest
 	end
 
 	test "successful edit" do
-		log_in_as(@api_user)
+		log_in_as_api_user(@api_user)
 
 		get edit_api_user_path(@api_user)
 		assert_template 'api_users/edit'
@@ -43,7 +43,7 @@ class ApiUsersEditTest < ActionDispatch::IntegrationTest
 
 	test "successful edit with friendly forwarding" do
 		get edit_api_user_path(@api_user)
-		log_in_as(@api_user)
+		log_in_as_api_user(@api_user)
 
 		assert_redirected_to edit_api_user_path(@api_user)
 		name  = "Foo Bar"

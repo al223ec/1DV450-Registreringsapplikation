@@ -8,9 +8,11 @@
 h1, h2, h3, h4, h5, a {
 	font-family: 'Montserrat', sans-serif;
 }
-body{
+body, html{
 	font-size: 12px;
 	font-family: 'Lato', sans-serif;
+	height: 100%; 
+	word-break: normal;
 }
 p{
 	 line-height: 16px;
@@ -126,24 +128,17 @@ footer {
   		color: #999;
 	}
 	small {
+		padding-top: 3px;
   		float: right;
-		line-height: 25px; 
 	}
 	hr {
 		height:1px;
 		border-width:0;
 		background-color:#777
 	}
-
 	ul {
-  		float: left;
   		list-style: none;
-  		line-height: 25px; 
-  		margin-top: 0;
-  		padding-top: 0;
 		li {
-			float: left;
-			margin-left: 15px;
 			display: inline-block; 
 			&::after { 
 				content: " |"; 
