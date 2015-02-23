@@ -20,11 +20,17 @@ Rails.application.routes.draw do
                
       post 'end_users/login'   =>  'end_users#login'
 
-      resources :end_users, only: [:show, :index] do
-        resources :events, only: [:show]    
+      resources :end_users, only: [:show, :index, :create] do
+        resources :events, only: [:show, :create, :index, :update] do 
+          resources :tags, only: [:index]
+        end
       end
 
-      resources :events, only: [:show, :index]
+      resources :events, only: [:show, :index] do        
+          resources :tags, only: [:show, :index, :create]
+      end
+      
+      resources :tags, only: [:show, :index, :create]
     end
   end
 end

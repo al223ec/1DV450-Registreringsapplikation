@@ -1,3 +1,16 @@
+<h2>Api:et</h2>
+<p>
+
+</p>
+
+<dl>
+	<dh></dh>
+	<dd></dd>
+</dl>
+
+Default 30 
+
+
 <h2>Webbapplikation för API-nyckel</h2>
 <p>
 	Byggd i Windows 8.1, för att komma igång och testköra applikationen borde det bara vara att köra bundle install, däerefter bundle exec rake db:migrate och seed om man vill. Utan seed saknas testdata och ingen admin användare finns.   
