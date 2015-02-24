@@ -29,6 +29,7 @@ endUser:
   email: example@endUser.gov
   password_digest: <%= EndUser.digest('password') %>
   type: EndUser
+  application: applications(:app)
 
 <% 30.times do |n| %>
 api_user_<%= n %>:

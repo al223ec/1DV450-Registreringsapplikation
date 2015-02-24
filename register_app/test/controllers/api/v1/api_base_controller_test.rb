@@ -1,4 +1,4 @@
-require 'test_helper'
+require 'api_test_helper'
 
 class ApiBaseControllerTest < ActionController::TestCase
   # test "the truth" do

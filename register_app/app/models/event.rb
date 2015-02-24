@@ -4,7 +4,7 @@ class Event < ActiveRecord::Base
 	belongs_to :application
 	
 	has_many :event_tags
-  	has_many :tags, through: :event_tags
+  	has_many :tags, through: :event_tags,  autosave: true, dependent: :destroy
 	
 	default_scope -> { order(created_at: :desc) }
 

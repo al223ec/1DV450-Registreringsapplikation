@@ -20,7 +20,9 @@ module Api
 			if get_resource.save
 		    	render :show, status: :created
 		  	else
-				render json: get_resource.errors, status: :unprocessable_entity
+		  		errors = get_resource.errors.full_messages 
+		  		respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
+				#render json: get_resource.errors, status: :unprocessable_entity
 			end
 		end
 
@@ -33,7 +35,7 @@ module Api
 		# GET /{plural_resource_name}
 		def index
 			plural_resource_name = "@#{resource_name.pluralize}"
-		  	resources = resource_class.where(query_params).paginate(page: params[:page], per_page: params[:per_page])
+		  	resources = resource_class.includes(include_params).where(query_params).paginate(page: params[:page], per_page: params[:per_page])
 			instance_variable_set(plural_resource_name, resources)
 		  	respond_with instance_variable_get(plural_resource_name)  
 		end
@@ -67,6 +69,9 @@ module Api
 				{}
 			end
 
+			def include_params
+				{}
+			end
 			# Returns the allowed parameters for pagination
 			# @return [Hash]
 			def page_params
@@ -122,12 +127,21 @@ module Api
 			end
 
 			def authenticate_user
+				@end_user = nil
 				if params[:jwt]
 					# Detta är en dålig lösning men får duga för tillfället
-					payload = JWT.decode(params[:jwt], @application.key)
-	  				@end_user = EndUser.find(payload["end_user_id"])
+					begin 
+						payload = JWT.decode(params[:jwt], @application.name)
+	  					@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
+	  				rescue
+						respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
+						return
+				    end
+				end
 
-	  				!@end_user.nil?
+				if @end_user.nil?
+					respond_with_error("Du måste logga in och få ut en 'jwt' som sedan måste skickas med reqesten som en url paramater för att använda denna funktion", :unauthorized)
+					return; 
 				end
 			end
 

@@ -5,9 +5,12 @@ module Api
 		def login
 		    end_user = EndUser.find_by(email: params[:email].downcase)
 		    if end_user && end_user.authenticate(params[:password])
-		    	payload = JWT.encode({
-				  end_user_id: end_user.id,
-				}, @application.key)
+				# Detta är en dålig lösning men får duga för tillfället, 
+				# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som
+				# man sedan
+		    	payload = JWT.encode({ 
+		    		end_user_id: end_user.id				
+		    		}, @application.name)
 
 				render(:json => { :jwt => payload }, :status => 200)
 		    else

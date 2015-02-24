@@ -12,25 +12,23 @@ Rails.application.routes.draw do
   resources :applications,          only: [:create, :destroy]
 
   namespace :api, defaults: { format: :json },
-                              constraints: { subdomain: 'api' }, path: '/'  do
+    constraints: { subdomain: 'api' }, path: '/'  do
     scope module: :v1 do
       # För att denna routing ska fungera kan man inte använda localhost, lvh.me:3000 kan användas ist
       # https://veerasundaravel.wordpress.com/2011/11/13/localhost-alternates-for-subdomain/
       # http://api.lvh.me:3000/events/1
-               
+                   
       post 'end_users/login'   =>  'end_users#login'
 
       resources :end_users, only: [:show, :index, :create] do
-        resources :events, only: [:show, :create, :index, :update] do 
-          resources :tags, only: [:index]
-        end
+          resources :events, only: [:show, :index, :destroy]
       end
 
-      resources :events, only: [:show, :index] do        
-          resources :tags, only: [:show, :index, :create]
+      resources :events, only: [:show, :index, :create, :destroy]
+
+      resources :tags, only: [:show, :index, :create] do
+          resources :events, only: [:index, :destroy]
       end
-      
-      resources :tags, only: [:show, :index, :create]
     end
   end
 end
