@@ -30,6 +30,7 @@ endUser:
   password_digest: <%= EndUser.digest('password') %>
   type: EndUser
   application: applications(:app)
+  application_id: applications(:app).id
 
 <% 30.times do |n| %>
 api_user_<%= n %>:

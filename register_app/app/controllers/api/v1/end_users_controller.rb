@@ -3,8 +3,8 @@ module Api
 	    before_action :authenticate_user, only: [:destroy, :update]
 
 		def login
-		    end_user = EndUser.find_by(email: params[:email].downcase)
-		    if end_user && end_user.authenticate(params[:password])
+		    end_user = EndUser.find_by(email: params[:end_user][:email].downcase).try(:authenticate, params[:end_user][:password])
+		    if end_user
 				# Detta är en dålig lösning men får duga för tillfället, 
 				# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som
 				# man sedan
@@ -25,7 +25,11 @@ module Api
 			end
 
 			def end_user_params
-				params.require(:end_user).permit(:name, :email, :password, :password_confirmation)
+				params.require(:end_user).permit(:name, :email, :password, :password_confirmation, :application_id)
+			end
+
+			def end_user_simple_params
+				params.require(:end_user).permit(:email, :password)
 			end
 	end
 end
