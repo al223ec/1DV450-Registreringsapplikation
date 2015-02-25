@@ -1,19 +1,13 @@
 require 'api_test_helper'
 
 module Api
-	class V1::EventsControllerTest < ActionController::TestCase
+	class V1::EventsControllerTest < ApiBaseControllerTest
 		def setup
-			@end_user = users(:endUser)
-			@application = applications(:app)
-			@end_user.application = @application
-			@end_user.save
-			@request.env['HTTP_ACCEPT'] = "application/json"
-			@request.env['HTTP_AUTHORIZATION'] = "Token token=#{@application.key}"
+			setup_header_and_user
 
 			@event = events(:banana)
 			@event.end_user = @end_user
 			@position = positions(:one)
-
 		end		
 			
 		test "should get index and be successful" do
@@ -28,7 +22,7 @@ module Api
 
 		test "post new invalid event information" do
 			assert_no_difference 'Event.count' do
-				post :create, end_user: { 
+				post :create, jwt: @jwt, event: { 
 					content:  "",
 					position_id: @position.id 
 				}
@@ -40,18 +34,17 @@ module Api
 			event_attr = { content: "Example content "}
 			
 			assert_difference 'Event.count', 1 do
-				post :create, event: { 
-					content:  user_attributes[:name], 
-					email: user_attributes[:email],
-					password: user_attributes[:password],
-					password_confirmation: user_attributes[:password],
-					application_id: @application.id
+				post :create, jwt: @jwt, event: { 
+					content:  event_attr[:content],
+					position_id: @position.id,
+					end_user_id: @end_user.id,
+					application_id: @application_id,
 				}
 			end
 
 			assert_response :created
 			body = JSON.parse(response.body)
-			assert body["end_user"]["email"] == user_attributes[:email]
+			assert body["event"]["content"] == event_attr[:content]
 		end
 
 	#require 'spec_helper'

@@ -7,12 +7,6 @@ class ActiveSupport::TestCase
   	fixtures :all
 
   	def log_in_as_end_user
-  		#end_user = users(:endUser)
-  		#app = applications(:app)
- # 		user = {password: 'password', email: ""}
-#
-		#post api_end_users_login_url, { end_user: user }, :json, :subdomain => "api" 
-		
-  		#post api_end_users_login_url.json #, '{"foo":"bar", "bool":true}', "CONTENT_TYPE" => 'application/json'
+
 	end
 end

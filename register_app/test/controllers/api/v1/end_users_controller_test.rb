@@ -1,14 +1,9 @@
 require 'api_test_helper'
 
 module Api
-	class V1::EndUsersControllerTest < ActionController::TestCase
+	class V1::EndUsersControllerTest < ApiBaseControllerTest
 		def setup
-			@end_user = users(:endUser)
-			@application = applications(:app)
-			@end_user.application = @application
-			@end_user.save
-			@request.env['HTTP_ACCEPT'] = "application/json"
-			@request.env['HTTP_AUTHORIZATION'] = "Token token=#{@application.key}"
+			setup_header_and_user
 		end		
 
 		test "login should be successful" do
