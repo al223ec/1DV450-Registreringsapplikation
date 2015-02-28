@@ -8,8 +8,8 @@ module Api
 			@event = events(:banana)
 			@event.end_user = @end_user
 			@position = positions(:one)
-		end		
-			
+		end
+
 		test "should get index and be successful" do
 			get :index
 			assert_response :success
@@ -21,20 +21,22 @@ module Api
 		end
 
 		test "post new invalid event information" do
+			@request.env['HTTP_JWT'] = @end_user.get_jwt
 			assert_no_difference 'Event.count' do
-				post :create, jwt: @jwt, event: { 
+				post :create, event: {
 					content:  "",
-					position_id: @position.id 
+					position_id: @position.id
 				}
 			end
 			assert_response :unprocessable_entity
 		end
 
 		test "post new valid event " do
+			@request.env['HTTP_JWT'] = @end_user.get_jwt
 			event_attr = { content: "Example content "}
-			
+
 			assert_difference 'Event.count', 1 do
-				post :create, jwt: @jwt, event: { 
+				post :create, event: {
 					content:  event_attr[:content],
 					position_id: @position.id,
 					end_user_id: @end_user.id,
@@ -47,39 +49,76 @@ module Api
 			assert body["event"]["content"] == event_attr[:content]
 		end
 
-	#require 'spec_helper'
+		test "post new valid event but invalid JWT" do
+			@request.env['HTTP_JWT'] = "invalid jwt"
 
-	#describe UsersController do
-	#   render_views # if you have RABL views
+			event_attr = { content: "Example content "}
+			assert_no_difference 'Event.count' do
+				post :create, event: {
+					content:  event_attr[:content],
+					position_id: @position.id,
+					end_user_id: @end_user.id,
+					application_id: @application_id,
+				}
+			end
 
-	#  before do
-	#  @user_attributes = { email: "test@example.com", password: "mypass" }
-	# end
+			assert_response :unauthorized
+		end
 
-	#   describe "POST to create" do
+		test "post new valid event but no JWT" do
 
-	#     it "should change the number of users" do
-	#       lambda do
-	#        post :create, user: @user_attributes
-	#       end.should change(User, :count).by(1)
-	#    end
+			event_attr = { content: "Example content "}
+			assert_no_difference 'Event.count' do
+				post :create, event: {
+					content:  event_attr[:content],
+					position_id: @position.id,
+					end_user_id: @end_user.id,
+					application_id: @application_id,
+				}
+			end
 
-	#    it "should be successful" do
-	#      post :create, user: @user_attributes
-	#      response.should be_success
-	#    end
-	#    
+			assert_response :unauthorized
+		end
 
-	#    it "should set @user" do
-	#      post :create, user: @user_attributes
-	#      assigns(:user).email.should == @user_attributes[:email]
-	#    end
+		test "post new valid event but user belongs to another application" do
+			other_user = users(:otherEndUser)
+			other_user.application = applications(:orange)
 
-	#    it "should return created user in json" do # depend on what you return in action
-	#      post :create, user: @user_attributes
-	#      body = JSON.parse(response.body)
-	#      body["email"].should == @user_attributes[:email]
-	#     end
-	# end
+			@request.env['HTTP_JWT'] = other_user.get_jwt
+
+			event_attr = { content: "Example content "}
+			assert_no_difference 'Event.count' do
+				post :create, event: {
+					content:  event_attr[:content],
+					position_id: @position.id,
+					end_user_id: other_user.id,
+					application_id: other_user.application_id,
+				}
+			end
+
+			assert_response :unauthorized
+		end
+
+		test "successful edit of event" do
+			@request.env['HTTP_JWT'] = @end_user.get_jwt
+			new_content = "new content"
+
+			event = events(:banana)
+			event.end_user = @end_user
+			event.application = @application
+
+			patch :update, id: event.id, event: {
+				content: new_content,
+				tags:{ "0" => "new tag" },
+				position_id: @position.id
+			}
+			assert_response :success
+
+			body = JSON.parse(response.body)
+
+			assert body["event"]["content"] == new_content
+			assert body["event"]["tags"][0]["tag"]["name"] == "new tag"
+		end
+
 	end
 end

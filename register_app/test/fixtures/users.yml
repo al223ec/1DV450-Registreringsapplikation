@@ -32,6 +32,13 @@ endUser:
   application: applications(:app)
   application_id: applications(:app).id
 
+otherEndUser:
+  name: Archer
+  email: otherEndUser@endUser.gov
+  password_digest: <%= EndUser.digest('password') %>
+  type: EndUser
+
+
 <% 30.times do |n| %>
 api_user_<%= n %>:
   name:  <%= "User #{n}" %>

@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   get     'login'   =>  'sessions#new'
   post    'login'   =>  'sessions#create'
   delete  'logout'  =>  'sessions#destroy'
-  
+
   resources :api_users
   resources :applications,          only: [:create, :destroy]
 
@@ -17,14 +17,14 @@ Rails.application.routes.draw do
       # För att denna routing ska fungera kan man inte använda localhost, lvh.me:3000 kan användas ist
       # https://veerasundaravel.wordpress.com/2011/11/13/localhost-alternates-for-subdomain/
       # http://api.lvh.me:3000/events/1
-                   
+
       post 'end_users/login'   =>  'end_users#login'
 
       resources :end_users, only: [:show, :index, :create] do
           resources :events, only: [:show, :index, :destroy]
       end
 
-      resources :events, only: [:show, :index, :create, :destroy]
+      resources :events
 
       resources :tags, only: [:show, :index, :create] do
           resources :events, only: [:index, :destroy]

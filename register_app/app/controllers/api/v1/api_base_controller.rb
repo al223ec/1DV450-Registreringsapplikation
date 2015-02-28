@@ -2,26 +2,27 @@ require 'jwt'
 
 module Api
 	class V1::ApiBaseController < ApplicationController
-		
+
 		# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 		protect_from_forgery with: :null_session
 		before_action :authenticate_application
-	    before_action :set_resource, only: [:destroy, :show, :update] 
+		before_action :set_base_url
+		before_action :set_resource, only: [:destroy, :show, :update]
 
-	    respond_to :json
+		respond_to :json
 
-	    @application
-	    @end_user
+		@application
+		@end_user
 
 		# POST /{plural_resource_name}
 		def create
-		  	set_resource(resource_class.new(resource_params))
+			set_resource(resource_class.new(resource_params))
 
 			if get_resource.save
-		    	render :show, status: :created
-		  	else
-		  		errors = get_resource.errors.full_messages 
-		  		respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
+				render :show, status: :created
+			else
+				errors = get_resource.errors.full_messages
+				respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
 				#render json: get_resource.errors, status: :unprocessable_entity
 			end
 		end
@@ -35,9 +36,9 @@ module Api
 		# GET /{plural_resource_name}
 		def index
 			plural_resource_name = "@#{resource_name.pluralize}"
-		  	resources = resource_class.includes(include_params).where(query_params).paginate(page: params[:page], per_page: params[:per_page])
+			resources = resource_class.includes(include_params).where(query_params).paginate(page: params[:page], per_page: params[:per_page])
 			instance_variable_set(plural_resource_name, resources)
-		  	respond_with instance_variable_get(plural_resource_name)  
+		respond_with instance_variable_get(plural_resource_name)
 		end
 
 		# GET /api/{plural_resource_name}/1
@@ -54,7 +55,7 @@ module Api
 			end
 		end
 
-	    private
+		private
 			# Returns the resource from the created instance variable
 			# @return [Object]
 			def get_resource
@@ -103,9 +104,7 @@ module Api
 			def set_resource(resource = nil)
 				resource ||= resource_class.find_by(id: params[:id])
 				if !resource
-					respond_with_error(
-						resource_name + " med id " + params[:id] + " hittades inte", 
-						:not_found)
+					respond_with_error(resource_name + " med id " + params[:id] + " hittades inte", :not_found)
 				end
 
 				instance_variable_set("@#{resource_name}", resource)
@@ -119,43 +118,52 @@ module Api
 					if !@application.nil?
 						call = @application.calls.build
 						call.ip = request.remote_ip
-						call.caller = request.env['HTTP_USER_AGENT'] 
+						call.caller = request.env['HTTP_USER_AGENT']
 						call.save # spara request allt verkar bra
 					end
 					#debugger
 				end
 			end
 
+			def set_base_url
+					@base_url = request.original_url
+			end
+
 			def authenticate_user
 				@end_user = nil
-				if params[:jwt]
+
+				jwt = request.headers['HTTP_JWT']
+				if jwt
 					# Detta är en dålig lösning men får duga för tillfället
-					begin 
-						payload = JWT.decode(params[:jwt], @application.name)
+					begin
+							payload = JWT.decode(jwt, @application.name)
 	  					@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
 	  				rescue
-						respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
-						return
+							respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
+							return
 				    end
 				end
 
 				if @end_user.nil?
 					respond_with_error("Du måste logga in och få ut en 'jwt' som sedan måste skickas med reqesten som en url paramater för att använda denna funktion", :unauthorized)
-					return; 
+					return;
+				elsif @end_user.application_id != @application.id
+					respond_with_error("Denna användare tillhör inte den aktuella applikation och requesten kan därför inte genomföras", :unauthorized)
+					return;
 				end
 			end
 
 
 			def respond_with_error(message, status)
-				render(:json => { 
-					:error => 1, 
-					:message => message, 
-					:method => request.method, 
+				render(:json => {
+					:error => 1,
+					:message => message,
+					:method => request.method,
 					:request_url => request.original_url,
-					:query_parameters => request.query_parameters 
-					}, 
+					:query_parameters => request.query_parameters
+					},
 					:status => status)
-				return # behövs detta?  
+				return # behövs detta?
 			end
 		end
 end

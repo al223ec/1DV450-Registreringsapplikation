@@ -1,4 +1,1 @@
-json.tag do
-  json.id    @tag.id
-  json.name @tag.name
-end
+json.partial! 'api/v1/tags/tag', tag: @tag

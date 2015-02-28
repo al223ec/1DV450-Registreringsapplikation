@@ -1,5 +1,1 @@
-json.end_user do
-  json.id    @end_user.id
-  json.name @end_user.name
-  json.email @end_user.email
-end
+json.partial! 'api/v1/end_users/end_user', end_user: @end_user

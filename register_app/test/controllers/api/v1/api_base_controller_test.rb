@@ -9,6 +9,5 @@ class ApiBaseControllerTest < ActionController::TestCase
 		@end_user = users(:endUser)
 		@end_user.application = @application
 		@end_user.save
-		@jwt = @end_user.get_jwt
 	end
 end
