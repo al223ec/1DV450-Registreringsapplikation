@@ -6,8 +6,9 @@ module Api
 		# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 		protect_from_forgery with: :null_session
 		before_action :authenticate_application
-		before_action :set_base_url
+
 		before_action :set_resource, only: [:destroy, :show, :update]
+		before_action :set_new_resource, only:[:create]
 
 		respond_to :json
 
@@ -16,14 +17,11 @@ module Api
 
 		# POST /{plural_resource_name}
 		def create
-			set_resource(resource_class.new(resource_params))
-
 			if get_resource.save
 				render :show, status: :created
 			else
 				errors = get_resource.errors.full_messages
 				respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
-				#render json: get_resource.errors, status: :unprocessable_entity
 			end
 		end
 
@@ -38,7 +36,7 @@ module Api
 			plural_resource_name = "@#{resource_name.pluralize}"
 			resources = resource_class.includes(include_params).where(query_params).paginate(page: params[:page], per_page: params[:per_page])
 			instance_variable_set(plural_resource_name, resources)
-		respond_with instance_variable_get(plural_resource_name)
+			respond_with instance_variable_get(plural_resource_name)
 		end
 
 		# GET /api/{plural_resource_name}/1
@@ -69,7 +67,7 @@ module Api
 			def query_params
 				{}
 			end
-
+			# Om någon extra tabell behöver laddas överlagras denna metod
 			def include_params
 				{}
 			end
@@ -110,23 +108,20 @@ module Api
 				instance_variable_set("@#{resource_name}", resource)
 			end
 
+			def set_new_resource
+				set_resource(resource_class.new(resource_params))
+			end
+
 			def authenticate_application
 				authenticate_or_request_with_http_token do |token|
-
 					@application = Application.where(key: token).first
-
 					if !@application.nil?
 						call = @application.calls.build
 						call.ip = request.remote_ip
 						call.caller = request.env['HTTP_USER_AGENT']
 						call.save # spara request allt verkar bra
 					end
-					#debugger
 				end
-			end
-
-			def set_base_url
-					@base_url = request.original_url
 			end
 
 			def authenticate_user
@@ -134,14 +129,14 @@ module Api
 
 				jwt = request.headers['HTTP_JWT']
 				if jwt
-					# Detta är en dålig lösning men får duga för tillfället
+					# Detta är en sådär lösning men får duga för tillfället
 					begin
 							payload = JWT.decode(jwt, @application.name)
 	  					@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
-	  				rescue
-							respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
-							return
-				    end
+  				rescue
+						respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
+						return
+			    end
 				end
 
 				if @end_user.nil?

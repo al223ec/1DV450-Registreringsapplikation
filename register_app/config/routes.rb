@@ -24,6 +24,7 @@ Rails.application.routes.draw do
           resources :events, only: [:show, :index, :destroy]
       end
 
+      post 'events/query' => 'events#query'
       resources :events
 
       resources :tags, only: [:show, :index, :create] do

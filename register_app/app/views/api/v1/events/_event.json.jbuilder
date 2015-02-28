@@ -3,10 +3,9 @@ json.event do
   json.content    event.content
   json.created_at event.created_at
 
-  json.url format_url(@base_url, event.id)
+  json.url format_url("events", event.id)
 
   json.tags do
-    @nested = event.id.to_s << "/tags"
     json.partial! 'api/v1/tags/tag', collection: event.tags, as: :tag
   end
 end

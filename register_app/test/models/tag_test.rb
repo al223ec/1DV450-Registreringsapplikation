@@ -23,4 +23,11 @@ class TagTest < ActiveSupport::TestCase
   		@tag.name = 'a'
     	assert_not @tag.valid?
   	end
+
+    test "should not be able to ad tag with same name" do
+      @tag.save
+      tag = Tag.new(name: @tag.name)
+      assert_not tag.valid?
+    end
+
 end

@@ -120,5 +120,20 @@ module Api
 			assert body["event"]["tags"][0]["tag"]["name"] == "new tag"
 		end
 
+		test "unsuccessful edit of event" do
+			@request.env['HTTP_JWT'] = @end_user.get_jwt
+			new_content = ""
+
+			event = events(:banana)
+			event.end_user = @end_user
+			event.application = @application
+
+			patch :update, id: event.id, event: {
+				content: new_content,
+				tags:{ "0" => "new tag" },
+				position_id: @position.id
+			}
+			assert_response :unprocessable_entity
+		end
 	end
 end

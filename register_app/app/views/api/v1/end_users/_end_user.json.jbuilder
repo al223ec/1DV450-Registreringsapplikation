@@ -4,5 +4,5 @@ json.end_user do
   json.email      end_user.email
   json.created_at end_user.created_at
 
-  json.url format_url(@base_url, end_user.id)
+  json.url format_url("end_users", end_user.id)
 end

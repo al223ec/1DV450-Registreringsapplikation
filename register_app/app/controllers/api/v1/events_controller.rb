@@ -1,35 +1,45 @@
 module Api
     class V1::EventsController < V1::ApiBaseController
         before_action :authenticate_user, only: [:destroy, :create, :update]
+
         # Denna metod överlagras för att den är unik iom att user_id och application id ska tilldelas
         # samt taggarna hanteras
         def create
-            set_resource(resource_class.new(resource_params))
-
             @event.end_user_id = @end_user.id
             @event.application_id = @application.id
 
             save_tags
-            if @event.save
-                render :show, status: :created
-            else
-                errors = @event.errors.full_messages
-                respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
-            end
+            super
         end
 
         def update
             save_tags
-            if @event.update(params.require(:event).permit(:content, :position_id))
-                render :show
+            super
+        end
+
+        def query
+            if queries = params[:queries]
+                sql = ''
+                query_hash = {}
+                # Osäker hur säkert detta är, men att parmatisera brukar vara ok
+                queries.each do | index, query |
+                    if sql == ''
+                        sql << "content LIKE :q#{index} "
+                    else
+                        sql << "AND content LIKE :q#{index} "
+                    end
+                    query_hash[:"q#{index}"] = "%#{query}%"
+                end
+
+                @events = Event.where(sql, query_hash) #.paginate(page: params[:page], per_page: params[:per_page])
+                render :index
             else
-                errors = @event.errors.full_messages
-                respond_with_error("Något har gått fel, #{errors}", :unprocessable_entity)
+                render json: get_resource.errors, status: :unprocessable_entity
             end
         end
 
         private
-
+            # nås via resource_params i bas klassen
         	def event_params
             	params.require(:event).permit(:content, :position_id)
           	end
@@ -43,10 +53,10 @@ module Api
                 elsif !params[:tag_id].nil?
                     # om man når denna kontroller via /tags/:id/events
                     tag_id = params[:tag_id].to_i
-                    {tags: { id: tag_id }}
+                    { tags: { id: tag_id }, application_id: @application.id }
                 else
                     # om man når denna kontroller via /events/
-                    {application_id: @application.id}
+                    { application_id: @application.id}
                 end
             end
 
