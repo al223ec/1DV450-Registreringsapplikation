@@ -15,11 +15,6 @@ module Api
 			assert_response :success
 		end
 
-		test "should get show and be successful" do
-			get :show, id: @event.id
-			assert_response :success
-		end
-
 		test "post new invalid event information" do
 			@request.env['HTTP_JWT'] = @end_user.get_jwt
 			assert_no_difference 'Event.count' do
