@@ -13,7 +13,7 @@ class Position < ActiveRecord::Base
       end
     end
 
-    after_validation :reverse_geocode #, if: ->(obj){ obj.address.present? and obj.address_changed? }
+    after_validation :reverse_geocode, if: ->(obj){ !obj.city.present? or obj.city_changed? }
 
     def address
       [street, city, state, country].compact.join(', ')

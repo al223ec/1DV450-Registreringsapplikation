@@ -1,15 +1,18 @@
 module Api
     class V1::PositionsController < V1::ApiBaseController
         before_action :authenticate_user, only: [:destroy, :create, :update]
+        before_action :set_resource, only: [:nearby]
 
-    def show
-      if @position.geocoded?
-        @position.nearbys(30)                      # other objects within 30 miles
-        @position.distance_from([40.714,-100.234]) # distance from arbitrary point to object
-        @position.bearing_to("Paris, France")      # direction from object to arbitrary point
-        #debugger
+    def nearby
+      radius = 30
+
+      if params.has_key?(:radius)
+        radius = params[:radius].to_i
       end
-      super
+
+      @positions = @position.nearbys(radius)
+      @show_events = true
+      render :index
     end
 
     def position_params

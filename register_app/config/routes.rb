@@ -31,8 +31,8 @@ Rails.application.routes.draw do
           resources :events, only: [:index, :destroy]
       end
 
-      resources :positions, only:[:show, :index, :create] do
-      end
+      resources :positions, only:[:show, :index, :create, :destroy]
+      post 'positions/:id/nearby' => 'positions#nearby'
     end
   end
 end
