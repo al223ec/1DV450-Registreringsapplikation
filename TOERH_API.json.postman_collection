@@ -1,0 +1,524 @@
+{
+	"id": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+	"name": "TOERH_API",
+	"description": "",
+	"order": [
+		"3f783c04-f32e-2246-20fb-d7483a02b416",
+		"e0c58696-164a-f4d3-eacb-a89428309301",
+		"0241c184-3f56-f031-ac7a-ba80527312b9",
+		"2c935c37-b5e5-dfc4-f042-85eb0f13d102",
+		"563f5594-5552-2cc7-befb-be2bad04a409",
+		"07664fb5-bfcf-1adf-ba97-7e469969c3db",
+		"bf466d75-3ae5-0a83-667e-8108bda2eb1b",
+		"6dec0260-637e-34cb-4c99-ce444e4a188b",
+		"8bbaff49-cdce-08bf-34b1-0c76ad336157",
+		"ed4bb625-a32e-e3e0-5724-8829cf97a257",
+		"cc104255-f6aa-8b4b-a016-f3c60f1ef5f5",
+		"db76c33c-8828-a6e6-c049-c348cdd62bad",
+		"27c645c6-2a05-7f58-d35f-efdae5d26e38",
+		"41aabc9c-c518-7433-1623-350258f3b8ff"
+	],
+	"folders": [],
+	"timestamp": 1425114960896,
+	"synced": false,
+	"remoteLink": "",
+	"requests": [
+		{
+			"id": "0241c184-3f56-f031-ac7a-ba80527312b9",
+			"headers": "Authorization: Token token=yAra32EhBKdHBaB3kqZD8LtL3yFhMZNHb54hj0ypCkIt\n",
+			"url": "http://api.lvh.me:3000/end_users/login",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "end_user[email]",
+					"value": "end_user@mail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425215158091,
+			"name": "Login end_user och få jwt",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "07664fb5-bfcf-1adf-ba97-7e469969c3db",
+			"headers": "Authorization: Token token=rnHUjXVjgXQsASYGqVi5jabWGGXLW5x9rMX9GLWtIqgt\n",
+			"url": "http://api.lvh.me:3000/tags",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "All taggar som finns",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425121076700,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "27c645c6-2a05-7f58-d35f-efdae5d26e38",
+			"headers": "Authorization: Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t\n",
+			"url": "http://api.lvh.me:3000/positions/1/nearby",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "radius",
+					"value": "30",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425238038813,
+			"name": "Söka nära en position",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "2c935c37-b5e5-dfc4-f042-85eb0f13d102",
+			"headers": "Authorization: Token token=rnHUjXVjgXQsASYGqVi5jabWGGXLW5x9rMX9GLWtIqgt\n",
+			"url": "http://api.lvh.me:3000/end_users/101/events",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "end_user[email]",
+					"value": "end_user@mail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "Events per end_user",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425115150247,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "3f783c04-f32e-2246-20fb-d7483a02b416",
+			"headers": "Authorization: Token token=yAra32EhBKdHBaB3kqZD8LtL3yFhMZNHb54hj0ypCkIt\n",
+			"url": "http://api.lvh.me:3000/end_users/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "event[content]",
+					"value": "Event content",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[position_id]",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[0]]",
+					"value": "Veryt",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[1]]",
+					"value": "Much",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425215333379,
+			"name": "End users per applikation",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "41aabc9c-c518-7433-1623-350258f3b8ff",
+			"headers": "Authorization: Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t\n",
+			"url": "http://api.lvh.me:3000/end_users/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "end_user[email]",
+					"value": "ny_end_user@mail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password_confirmation]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[name]",
+					"value": "Namnet",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425236907350,
+			"name": "Ny end user",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "563f5594-5552-2cc7-befb-be2bad04a409",
+			"headers": "Authorization: Token token=yAra32EhBKdHBaB3kqZD8LtL3yFhMZNHb54hj0ypCkIt\nJWT: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJlbmRfdXNlcl9pZCI6MTAxLCJleHBpZXJlZCI6MTQyNTIyMjM4N30.mVZp5LMb8QH9A2i1J9ib6P2H5lTP8OvEkvqmaxVyK2xklEXqbTevBkImq_TC6a43TY0wuecz8uMMppEhwjGqhQ\n",
+			"url": "http://api.lvh.me:3000/events/",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "POST",
+			"data": [
+				{
+					"key": "event[content]",
+					"value": "Event content",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[position_id]",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[0]]",
+					"value": "Veryt",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[1]]",
+					"value": "Much",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425215204417,
+			"name": "Post event",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "6dec0260-637e-34cb-4c99-ce444e4a188b",
+			"headers": "Authorization: Token token=rnHUjXVjgXQsASYGqVi5jabWGGXLW5x9rMX9GLWtIqgt\n",
+			"url": "http://api.lvh.me:3000/tags/7/events",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [],
+			"dataMode": "params",
+			"name": "Alla events som har en viss tag",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425140498836,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "8bbaff49-cdce-08bf-34b1-0c76ad336157",
+			"headers": "Authorization: Token token=rnHUjXVjgXQsASYGqVi5jabWGGXLW5x9rMX9GLWtIqgt\n",
+			"url": "http://api.lvh.me:3000/events/query",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "queries[0]",
+					"value": "Est",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "queries[1]",
+					"value": "t",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "Query on events",
+			"description": "Går att skicka med ord man kan filtrera på\ndet kräver att alla ord som anges finns i eventet",
+			"descriptionFormat": "html",
+			"time": 1425145780134,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "bf466d75-3ae5-0a83-667e-8108bda2eb1b",
+			"headers": "Authorization: Token token=rnHUjXVjgXQsASYGqVi5jabWGGXLW5x9rMX9GLWtIqgt\n",
+			"url": "http://api.lvh.me:3000/events?page=1&per_page=2",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "event[content]",
+					"value": "Event content",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[position_id]",
+					"value": "1",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[0]]",
+					"value": "Veryt",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "event[tags[1]]",
+					"value": "Much",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "Events med Offset och limit ",
+			"description": "Detta kan man göra med alla request\n",
+			"descriptionFormat": "html",
+			"time": 1425137730332,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "cc104255-f6aa-8b4b-a016-f3c60f1ef5f5",
+			"headers": "Authorization: Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t\n",
+			"url": "http://api.lvh.me:3000/positions/1",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "end_user[email]",
+					"value": "ny_end_user@mail.com",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[password_confirmation]",
+					"value": "foobar",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "end_user[name]",
+					"value": "Namnet",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425237979269,
+			"name": "Positions ",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "db76c33c-8828-a6e6-c049-c348cdd62bad",
+			"headers": "Authorization: Token token=YyelOWtNu21BYRzQHt8fFxBprPxNCp1D0JWXSnoK0EIt\n",
+			"url": "http://api.lvh.me:3000/positions/1",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "GET",
+			"data": [
+				{
+					"key": "position[lat]",
+					"value": "56.65507",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "position[lng]",
+					"value": "16.27642",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "En Position med event",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425228915406,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		},
+		{
+			"id": "e0c58696-164a-f4d3-eacb-a89428309301",
+			"headers": "Authorization: Token token=YyelOWtNu21BYRzQHt8fFxBprPxNCp1D0JWXSnoK0EIt\n",
+			"url": "http://api.lvh.me:3000/events",
+			"preRequestScript": "",
+			"pathVariables": {},
+			"method": "GET",
+			"data": [
+				{
+					"key": "position[lat]",
+					"value": "56.65507",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "position[lng]",
+					"value": "16.27642",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"version": 2,
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1425228314604,
+			"name": "Events per applikation",
+			"description": "",
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"responses": [],
+			"synced": false
+		},
+		{
+			"id": "ed4bb625-a32e-e3e0-5724-8829cf97a257",
+			"headers": "Authorization: Token token=yAra32EhBKdHBaB3kqZD8LtL3yFhMZNHb54hj0ypCkIt\nJWT: eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJlbmRfdXNlcl9pZCI6MTAxLCJleHBpZXJlZCI6MTQyNTIyMjM4N30.mVZp5LMb8QH9A2i1J9ib6P2H5lTP8OvEkvqmaxVyK2xklEXqbTevBkImq_TC6a43TY0wuecz8uMMppEhwjGqhQ\n",
+			"url": "http://api.lvh.me:3000/positions/",
+			"pathVariables": {},
+			"preRequestScript": "",
+			"method": "POST",
+			"data": [
+				{
+					"key": "position[lat]",
+					"value": "56.65507",
+					"type": "text",
+					"enabled": true
+				},
+				{
+					"key": "position[lng]",
+					"value": "16.27642",
+					"type": "text",
+					"enabled": true
+				}
+			],
+			"dataMode": "params",
+			"name": "Post position",
+			"description": "",
+			"descriptionFormat": "html",
+			"time": 1425215914882,
+			"version": 2,
+			"responses": [],
+			"tests": "",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"collectionId": "3152cd21-37bf-6681-60c4-486b7a9997aa",
+			"synced": false
+		}
+	]
+}

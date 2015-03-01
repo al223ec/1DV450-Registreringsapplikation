@@ -1,15 +1,35 @@
 <h2>Api:et</h2>
 <p>
+	Kör "rake db:migrate" och "rake db:seed" följt av "rails s".<br>
+	Api:et har routingen api.lvh.me:3000<br>
+</p>
+<p>
 
 </p>
 
-<dl>
-	<dh></dh>
-	<dd></dd>
-</dl>
+<h2>Tidigare problem</h2>
+<p>
+Jag kom så långt att jag kunde köra "bundle install", men när jag försökte köra "rails s" så fick jag ett error om bcrypt.
+</p>
+<p>
+Löste problemet genom att byta ut föregående raden:
+"gem 'bcrypt', '3.1.7'"
+<br>
+mot raden:<br>
 
-Default 30
-
+gem 'bcrypt', '~> 3.1.9' <br>
+(Det var alltså fel version på bcrypt... som ej fungerade med windows..)
+</p>
+<p>
+	Samma sak gällde sqlite3, lösningen blev följande:
+	gem 'sqlite3', '1.3.9'
+	byttes ut till:
+	gem 'sqlite3', '1.3.10'
+</p>
+<p>
+	Körde "rake db:migrate" och "rake db:seed" följt av "rails s".
+	Nu fungerade sidan och allt som det skulle.
+</p>
 <h2>Webbapplikation för API-nyckel</h2>
 <p>
 	Byggd i Windows 8.1, för att komma igång och testköra applikationen borde det bara vara att köra bundle install, däerefter bundle exec rake db:migrate och seed om man vill. Utan seed saknas testdata och ingen admin användare finns.
