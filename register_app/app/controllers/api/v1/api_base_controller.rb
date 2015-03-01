@@ -120,19 +120,28 @@ module Api
 						call.ip = request.remote_ip
 						call.caller = request.env['HTTP_USER_AGENT']
 						call.save # spara request allt verkar bra
+						# TODO: Rate Limit och sätta headers
+						# X-RATE-LIMIT-LIMIT - antalet anrop inom en tidsperiod
+						# X-RATE-LIMIT-REMAINING - återstående anrop
+						# X-RATE-LIMIT-RESET - sekunder kvar till nästa "reset"
 					end
+
 				end
 			end
 
 			def authenticate_user
 				@end_user = nil
-
 				jwt = request.headers['HTTP_JWT']
 				if jwt
 					# Detta är en sådär lösning men får duga för tillfället
 					begin
-							payload = JWT.decode(jwt, @application.name)
-	  					@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
+							payload = JWT.decode(jwt, Rails.application.secrets.secret_key_base, "HS512")
+							if payload[0]["expiered"] >= Time.now.to_i
+	  						@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
+	  					else
+	  						respond_with_error("Tiden har gått ut för den aktuella jwt vg skaffa en ny", :unauthorized)
+	  						return
+	  					end
   				rescue
 						respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
 						return
@@ -141,12 +150,12 @@ module Api
 
 				if @end_user.nil?
 					respond_with_error("Du måste logga in och få ut en 'jwt' som sedan måste skickas med reqesten som en url paramater för att använda denna funktion", :unauthorized)
-					return;
+					return
 				elsif @end_user.application_id != @application.id
 					respond_with_error("Denna användare tillhör inte den aktuella applikation och requesten kan därför inte genomföras", :unauthorized)
-					return;
+					return
 				end
-			end
+			end # authenticate_user
 
 
 			def respond_with_error(message, status)

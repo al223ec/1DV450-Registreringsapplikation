@@ -36,6 +36,7 @@ otherEndUser:
   name: Archer
   email: otherEndUser@endUser.gov
   password_digest: <%= EndUser.digest('password') %>
+  application: application(:orange)
   type: EndUser
 
 

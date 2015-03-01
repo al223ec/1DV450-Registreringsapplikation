@@ -5,31 +5,31 @@ module Api
 		def login
 		    end_user = EndUser.find_by(email: params[:end_user][:email].downcase).try(:authenticate, params[:end_user][:password])
 		    if end_user
-				# Detta är en dålig lösning men får duga för tillfället, 
-				# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som
-				# man sedan
-		    	payload = JWT.encode({ 
-		    		end_user_id: end_user.id				
-		    		}, @application.name)
+				# Detta är en sådär lösning men får duga för tillfället,
+				# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som man sedan hämtat ut
+		    	payload = JWT.encode({
+		    		end_user_id: end_user.id,
+		    		expiered: 2.hours.from_now.to_i
+		    		}, Rails.application.secrets.secret_key_base, "HS512")
 
-				render(:json => { :jwt => payload }, :status => 200)
+					render(:json => { :jwt => payload }, :status => 200)
 		    else
-		    	respond_with_error("Felaktigt email eller lösenord vg försök igen", :bad_request)
+		    	respond_with_error("Felaktigt email eller lösenord vg försök igen", :unauthorized)
 		    end
 		end
 
 	    private
-			def query_params
-				# filter
-	        	"application_id = #{@application.id}"
-			end
+	    # @return [Hash]
+				def query_params
+		   		{ application_id: @application.id}
+				end
 
-			def end_user_params
-				params.require(:end_user).permit(:name, :email, :password, :password_confirmation, :application_id)
-			end
+				def end_user_params
+					params.require(:end_user).permit(:name, :email, :password, :password_confirmation, :application_id)
+				end
 
-			def end_user_simple_params
-				params.require(:end_user).permit(:email, :password)
-			end
+				def end_user_simple_params
+					params.require(:end_user).permit(:email, :password)
+				end
 	end
 end

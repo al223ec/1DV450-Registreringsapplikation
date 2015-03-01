@@ -4,7 +4,7 @@ module Api
 	class V1::EndUsersControllerTest < ApiBaseControllerTest
 		def setup
 			setup_header_and_user
-		end		
+		end
 
 		test "login should be successful" do
 			post :login, end_user: { email: @end_user.email, password:"password" }
@@ -13,17 +13,23 @@ module Api
 
 		test "login should not be successful" do
 			post :login, end_user: { email: @end_user.email, password:" " }
-			assert_response :bad_request
+			assert_response :unauthorized
 		end
 
-		# Test for signup 
+		test "login should not be successful using user from other application" do
+			other_user = users(:otherEndUser)
+			post :login, end_user: { email: other_user.email, password:"password" }
+			assert_response :unauthorized
+		end
+
+		# Test for signup
 		test "invalid signup information" do
 			assert_no_difference 'ApiUser.count' do
-				post :create, end_user: { 
-					name:  "", 
+				post :create, end_user: {
+					name:  "",
 					email: "user@invalid",
 					password: "foo",
-					password_confirmation: "bar" 
+					password_confirmation: "bar"
 				}
 			end
 			assert_response :unprocessable_entity
@@ -31,10 +37,10 @@ module Api
 
 		test "valid signup information" do
 			user_attributes = { name: "Example user", email: "test@example.com", password: "password" }
-			
+
 			assert_difference 'EndUser.count', 1 do
-				post :create, end_user: { 
-					name:  user_attributes[:name], 
+				post :create, end_user: {
+					name:  user_attributes[:name],
 					email: user_attributes[:email],
 					password: user_attributes[:password],
 					password_confirmation: user_attributes[:password],

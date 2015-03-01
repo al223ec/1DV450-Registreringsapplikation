@@ -23,15 +23,11 @@ module Api
                 query_hash = {}
                 # Osäker hur säkert detta är, men att parmatisera brukar vara ok
                 queries.each do | index, query |
-                    if sql == ''
-                        sql << "content LIKE :q#{index} "
-                    else
-                        sql << "AND content LIKE :q#{index} "
-                    end
+                    sql << "AND content LIKE :q#{index} "
                     query_hash[:"q#{index}"] = "%#{query}%"
                 end
 
-                @events = Event.where(sql, query_hash) #.paginate(page: params[:page], per_page: params[:per_page])
+                @events = Event.where("application_id = #{@application.id} " << sql, query_hash).paginate(page: params[:page], per_page: params[:per_page])
                 render :index
             else
                 render json: get_resource.errors, status: :unprocessable_entity
@@ -49,7 +45,7 @@ module Api
                 if !params[:end_user_id].nil?
                     # om man når denna kontroller via /end_user/:id/events
                     user_id = params[:end_user_id].to_i
-                    "application_id = #{@application.id} and end_user_id = #{user_id}"
+                    { application_id: @application.id, end_user_id: user_id }
                 elsif !params[:tag_id].nil?
                     # om man når denna kontroller via /tags/:id/events
                     tag_id = params[:tag_id].to_i

@@ -10,6 +10,6 @@ class EndUser < User
 
 	#Endast för testning
 	def get_jwt
-		 JWT.encode({ end_user_id: id }, application.name)
+		 JWT.encode({ end_user_id: id, expiered: 2.hours.from_now.to_i }, Rails.application.secrets.secret_key_base, "HS512")
 	end
 end
