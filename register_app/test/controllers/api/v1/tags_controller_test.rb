@@ -10,6 +10,5 @@ module Api
 			get :index
 			assert_response :success
 		end
-
 	end
 end

@@ -30,6 +30,9 @@ Rails.application.routes.draw do
       resources :tags, only: [:show, :index, :create] do
           resources :events, only: [:index, :destroy]
       end
+
+      resources :positions, only:[:show, :index, :create] do
+      end
     end
   end
 end

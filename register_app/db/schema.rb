@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150223120618) do
+ActiveRecord::Schema.define(version: 20150301114101) do
 
   create_table "applications", force: :cascade do |t|
     t.string   "key"
@@ -60,10 +60,14 @@ ActiveRecord::Schema.define(version: 20150223120618) do
   add_index "events", ["position_id"], name: "index_events_on_position_id"
 
   create_table "positions", force: :cascade do |t|
-    t.decimal  "lat"
-    t.decimal  "lng"
+    t.float    "lat"
+    t.float    "lng"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text     "street"
+    t.text     "city"
+    t.text     "state"
+    t.text     "country"
   end
 
   create_table "tags", force: :cascade do |t|

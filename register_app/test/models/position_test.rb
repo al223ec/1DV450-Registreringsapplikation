@@ -17,6 +17,7 @@ class PositionTest < ActiveSupport::TestCase
   	test "should not validate strings in lng" do
   		@position.lng = "NaN"
   		assert_not @position.valid?
+
   	end
 
   	test "should not validate latitude values lower than -90" do
@@ -44,7 +45,7 @@ class PositionTest < ActiveSupport::TestCase
       end_user = users(:endUser)
       app = applications(:app)
       event = Event.new(
-        position: @position, 
+        position: @position,
         position_id: @position.id,
         end_user: end_user,
         end_user_id: end_user.id,
