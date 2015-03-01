@@ -1,11 +1,19 @@
 <h2>Api:et</h2>
 <p>
-	Kör "rake db:migrate" och "rake db:seed" följt av "rails s".<br>
+	Kör bundle install "rake db:migrate" och "rake db:seed" följt av "rails s".<br>
 	Api:et har routingen api.lvh.me:3000<br>
+	Vill man köra testerna måste man köra rake db:migrate RAILS_ENV=test
 </p>
 <p>
-
+	Headern måste innehålla en Authorization med värdet Token token="api-key". För att kunna skapa objekt krävs att man skickar med en JWT denna får man ut genom att logga in med en användare.<br>
+	JWT skickas med header i JWT.<br>
+	Tror att postman filen täcker det mesta man kan göra i api:et, ligger i rooten av repot, man måste uppdatera token värdet med det värdet man får ut från seeden.
 </p>
+<ul>
+	<li>Seedad end user</li>
+	<li>end_user[email] = end_user@mail.com</li>
+	<li>end_user[password] = foobar</li>
+</ul>
 
 <h2>Tidigare problem</h2>
 <p>
@@ -55,9 +63,6 @@ gem 'bcrypt', '~> 3.1.9' <br>
 		</ul>
 	</li>
 </ul>
-
-
-
 
 <h2>Om registreringsapplikationen</h2>
 <p>Till tjänsten ska en registreringsapplikation utvecklas där utvecklare (som vill använda ditt API) ska kunna få tillgång till en giltig API-nyckel som kan användas i API-anropen för samtliga resurser. </p>
