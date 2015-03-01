@@ -3,8 +3,8 @@ require 'test_helper'
 class ApplicationTest < ActiveSupport::TestCase
 
 	def setup
-		@user = users(:mikael)
-		@application = @user.applications.build(name: "applicationName")
+		@api_user = users(:mikael)
+		@application = @api_user.applications.build(name: "applicationName")
 	end
 
 	test "should be valid" do
@@ -12,7 +12,7 @@ class ApplicationTest < ActiveSupport::TestCase
 	end
 
 	test "user id must be present" do
-		@application.user_id = nil
+		@application.api_user_id = nil
 		assert_not @application.valid?
 	end
 
@@ -37,5 +37,14 @@ class ApplicationTest < ActiveSupport::TestCase
 		duplicate_application.key = @application.key
 		@application.save
 		assert_not duplicate_application.key == @application.key
+  	end
+
+  	test "associated calls should be destroyed" do
+		@application.save
+		@application.calls.create!(ip: "170.20.145.2")
+		
+		assert_difference 'Call.count', -1 do
+			@application.destroy
+		end
   	end
 end

@@ -1,9 +1,12 @@
 class Application < ActiveRecord::Base
 	#before_create:generateKey
-	belongs_to :user
+	has_many :calls, dependent: :destroy
+	belongs_to :api_user
+	has_many :end_users
+
 	default_scope -> { order(created_at: :desc) }
 	
-	validates :user_id, presence: true
+	validates :api_user_id, presence: true
 	validates :key, presence: true, length: { maximum: 140, minimum:31 }, uniqueness: true
 
 	before_validation(on: :create) do 

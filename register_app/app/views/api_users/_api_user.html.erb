@@ -1,0 +1,13 @@
+<li>
+    <section class="user_info">
+        <%= link_to gravatar_for(api_user), api_user %>
+        <h2><%=link_to api_user.name, api_user %></h2><span><%= api_user.email %></span>
+        <% if current_user.admin? && !current_user?(api_user) %>
+        | <%= link_to "ta bort användaren", api_user, method: :delete, data: { confirm: "Du säker?" } %>
+        
+        	<% if api_user.applications.any? %>
+        		<span> <%= api_user.applications.count %> Registrerade applikationer</span>
+        	<% end %>
+        <% end %>
+    </section>
+</li>

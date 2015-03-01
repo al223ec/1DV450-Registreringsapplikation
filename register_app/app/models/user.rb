@@ -1,5 +1,5 @@
 class User < ActiveRecord::Base
-	has_many :applications, dependent: :destroy
+	# Basklass för api_user och end_user
 	#to create an accessible attribute som ej finns i db
 	attr_accessor :remember_token 
 
@@ -42,11 +42,4 @@ class User < ActiveRecord::Base
 	def forget
 		update_attribute(:remember_digest, nil)
 	end
-
-	#id is properly escaped before being included in the underlying SQL query, thereby avoiding a serious security hole called SQL injection
-	def get_applications
-		Application.where("user_id = ?", id)
-	end
 end
-
-

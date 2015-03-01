@@ -29,11 +29,13 @@ class ApplicationsController < ApplicationController
 		def current_user_is_creator_or_admin
 			if current_user.admin? 
 				@application = Application.find_by(id: params[:id]);
-				flash[:error] = "Något oväntat har gått fel, applikationen kan inte hittas i databasen"
-				redirect_to root_url if @application.nil? 
 			else
 				@application = current_user.applications.find_by(id: params[:id])
-				redirect_to root_url if @application.nil? 
+			end
+
+			if 	@application.nil?
+				flash[:error] = "Något oväntat har gått fel, applikationen kan inte hittas i databasen"
+				redirect_to root_url
 			end
 		end
 

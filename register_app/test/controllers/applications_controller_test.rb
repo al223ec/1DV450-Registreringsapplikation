@@ -24,7 +24,7 @@ class ApplicationsControllerTest < ActionController::TestCase
 	end
 
 	test "should redirect destroy for wrong application" do
-		log_in_as(users(:archer))
+		log_in_as_api_user(users(:archer))
 		application = applications(:cat_video)
 
 		assert_no_difference 'Application.count' do

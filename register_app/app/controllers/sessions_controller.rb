@@ -4,11 +4,11 @@ class SessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
-		  log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_back_or user
+    api_user = ApiUser.find_by(email: params[:session][:email].downcase)
+    if api_user && api_user.authenticate(params[:session][:password])
+		  log_in api_user
+      params[:session][:remember_me] == '1' ? remember(api_user) : forget(api_user)
+      redirect_back_or api_user
     else
 		  flash.now[:danger] = 'Ogitig email/lösenords kombination'
     	render 'new'
