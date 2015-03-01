@@ -104,7 +104,6 @@ module Api
 				if !resource
 					respond_with_error(resource_name + " med id " + params[:id] + " hittades inte", :not_found)
 				end
-
 				instance_variable_set("@#{resource_name}", resource)
 			end
 

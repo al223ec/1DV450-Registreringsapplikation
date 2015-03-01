@@ -8,19 +8,18 @@
 	<dd></dd>
 </dl>
 
-Default 30 
-
+Default 30
 
 <h2>Webbapplikation för API-nyckel</h2>
 <p>
-	Byggd i Windows 8.1, för att komma igång och testköra applikationen borde det bara vara att köra bundle install, däerefter bundle exec rake db:migrate och seed om man vill. Utan seed saknas testdata och ingen admin användare finns.   
+	Byggd i Windows 8.1, för att komma igång och testköra applikationen borde det bara vara att köra bundle install, däerefter bundle exec rake db:migrate och seed om man vill. Utan seed saknas testdata och ingen admin användare finns.
 </p>
 <ul>
 	<li>bundle install</li>
 	<li>rails --version v 4.2.0</li>
 	<li>ruby 2.0.0p247 [x64-mingw32]</li>
 	<li>
-		Db i development är en sqlite3, för migrations 
+		Db i development är en sqlite3, för migrations
 		<ul>
 			<li>
 				bundle exec rake db:migrate

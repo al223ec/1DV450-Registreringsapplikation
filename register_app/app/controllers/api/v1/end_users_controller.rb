@@ -2,21 +2,26 @@ module Api
 	class V1::EndUsersController < V1::ApiBaseController
 	    before_action :authenticate_user, only: [:destroy, :update]
 
-		def login
-		    end_user = EndUser.find_by(email: params[:end_user][:email].downcase).try(:authenticate, params[:end_user][:password])
-		    if end_user
-				# Detta är en sådär lösning men får duga för tillfället,
-				# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som man sedan hämtat ut
-		    	payload = JWT.encode({
-		    		end_user_id: end_user.id,
-		    		expiered: 2.hours.from_now.to_i
-		    		}, Rails.application.secrets.secret_key_base, "HS512")
+			def login
+			    end_user = EndUser.find_by(email: params[:end_user][:email].downcase).try(:authenticate, params[:end_user][:password])
+			    if end_user
+					# Detta är en sådär lösning men får duga för tillfället,
+					# det man skulle ha gjort är unika tokens per user och request och sparat detta i db som man sedan hämtat ut
+			    	payload = JWT.encode({
+			    		end_user_id: end_user.id,
+			    		expiered: 2.hours.from_now.to_i
+			    		}, Rails.application.secrets.secret_key_base, "HS512")
 
-					render(:json => { :jwt => payload }, :status => 200)
-		    else
-		    	respond_with_error("Felaktigt email eller lösenord vg försök igen", :unauthorized)
-		    end
-		end
+						render(:json => { :jwt => payload }, :status => 200)
+			    else
+			    	respond_with_error("Felaktigt email eller lösenord vg försök igen", :unauthorized)
+			    end
+			end
+
+			def create
+				@end_user.application = @application
+				super
+			end
 
 	    private
 	    # @return [Hash]
