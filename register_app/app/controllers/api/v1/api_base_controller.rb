@@ -12,6 +12,12 @@ module Api
 
 		respond_to :json
 
+    rescue_from ActionController::UnknownFormat, with: :missing_format
+    rescue_from ActiveRecord::RecordNotFound, with: :not_found
+    rescue_from JWT::ExpiredSignature, with: :not_authenticated
+    rescue_from JWT::DecodeError, with: :not_authorized
+
+
 		@application
 		@end_user
 

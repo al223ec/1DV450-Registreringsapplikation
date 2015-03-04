@@ -1,8 +1,9 @@
 class ApiUsersController < ApplicationController
+
 	before_action :logged_in_user, only: [:edit, :update, :destroy]
 	before_action :correct_user,   only: [:edit, :update]
 	before_action :admin_user,     only: [:destroy]
-	before_action :correct_user_or_admin, only: [:index]
+	before_action :correct_user_or_admin, only: [:index, :show]
 
 	def index
 		@api_users = ApiUser.paginate(page: params[:page])
@@ -20,13 +21,13 @@ class ApiUsersController < ApplicationController
 		flash[:success] = "Användaren är borttagen"
 		redirect_to api_users_url
 	end
-	
+
 	def new
 		@api_user = ApiUser.new
 	end
 
 	def create
-		@api_user = ApiUser.new(user_params) 
+		@api_user = ApiUser.new(user_params)
 		if @api_user.save
 			log_in @api_user
 			flash[:success] = "Du har registrerat en användare, nu kan du skapa en applikation och få ut en api nyckel!"
@@ -35,7 +36,7 @@ class ApiUsersController < ApplicationController
 			render 'new'
 		end
 	end
-	
+
 	def edit
     	@api_user = ApiUser.find(params[:id])
   	end
@@ -66,14 +67,14 @@ class ApiUsersController < ApplicationController
 				redirect_to(root_url)
 			end
 		end
-		
+
 		# Confirms an admin user.
 		def admin_user
 			redirect_to(root_url) unless is_admin?
 		end
 
 		def correct_user_or_admin
-			@api_user = false; 
+			@api_user = false;
 			if(!params[:id].nil?)
 				@api_user = ApiUser.find(params[:id])
 			end

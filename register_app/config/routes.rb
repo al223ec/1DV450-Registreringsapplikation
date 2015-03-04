@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'sessions/new'
 
+  get 'spa' => 'spa#index'
+
   root              'static_pages#home'
   get     'about'   =>  'static_pages#about'
   get     'signup'  =>  'api_users#new'

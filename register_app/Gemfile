@@ -6,10 +6,10 @@ gem 'faker',                '1.4.2'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'sass-rails',           '5.0.1'
-gem 'bootstrap-sass',       '3.2.0.0'
+# gem 'bootstrap-sass',       '3.2.0.0' # denna bör laddas via bower
 gem 'uglifier',             '2.5.3'
 gem 'coffee-rails',         '4.1.0'
-gem 'jquery-rails',         '4.0.3'
+gem 'jquery-rails',         '4.0.3' # denna bör också laddas via bower
 gem 'turbolinks',           '2.3.0'
 gem 'jbuilder',             '2.2.3'
 
@@ -21,11 +21,19 @@ gem 'responders',           '~> 2.0'
 gem 'jwt'
 gem 'geocoder'
 
+#SPA gems
+gem 'bower-rails'
+
 group :development, :test do
   gem 'sqlite3',     '1.3.9'
   gem 'byebug',      '3.4.0'
   # gem 'web-console', '2.0.0.beta3' #Funkar ej i windows
   gem 'spring',      '1.1.3'
+  #SPA gems
+  gem "rspec-rails", "~> 2.0"
+  #browser tests
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :test do
