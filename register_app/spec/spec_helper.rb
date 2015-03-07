@@ -40,11 +40,6 @@ RSpec.configure do |config|
   # rspec-rails.
   config.infer_base_class_for_anonymous_controllers = false
 
-  # Run specs in random order to surface order dependencies. If you find an
-  # order dependency and want to debug it, you can fix the order by providing
-  # the seed, which is printed after each run.
-  #     --seed 1234
-  config.order = "random"
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -60,4 +55,30 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/v/3-0/docs
   config.infer_spec_type_from_file_location!
+
+  config.expect_with :rspec do |c|
+    c.syntax = :expect
+  end
+
+  config.before(:suite) do
+    DatabaseCleaner.clean_with :truncation
+    DatabaseCleaner.clean_with :transaction
+  end
+
+  config.after(:each) do
+    ActionMailer::Base.deliveries.clear
+  end
+
+  config.around(:each, type: :feature, js: true) do |ex|
+    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.start
+    self.use_transactional_fixtures = false
+    ex.run
+    self.use_transactional_fixtures = true
+    DatabaseCleaner.clean
+  end
+
+  config.treat_symbols_as_metadata_keys_with_true_values = true
+  config.infer_base_class_for_anonymous_controllers = false
+  config.order = "random"
 end

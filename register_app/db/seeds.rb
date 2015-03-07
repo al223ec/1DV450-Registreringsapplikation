@@ -35,7 +35,7 @@ EndUser.create!(
 	email: "end_user@mail.com",
 	password: "foobar",
 	password_confirmation: "foobar",
-    application_id: app.id
+  application_id: app.id
 )
 
 applications = Application.order(:created_at).take(3);
