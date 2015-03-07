@@ -43,13 +43,12 @@ describe Api::V1::EventsController do
     end
 
     context "when the search finds results" do
-      let(:queries) { []<< 'baked'}
+      let(:queries) { ['baked'] }
       it 'should 200' do
         expect(response.status).to eq(200)
       end
       it 'should return two results' do
         expect(results.size).to eq(2)
-        debugger
       end
       it "should include 'Baked Potato w/ Cheese'" do
         expect(results.map(&extract_content)).to include('Baked Potato w/ Cheese')
@@ -60,7 +59,7 @@ describe Api::V1::EventsController do
     end
 
     context "when the search doesn't find results" do
-      let(:queries) { [] << 'foo' }
+      let(:queries) { ['foo'] }
       it 'should return no results' do
         expect(results.size).to eq(0)
       end

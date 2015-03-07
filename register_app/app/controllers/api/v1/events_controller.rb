@@ -22,11 +22,10 @@ module Api
                 sql = ''
                 query_hash = {}
                 # Osäker hur säkert detta är, men att parmatisera brukar vara ok
-                queries.each do | index, query |
-                    sql << "AND content LIKE :q#{index} "
-                    query_hash[:"q#{index}"] = "%#{query}%"
+                queries.each do | query |
+                    sql << "AND content LIKE :q#{query} "
+                    query_hash[:"q#{query}"] = "%#{query}%"
                 end
-
                 @events = Event.where("application_id = #{@application.id} " << sql, query_hash).paginate(page: params[:page], per_page: params[:per_page])
                 render :index
             else
