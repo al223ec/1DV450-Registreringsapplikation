@@ -10,37 +10,20 @@ receta.config([ '$routeProvider',
     $routeProvider
       .when('/',
         templateUrl: "index.html"
-        controller: 'RecipesController'
+        controller: 'EventsController'
       )
 ])
 
-recipes = [
-  {
-    id: 1
-    name: 'Baked Potato w/ Cheese'
-  },
-  {
-    id: 2
-    name: 'Garlic Mashed Potatoes',
-  },
-  {
-    id: 3
-    name: 'Potatoes Au Gratin',
-  },
-  {
-    id: 4
-    name: 'Baked Brussel Sprouts',
-  },
-]
 controllers = angular.module('controllers',[])
-controllers.controller("RecipesController", [ '$scope', '$routeParams', '$location', '$resource',
+controllers.controller("EventsController", [ '$scope', '$routeParams', '$location', '$resource',
 
-  ($scope,$routeParams,$location)->
+  ($scope,$routeParams,$location, $resource)->
     $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
 
+    Event = $resource('api.lvh.me:3000/events/:eventId', { recipeId: "@id", format: 'json' })
+
     if $routeParams.keywords
-      keywords = $routeParams.keywords.toLowerCase()
-      $scope.recipes = recipes.filter (recipe)-> recipe.name.toLowerCase().indexOf(keywords) != -1
+      Event.query(keywords: $routeParams.keywords, (results)-> $scope.events = results)
     else
-      $scope.recipes = []
+      $scope.events = []
 ])

@@ -5,6 +5,7 @@ module Api
 
 		# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 		protect_from_forgery with: :null_session
+		before_action :set_access_control_headers
 		before_action :authenticate_application
 
 		before_action :set_resource, only: [:destroy, :show, :update]
@@ -176,8 +177,8 @@ module Api
 			end
 		end
 
-		# def set_access_control_headers
-    # 	headers['Access-Control-Allow-Origin'] = '*'
-    # 	headers['Access-Control-Request-Method'] = '*'
-  	# end
+		def set_access_control_headers
+			headers['Access-Control-Allow-Origin'] = '*'
+		 	headers['Access-Control-Request-Method'] = '*'
+		end
 end

@@ -1,5 +1,3 @@
-#= require angular-mocks/angular-mocks
-
 # Teaspoon includes some support files, but you can use anything from your own support path too.
 # require support/jasmine-jquery-1.7.0
 # require support/jasmine-jquery-2.0.0
@@ -31,3 +29,8 @@
 # the configuration and use this file as a manifest.
 #
 # For more information: http://github.com/modeset/teaspoon
+
+#= require angular-mocks/angular-mocks
+beforeEach ->
+  this.addMatchers
+    toEqualData: (expected)-> return angular.equals(this.actual, expected)

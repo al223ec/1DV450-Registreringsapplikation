@@ -17,6 +17,7 @@ describe Api::V1::EventsController do
         name: "Miss Schuyler Padberg",
         api_user: api_user,
         );
+
       end_user = EndUser.create!(
         name: "End User",
         email: "end_user@mail.com",
