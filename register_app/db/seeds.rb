@@ -9,7 +9,7 @@ ApiUser.create!(
 	admin: true
 )
 
-99.times do |n|
+20.times do |n|
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -23,7 +23,7 @@ end
 
 
 users = ApiUser.order(:created_at).take(6)
-50.times do
+20.times do
   name = Faker::Name.name
   users.each { |user| user.applications.create!(name: name) }
 end

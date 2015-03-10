@@ -3,6 +3,7 @@ describe "EventController", ->
   ctrl         = null
   routeParams  = null
   httpBackend  = null
+  flash        = null
   eventId     = 42
 
   fakeEvent   =
@@ -28,12 +29,13 @@ describe "EventController", ->
       ]
 
   setupController =(eventExists=true)->
-    inject(($location, $routeParams, $rootScope, $httpBackend, $controller)->
+    inject(($location, $routeParams, $rootScope, $httpBackend, $controller, _flash_)->
       scope       = $rootScope.$new()
       location    = $location
       httpBackend = $httpBackend
       routeParams = $routeParams
       routeParams.eventId = eventId
+      flash = _flash_
 
       request = new RegExp("\/events/#{eventId}")
       results = if eventExists
@@ -65,3 +67,4 @@ describe "EventController", ->
         httpBackend.flush()
         expect(scope.event).toBe(null)
         # what else?!
+        expect(flash.error).toBe("There is no event with ID #{eventId}")

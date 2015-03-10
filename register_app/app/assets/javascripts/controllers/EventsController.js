@@ -13,6 +13,7 @@ controllers.controller("EventsController", [
       eventId: "@id",
       format: 'json'
     });
+
     /*
     Event.query({ queries: $routeParams.keywords },
             function(results) {

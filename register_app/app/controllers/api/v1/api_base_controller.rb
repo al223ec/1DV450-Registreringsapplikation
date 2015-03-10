@@ -13,8 +13,6 @@ module Api
 		respond_to :json
 
 		rescue_from ActionController::UnknownFormat, with: :missing_format
-		rescue_from ActiveRecord::RecordNotFound, with: :not_found
-		rescue_from JWT::ExpiredSignature, with: :not_authenticated
 		rescue_from JWT::DecodeError, with: :not_authorized
 
 		@application
@@ -143,19 +141,13 @@ module Api
 				@end_user = nil
 				jwt = request.headers['HTTP_JWT']
 				if jwt
-					# Detta är en sådär lösning men får duga för tillfället
-					begin
-							payload = JWT.decode(jwt, Rails.application.secrets.secret_key_base, "HS512")
-							if payload[0]["expiered"] >= Time.now.to_i
-	  						@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
-	  					else
-	  						respond_with_error("Tiden har gått ut för den aktuella jwt vg skaffa en ny", :unauthorized)
-	  						return
-	  					end
-  				rescue
-						respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
-						return
-			    end
+						payload = JWT.decode(jwt, Rails.application.secrets.secret_key_base, "HS512")
+						if payload[0]["expiered"] >= Time.now.to_i
+  						@end_user = EndUser.find_by(id: payload[0]["end_user_id"])
+  					else
+  						respond_with_error("Tiden har gått ut för den aktuella jwt vg skaffa en ny", :unauthorized)
+  						return
+  					end
 				end
 
 				if @end_user.nil?
@@ -179,5 +171,14 @@ module Api
 					:status => status)
 				return # behövs detta?
 			end
+
+
+      def missing_format(e)
+        respond_with_error("Cannot serve requested format ", :unprocessable_entity)
+      end
+
+      def not_authorized
+      	respond_with_error("Kan inte parsa jwt, du verkar ha skickat ett ogiltigt värde", :unauthorized)
+      end
 		end
 end

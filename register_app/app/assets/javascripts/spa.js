@@ -1,5 +1,12 @@
 "use strict";
-var toerh = angular.module('toerh', ['templates', 'ngRoute', 'controllers', 'ngResource']);
+var toerh = angular.module('toerh', [
+  'templates',
+  'ngRoute',
+  'controllers',
+  'ngResource',
+  'angular-flash.service',
+  'angular-flash.flash-alert-directive'
+  ]);
 toerh.config([
   '$routeProvider', '$httpProvider', function($routeProvider, $httpProvider) {
     $routeProvider.when('/', {

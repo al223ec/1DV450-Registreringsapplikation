@@ -50,7 +50,7 @@ module Api
 
 			assert_response :created
 			body = JSON.parse(response.body)
-			assert body["end_user"]["email"] == user_attributes[:email]
+			assert body["email"] == user_attributes[:email]
 		end
 	end
 end
