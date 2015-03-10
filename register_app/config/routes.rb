@@ -27,6 +27,7 @@ Rails.application.routes.draw do
       end
 
       post 'events/query' => 'events#query'
+
       resources :events
 
       resources :tags, only: [:show, :index, :create] do

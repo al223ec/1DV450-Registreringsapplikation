@@ -5,7 +5,6 @@ module Api
 
 		# ref: https://codelation.com/blog/rails-restful-api-just-add-water
 		protect_from_forgery with: :null_session
-		before_action :set_access_control_headers
 		before_action :authenticate_application
 
 		before_action :set_resource, only: [:destroy, :show, :update]
@@ -13,11 +12,10 @@ module Api
 
 		respond_to :json
 
-    rescue_from ActionController::UnknownFormat, with: :missing_format
-    rescue_from ActiveRecord::RecordNotFound, with: :not_found
-    rescue_from JWT::ExpiredSignature, with: :not_authenticated
-    rescue_from JWT::DecodeError, with: :not_authorized
-
+		rescue_from ActionController::UnknownFormat, with: :missing_format
+		rescue_from ActiveRecord::RecordNotFound, with: :not_found
+		rescue_from JWT::ExpiredSignature, with: :not_authenticated
+		rescue_from JWT::DecodeError, with: :not_authorized
 
 		@application
 		@end_user
@@ -59,6 +57,12 @@ module Api
 				render json: get_resource.errors, status: :unprocessable_entity
 			end
 		end
+
+		protected
+			def set_access_control_headers
+				response.headers['Access-Control-Allow-Origin'] = '*'
+			 	response.headers['Access-Control-Request-Method'] = '*'
+			end
 
 		private
 			# Returns the resource from the created instance variable
@@ -119,6 +123,7 @@ module Api
 			end
 
 			def authenticate_application
+									debugger
 				authenticate_or_request_with_http_token do |token|
 					@application = Application.where(key: token).first
 					if !@application.nil?
@@ -175,10 +180,5 @@ module Api
 					:status => status)
 				return # behövs detta?
 			end
-		end
-
-		def set_access_control_headers
-			headers['Access-Control-Allow-Origin'] = '*'
-		 	headers['Access-Control-Request-Method'] = '*'
 		end
 end

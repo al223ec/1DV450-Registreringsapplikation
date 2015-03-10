@@ -17,6 +17,12 @@ module Api
             super
         end
 
+        def options
+            # if access_allowed?
+            set_access_control_headers
+            head :ok
+        end
+
         def query
             if queries = params[:queries]
                 sql = ''
