@@ -40,7 +40,7 @@ describe Api::V1::EventsController do
     subject(:results) { JSON.parse(response.body) }
 
     def extract_content
-      ->(object) { object["event"]["content"] }
+      ->(object) { object["content"] }
     end
 
     context "when the search finds results" do

@@ -28,14 +28,16 @@ feature "Looking up events", js: true do
       Event.create!(content: 'Garlic Mashed Potatoes', position: position, end_user: end_user, application: app)
       Event.create!(content: 'Potatoes Au Gratin', position: position, end_user: end_user, application: app)
       Event.create!(content: 'Baked Brussel Sprouts', position: position, end_user: end_user, application: app)
+
   end
 
-  scenario "finding events" do
+scenario "finding events" do
     visit '/spa'
-    fill_in "keywords", with: "baked"
+    fill_in "keywords", with: "Asperiores"
     click_on "Search"
 
-    expect(page).to have_content("Baked Potato")
-    expect(page).to have_content("Baked Brussel Sprouts")
+    sleep 1.seconds
+
+    expect(page).to have_content("asperiores")
   end
 end

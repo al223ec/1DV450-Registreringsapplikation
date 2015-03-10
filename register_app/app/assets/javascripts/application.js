@@ -18,4 +18,5 @@
 //= require angular-resource/angular-resource
 //= require angular-rails-templates
 //= require turbolinks
+//= require spa
 //= require_tree .

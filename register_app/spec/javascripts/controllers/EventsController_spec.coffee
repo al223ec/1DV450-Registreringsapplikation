@@ -19,15 +19,15 @@ describe "EventsController", ->
       httpBackend = $httpBackend
 
       if results
-        request = new RegExp("\/events.*keywords=#{keywords}")
-        httpBackend.expectGET(request).respond(results)
+        request = new RegExp("\/query")
+        httpBackend.expectPOST(request).respond(results)
 
       ctrl        = $controller('EventsController',
                                 $scope: scope
                                 $location: location)
     )
 
-  beforeEach(module("receta"))
+  beforeEach(module("toerh"))
   beforeEach(setupController())
 
   afterEach ->

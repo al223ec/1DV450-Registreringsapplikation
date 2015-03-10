@@ -18,7 +18,6 @@ module Api
         end
 
         def query
-            debugger
             if queries = params[:queries]
                 sql = ''
                 query_hash = {}
@@ -27,10 +26,12 @@ module Api
                     sql << "AND content LIKE :q#{query} "
                     query_hash[:"q#{query}"] = "%#{query}%"
                 end
+
+
                 @events = Event.where("application_id = #{@application.id} " << sql, query_hash).paginate(page: params[:page], per_page: params[:per_page])
                 render :index
             else
-                render json: get_resource.errors, status: :unprocessable_entity
+                render json: "Felaktigt formaterade parametrar", status: :unprocessable_entity
             end
         end
 
