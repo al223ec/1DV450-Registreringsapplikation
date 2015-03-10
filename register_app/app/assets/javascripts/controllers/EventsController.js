@@ -13,18 +13,18 @@ controllers.controller("EventsController", [
       eventId: "@id",
       format: 'json'
     });
-
+    /*
+    Event.query({ queries: $routeParams.keywords },
+            function(results) {
+              $scope.events = results;
+            });
+    */
     if ($routeParams.keywords) {
       var queries = { queries: [$routeParams.keywords] };
       $http.post('http://api.lvh.me:3000/events/query', queries ).success(
         function (data){
           $scope.events = data;
       });
-      /*
-      Event.query({ queries: $routeParams.keywords },
-        function(results) {
-          $scope.events = results;
-        });*/
     } else {
         $scope.events = [];
     }

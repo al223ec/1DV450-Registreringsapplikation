@@ -5,6 +5,9 @@ toerh.config([
     $routeProvider.when('/', {
       templateUrl: "index.html",
       controller: 'EventsController'
+    }).when('/events/:eventId', {
+      templateUrl: "show.html",
+      controller: 'EventController'
     });
 
     return $httpProvider.defaults.headers.common = {
