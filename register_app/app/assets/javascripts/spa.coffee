@@ -20,12 +20,14 @@ controllers = angular.module('controllers',[])
 controllers.controller("EventsController", [ '$scope', '$routeParams', '$location', '$resource',
 
   ($scope,$routeParams,$location, $resource)->
-    $scope.search = (keywords)->  $location.path("/").search('keywords',keywords)
+    $scope.search = (queries)->
+      queries = queries.replace('/ /g','').split(",");
+      $location.path("/").search('queries', queries)
 
     Event = $resource('http://api.lvh.me:3000/events/:eventId', { eventId: "@id", format: 'json' }, )
 
-    if $routeParams.keywords
-      Event.query(keywords: $routeParams.keywords, (results)-> $scope.events = results)
+    if $routeParams.queries
+      Event.query(queries: $routeParams.queries, (results)-> $scope.events = results)
     else
       $scope.events = []
 ])

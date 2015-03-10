@@ -29,6 +29,7 @@ module RegisterApp
     config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
     config.assets.paths << Rails.root.join("vendor","assets", "components","bootstrap-sass-official","assets","fonts")
 
+    # TODO::Begränsa de sidor som får genomföra requests
     config.middleware.insert_before 0, "Rack::Cors" do
       allow do
         origins '*'

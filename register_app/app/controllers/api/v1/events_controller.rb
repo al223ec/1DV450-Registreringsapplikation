@@ -17,13 +17,8 @@ module Api
             super
         end
 
-        def options
-            # if access_allowed?
-            set_access_control_headers
-            head :ok
-        end
-
         def query
+            debugger
             if queries = params[:queries]
                 sql = ''
                 query_hash = {}

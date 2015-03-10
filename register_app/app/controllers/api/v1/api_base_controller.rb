@@ -123,7 +123,6 @@ module Api
 			end
 
 			def authenticate_application
-									debugger
 				authenticate_or_request_with_http_token do |token|
 					@application = Application.where(key: token).first
 					if !@application.nil?
