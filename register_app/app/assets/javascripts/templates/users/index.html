@@ -1,0 +1,15 @@
+<ng-include src="'/templates/_nav.html'"></ng-include>
+<ng-include src="'/templates/_flash_message.html'"></ng-include>
+
+<section class="results">
+  <aside>
+    <h1>Users</h1>
+  </aside>
+  <article>
+    <ul>
+      <li ng-repeat="user in users">
+        <ng-include src="'/templates/_user.html'"></ng-include>
+      </li>
+  </ul>
+  </article>
+</section>

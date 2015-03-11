@@ -1,0 +1,31 @@
+<ng-include src="'/templates/_nav.html'"></ng-include>
+<ng-include src="'/templates/_flash_message.html'"></ng-include>
+<!--
+<section class="search">
+    <h1>Find Events</h1>
+    <form>
+        <aside>
+            <label for="keywords" class="sr-only">Keywords</label>
+            <input ng-model="keywords" name="keywords" type="text" autofocus class="form-control" placeholder="Search for event, e.g. Baked Potato seperate words with ',' plz">
+        </aside>
+        <section>
+            <a class="btn" ng-click="search(keywords)">Search</a>
+        </section>
+    </form>
+</section>
+<hr>
+-->
+<section class="results">
+  <aside>
+    <h1>Events</h1>
+    <span class="stamp">Vad nu det är</span>
+    <a ng-click="newEvent()"> Nytt event</a>
+  </aside>
+  <article>
+    <ul>
+      <li ng-repeat="event in events">
+        <ng-include src="'/templates/_event.html'"></ng-include>
+      </li>
+  </ul>
+  </article>
+</section>

@@ -1,0 +1,20 @@
+<section class="nav">
+  <aside><img src="/toerh.png" alt="logo"></aside>
+  <section>
+  <h1><a href ng-click="goToHome()">TOERH</a></h1>
+  <ul>
+    <li>
+      <a href ng-click="setShowLoginForm()">Login</a>
+    </li>
+    <li>
+      <a href ng-click="goToHome()">Home</a>
+    </li>
+    <li>
+      <a href ng-click="goToUsers()">Users</a>
+    </li>
+  </ul>
+  </section>
+</section>
+<div ng-show="showLoginForm" ng-animate="'animate'">
+    <ng-include  src="'/templates/_login_form.html'"></ng-include>
+</div>

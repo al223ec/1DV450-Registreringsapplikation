@@ -11,6 +11,10 @@
  * file per style scope.
  *
  *= require bootstrap/dist/css/bootstrap
- *= require_tree
+ *= require custom
+ *= require applications
+ *= require sessions
+ *= require static_pages
+ *= require users
  *= require_self
  */

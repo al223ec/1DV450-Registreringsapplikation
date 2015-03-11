@@ -5,33 +5,27 @@ controllers.controller("EventsController", [
   function($scope, $routeParams, $location, $resource, $http) {
     var Event;
 
-    $scope.search = function(keywords) {
-      return $location.path("/").search('keywords', keywords);
-    };
-
     Event = $resource('http://api.lvh.me:3000/events/:eventId', {
       eventId: "@id",
       format: 'json'
     });
+    Event.query({}, function(results) { $scope.events = results; });
 
     /*
-    Event.query({ queries: $routeParams.keywords },
-            function(results) {
-              $scope.events = results;
-            });
-    */
-    $scope.view = function(eventId) {
-      $location.path("/events/" + eventId);
-    }
-
+    Kommer implementera denna senare
+    $scope.search = function(keywords) {
+      return $location.path("/").search('keywords', keywords);
+    };
     if ($routeParams.keywords) {
       var queries = { queries: [$routeParams.keywords] };
       $http.post('http://api.lvh.me:3000/events/query', queries ).success(
         function (data){
+          console.log(data);
           $scope.events = data;
       });
     } else {
         $scope.events = [];
     }
+    */
   }
 ]);

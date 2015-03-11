@@ -1,0 +1,18 @@
+<section class="user" ng-if="user">
+<aside><img src="/toerh.png" alt="logo"> </aside>
+<article>
+<header>{{user.email}}</header>
+  <h2>{{user.name}}</h2>
+  <span class="stamp">
+    Skapades {{user.created_at}}
+  </span>
+  <section>
+    <ul>
+      <li><h2>Events av {{user.name}}</h2></li>
+      <li ng-repeat="event in user.events">
+        <ng-include src="'/templates/_event.html'"></ng-include>
+      </li>
+    </ul>
+  </section>
+</article>
+</section>

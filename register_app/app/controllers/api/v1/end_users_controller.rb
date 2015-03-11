@@ -2,6 +2,8 @@ module Api
 	class V1::EndUsersController < V1::ApiBaseController
 	    before_action :authenticate_user, only: [:destroy, :update]
 
+			rescue_from NoMethodError, with: :error_wrong_credentials
+
 			def login
 			    end_user = EndUser.find_by(email: params[:end_user][:email].downcase).try(:authenticate, params[:end_user][:password])
 			    if end_user
@@ -14,7 +16,7 @@ module Api
 
 						render(:json => { :jwt => payload }, :status => 200)
 			    else
-			    	respond_with_error("Felaktigt email eller lösenord vg försök igen", :unauthorized)
+						error_wrong_credentials
 			    end
 			end
 
@@ -35,6 +37,10 @@ module Api
 
 				def end_user_simple_params
 					params.require(:end_user).permit(:email, :password)
+				end
+
+				def error_wrong_credentials
+					respond_with_error("Felaktigt email eller lösenord vg försök igen", :unauthorized)
 				end
 	end
 end

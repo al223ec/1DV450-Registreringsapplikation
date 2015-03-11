@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title><%= full_title(yield(:title)) %></title>
-        <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => false %>
+        <base href="/">
+        <title>TOERH SPA</title>
+        <%= stylesheet_link_tag    'spa', media: 'all', 'data-turbolinks-track' => false %>
         <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
         <%= csrf_meta_tags %>
     </head>
     <body>
         <div ng-app="toerh">
-          <div class="view-container">
+          <div ng-controller="NavigationController">
             <div ng-view class="view-frame animate-view"></div>
           </div>
         </div>

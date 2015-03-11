@@ -1,0 +1,304 @@
+@import"bourbon";
+@import"neat";
+
+$orange: #ff6d3b;
+$dark-orange: #e66235;
+$turquoise: #21d8de;
+$dark-turquoise: #21d8de;
+$blue: #2a445e;
+$dark-blue: #22364b;
+$red: #ba2025;
+$grey: #ccc;
+
+$nav-height:100px;
+
+@import url(http://fonts.googleapis.com/css?family=Montserrat:400,700);
+@import url(http://fonts.googleapis.com/css?family=Lato);
+/* ==========================================================================
+  Typography
+========================================================================== */
+
+h1, h2, h3, h4, h5, a {
+    font-family: 'Montserrat', sans-serif;
+    color: $dark-blue;
+}
+body, html {
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    height: 100%;
+    word-break: normal;
+    padding: 0;
+    margin: 0;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+p {
+}
+a, li a {
+  color: $dark-blue;
+  text-decoration: none;
+  -webkit-transition: all 0.5s;
+  -moz-transition: all 0.5s;
+  -o-transition: all 0.5s;
+  transition: all 0.5s;
+  &:focus {
+        outline: thin dotted;
+  }
+  &:active, &:hover {
+       outline: 0;
+  }
+  &:hover, &:focus {
+      color: $orange;
+      text-decoration: none;
+ }
+  &:visited { text-decoration: none; }
+  &:hover { text-decoration: none; }
+  &:focus { text-decoration: none; }
+}
+hr {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  height: 1px;
+  border-width: 0;
+  background-color: $grey;
+  .dark {}
+  .light {}
+}
+
+.right{
+  float:right
+}
+.btn {
+    display: inline-block;
+    padding: 5px 10px;
+    color: #222;
+    border: solid 1px $grey;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+
+    &:hover, &:focus{
+      color: $dark-turquoise;
+      border: solid 1px $dark-turquoise;
+    }
+    &.dng{
+      &:hover, &:focus{
+        color: $red;
+        border: solid 1px $red;
+      }
+    }
+}
+input{
+  padding: 5px 10px;
+  color: #222;
+  border: solid 1px $grey;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+span{
+  &.stamp{
+    color: $grey;
+  }
+  &.email{
+    font-style: strong;
+  }
+}
+
+/* "Debugging"
+section, aside, header, p {
+  outline: 1px solid $grey;
+}*/
+.nav{
+  @include outer-container;
+  max-width: 100%;
+  max-height: $nav-height;
+  background-color: $blue;
+  color:white;
+  a {
+    color:white;
+  }
+  aside {
+    @include span-columns(1);
+    img{
+      max-height: $nav-height;
+    }
+  }
+  section {
+    @include span-columns(11);
+    h1{
+      @include span-columns(6);
+      margin: 0;
+      font-size: 60px;
+      line-height: $nav-height;
+      text-decoration: underline;
+      a{
+        color:$dark-blue;
+        -webkit-transition: all 0.5s;
+        -moz-transition: all 0.5s;
+        -o-transition: all 0.5s;
+        transition: all 0.5s;
+        &:hover{
+          color: $orange;
+        }
+      }
+    }
+    ul{
+      @include shift(3);
+      @include span-columns(3);
+      li{
+        float:left;
+        line-height: $nav-height;
+        padding-left: 15px;
+        padding-right: 15px;
+        &:before{
+          content: "| ";
+        }
+      }
+
+    }
+  }
+}
+
+.search{
+    @include outer-container;
+    aside {
+      @include span-columns(9);
+      label{
+        @include span-columns(2);
+        line-height: 22px;
+      }
+      input{
+        @include span-columns(10);
+      }
+    }
+    section {
+     @include span-columns(3);
+    }
+}
+.results{
+    @include outer-container;
+    h1{
+      font-size: 50px;
+      color: $dark-orange;
+      padding: 0;
+      margin:0;
+    }
+    aside {
+      @include fill-parent();
+    }
+    article {
+      @include fill-parent();
+    }
+}
+.event {
+    @include outer-container;
+    border-top: 1px solid $grey;
+    aside {
+      @include span-columns(2);
+      img{
+        max-width: 50%;
+        float: right;
+        padding-top:10px;
+      }
+    }
+    article {
+     @include span-columns(10);
+      header {
+        letter-spacing: 2px;
+        font-size: 11px;
+        margin-bottom: 15px;
+        border-width: 0px 0px 1px 0px;
+        border-style: dotted;
+        border-color: $grey;
+        color: rgba(0, 0, 0, 1);
+      }
+      .content{
+        font-size: 15px;
+        color: #000;
+      }
+      footer{
+        span{
+        display: block;
+        &.tags{
+          display: inline;
+        }
+        }
+      }
+    }
+}
+
+.login-form{
+   @include outer-container;
+    aside {
+      @include shift(1);
+      @include span-columns(9);
+    }
+    section {
+      @include span-columns(2);
+    }
+}
+.form{
+   @include outer-container;
+    aside {
+      @include shift(1);
+      @include span-columns(9);
+      input{
+        @include span-columns(9);
+      }
+      label{
+        @include span-columns(3);
+      }
+    }
+    section {
+      @include span-columns(2);
+    }
+}
+
+.user {
+    @include outer-container;
+    border-top: 1px solid $grey;
+    aside {
+      @include span-columns(2);
+      img{
+        max-width: 50%;
+        float: right;
+        padding-top:10px;
+      }
+    }
+    article {
+     @include span-columns(10);
+      header {
+        letter-spacing: 2px;
+        font-size: 11px;
+        margin-bottom: 15px;
+        border-width: 0px 0px 1px 0px;
+        border-style: dotted;
+        border-color: $grey;
+        color: rgba(0, 0, 0, 1);
+      }
+    }
+}
+
+.flash {
+  @include outer-container;
+  aside{
+    @include fill-parent();
+  }
+}
+.flash-danger{
+  background-color:$red;
+}
+.flash-warning{
+  background-color:$dark-orange;
+}
+.flash-info{
+  background-color:green;
+}
+.flash-success{
+  background-color: green;
+}

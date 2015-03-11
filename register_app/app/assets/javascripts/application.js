@@ -17,6 +17,9 @@
 //= require angular-route/angular-route
 //= require angular-resource/angular-resource
 //= require angular-flash/dist/angular-flash
+//= require angular-animate/angular-animate
+//= require a0-angular-storage/dist/angular-storage
+//= require angular-jwt/dist/angular-jwt
 //= require angular-rails-templates
 //= require turbolinks
 //= require spa

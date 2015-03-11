@@ -1,0 +1,20 @@
+<section class="event" ng-if="event">
+<aside> <img src="/toerh.png" alt="logo"> </aside>
+<article>
+  <header>Skrivet av <a href ng-click="viewUser(event.end_user.id)" >{{event.end_user.name}}</header>
+  <p class="content"><a href ng-click="viewEvent(event.id)" >{{event.content}}</a></p>
+  <footer>
+  <span class="email">{{event.end_user.email}} </span>
+  <span class="stamp">{{event.created_at}}</span>
+  <span class="location">{{event.position.address}}</span>
+  <span class="tags right" ng-repeat="tag in event.tags">#{{tag.name}},</span>
+  <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
+  </footer>
+<!--
+<p class="right">
+<a class="btn">Edit</a> |
+<a class="btn dng">Delete</a>
+</p>
+-->
+</article>
+</section>
