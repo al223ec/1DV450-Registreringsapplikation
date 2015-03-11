@@ -20,6 +20,10 @@ controllers.controller("EventsController", [
               $scope.events = results;
             });
     */
+    $scope.view = function(eventId) {
+      $location.path("/events/" + eventId);
+    }
+
     if ($routeParams.keywords) {
       var queries = { queries: [$routeParams.keywords] };
       $http.post('http://api.lvh.me:3000/events/query', queries ).success(

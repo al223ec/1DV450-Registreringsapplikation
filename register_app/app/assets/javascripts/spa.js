@@ -18,6 +18,7 @@ toerh.config([
     });
 
     return $httpProvider.defaults.headers.common = {
+      // elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t
       'Authorization': 'Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t'
     };
   }
