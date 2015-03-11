@@ -15,11 +15,12 @@
 </section>
 <hr>
 -->
+<div ui-view="login"></div>
 <section class="results">
   <aside>
     <h1>Events</h1>
     <span class="stamp">Vad nu det är</span>
-    <a ng-click="newEvent()"> Nytt event</a>
+    <a href ui-sref="events.new"> Nytt event</a>
   </aside>
   <article>
     <ul>

@@ -1,7 +1,7 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("EndUserController", ['$scope', '$routeParams', '$resource', 'flash', '$location',
-    function($scope, $routeParams, $resource, flash, $location) {
+controllers.controller("EndUserController", ['$scope', '$stateParams', '$resource', 'flash', '$state',
+    function($scope, $stateParams, $resource, flash, $state) {
 
         var Event = $resource('http://api.lvh.me:3000/end_users/:endUserId/events', {
             endUserId: "@id"
@@ -11,25 +11,21 @@ controllers.controller("EndUserController", ['$scope', '$routeParams', '$resourc
         });
 
         User.get({
-            endUserId: $routeParams.endUserId
+            endUserId: $stateParams.endUserId
         }, function(user) {
             $scope.user = user
 
             Event.query({
-                endUserId: $routeParams.endUserId
+                endUserId: $stateParams.endUserId
             }, function(events){
                 $scope.user.events = events
             }, function(httpResponse) {
                 $scope.user = null
-                flash.error = "Kan inte hitta några events med userid " + $routeParams.endUserId;
+                flash.error = "Kan inte hitta några events med userid " + $stateParams.endUserId;
             })
         }, function(httpResponse) {
             $scope.user = null
-            flash.error = "There is no user with ID " + $routeParams.endUserId;
+            flash.error = "There is no user with ID " + $stateParams.endUserId;
         });
-
-        $scope.back = function() {
-            $location.path("/")
-        }
     }
 ]);

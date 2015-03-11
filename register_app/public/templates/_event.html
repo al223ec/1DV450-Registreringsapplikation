@@ -1,8 +1,8 @@
 <section class="event" ng-if="event">
 <aside> <img src="/toerh.png" alt="logo"> </aside>
 <article>
-  <header>Skrivet av <a href ng-click="viewUser(event.end_user.id)" >{{event.end_user.name}}</header>
-  <p class="content"><a href ng-click="viewEvent(event.id)" >{{event.content}}</a></p>
+  <header>Skrivet av <a href ui-sref="users.show({endUserId: event.end_user.id})" >{{event.end_user.name}}</header>
+  <p class="content"><a href ui-sref="events.show({eventId: event.id})" >{{event.content}}</a></p>
   <footer>
   <span class="email">{{event.end_user.email}} </span>
   <span class="stamp">{{event.created_at}}</span>

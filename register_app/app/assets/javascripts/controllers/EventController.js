@@ -1,8 +1,11 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("EventController", ['$scope', '$routeParams', '$resource', 'flash', '$location',
-    function($scope, $routeParams, $resource, flash, $location) {
+controllers.controller("EventController", ['$scope', '$stateParams', '$resource', 'flash', '$state',
+    function($scope, $stateParams, $resource, flash, $state) {
         $scope.event = {};
+        var Position = $resource('http://api.lvh.me:3000/positions/',{});
+        Position.query({}, function(positions) { $scope.positions = positions; });
+
         var Event = $resource('http://api.lvh.me:3000/events/:eventId',
         {
             eventId: "@id"
@@ -11,29 +14,29 @@ controllers.controller("EventController", ['$scope', '$routeParams', '$resource'
             'create': {method:'POST'}
         });
 
-        if($routeParams.eventId){
+        if($stateParams.eventId){
             Event.get({
-                eventId: $routeParams.eventId
+                eventId: $stateParams.eventId
             }, function(event) {
                 $scope.event = event
             }, function(httpResponse) {
                 $scope.event = null
-                flash.error = "There is no event with ID " + $routeParams.eventId;
+                flash.error = "There is no event with ID " + $stateParams.eventId;
             });
         }
 
+
         $scope.edit = function(){
-            $location.path("/events/" + $scope.event.id + "/edit");
         }
 
         $scope.save = function(){
             if ($scope.event.id) {
                 $scope.event.$save(
-                    function(){ $location.path("/events/" + $scope.event.id)},
+                    function(){ $state.go('events.show', { eventId: $scope.event.id }); },
                     onError);
             } else {
                 Event.create($scope.event,
-                function(newEvent){ $location.path("/events/" + $scope.newEvent.id)},
+                function(newEvent){ $state.go('events.show', { eventId: $scope.event.id }); },
                 onError);
             }
         }
