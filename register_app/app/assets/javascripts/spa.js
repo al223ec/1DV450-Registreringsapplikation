@@ -9,7 +9,7 @@ var toerh = angular.module('toerh', [
     'angular-flash.flash-alert-directive',
     'angular-storage',
     'angular-jwt',
-    'ui.router',
+    'ui.router'
     ]);
 
 toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvider', 'jwtInterceptorProvider','$stateProvider','$urlRouterProvider',
@@ -20,15 +20,39 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         flashProvider.infoClassnames.push("flash-info")
         flashProvider.successClassnames.push("flash-success")
 
-        $urlRouterProvider.otherwise("/events/list");
         $stateProvider
+/*        .state('app', {
+*           url: '',
+*           abstract: true,
+*           templateUrl: 'app.html',
+*           controller: 'AppController'
+*       })
+*/
+        .state('profile', {
+            url: '/profile',
+            abstract: true,
+            templateUrl: 'app.html',
+            controller: 'AppController'
+        })
+        .state('profile.showProfile',{
+            url: '/show',
+            views: {
+                'main': {
+                    templateUrl: "profile/show.html",
+                    controller: 'EndUserController'
+                }
+            },
+            data:{
+                requiresLogin: true
+            }
+        })
         .state('events', {
             url: '/events',
             abstract: true,
             templateUrl: 'app.html',
             controller: 'AppController'
         })
-        .state('events.list', {
+        .state('events.listEvents', {
             url: "/list",
             views: {
                 'main': {
@@ -37,8 +61,8 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         })
-        .state('events.show', {
-            url: '/{eventId:[0-9]{1,6}}',
+        .state('events.showEvent', {
+            url: '/{eventId:[0-9]{1,6}}', //{eventId:[0-9]{1,6}}',
             views: {
                 'main': {
                     templateUrl: "events/show.html",
@@ -46,19 +70,19 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         })
-        .state('events.new', {
+        .state('events.newEvent', {
             url: '/new',
             views: {
                 'main': {
                     templateUrl: "events/create.html",
-                    controller: 'EventController'
+                    controller: 'CreateEventController'
                 }
             },
             data:{
                 requiresLogin: true
             }
         })
-        .state('events.edit',{
+        .state('events.editEvent',{
             url: '/edit',
             views: {
                 'main': {
@@ -74,9 +98,10 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             url: '/users',
             abstract: true,
             templateUrl: 'app.html',
+            controller: 'AppController'
         })
-        .state('users.list', {
-            url: "/all",
+        .state('users.listUsers', {
+            url: "/list",
             views: {
                 'main': {
                     templateUrl: "users/index.html",
@@ -84,7 +109,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         })
-        .state('users.show', {
+        .state('users.showUser', {
             url: '/{endUserId:[0-9]{1,6}}',
             views: {
                 'main': {
@@ -92,13 +117,8 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                     controller: 'EndUserController'
                 }
             }
-        })
-        .state('login', {
-            url: '/login',
-            templateUrl: "auth/index.html",
-            controller: 'AuthController'
         });
-
+//      url: "*path",
 
         $httpProvider.defaults.headers.common = {
             'Authorization': 'Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t',
@@ -110,16 +130,20 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         jwtInterceptorProvider.authHeader = 'JWT';
         jwtInterceptorProvider.authPrefix = '';
         $httpProvider.interceptors.push('jwtInterceptor');
+
+        $urlRouterProvider.otherwise("/events/list");
         // $locationProvider.html5Mode(true);
     }
 ]);
 
-toerh.run(['$state', 'store', '$rootScope', function($state, store, $rootScope ){
+toerh.run(['$state', 'store', '$rootScope', 'flash', function($state, store, $rootScope, flash ){
     $rootScope.$on('$stateChangeStart', function(e, to){
         if(to.data && to.data.requiresLogin){
             if(!store.get('jwt')){
                 e.preventDefault();
-                $state.go('login');
+                $state.go('events.list');
+                console.log("not authenticated");
+                flash.error = "V.g logga in";
             }
         }
     })

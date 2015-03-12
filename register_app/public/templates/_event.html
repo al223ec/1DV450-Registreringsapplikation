@@ -1,20 +1,19 @@
 <section class="event" ng-if="event">
-<aside> <img src="/toerh.png" alt="logo"> </aside>
-<article>
-  <header>Skrivet av <a href ui-sref="users.show({endUserId: event.end_user.id})" >{{event.end_user.name}}</header>
-  <p class="content"><a href ui-sref="events.show({eventId: event.id})" >{{event.content}}</a></p>
-  <footer>
-  <span class="email">{{event.end_user.email}} </span>
-  <span class="stamp">{{event.created_at}}</span>
-  <span class="location">{{event.position.address}}</span>
-  <span class="tags right" ng-repeat="tag in event.tags">#{{tag.name}},</span>
-  <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
-  </footer>
-<!--
-<p class="right">
-<a class="btn">Edit</a> |
-<a class="btn dng">Delete</a>
-</p>
--->
-</article>
+  <aside> <img src="/toerh.png" alt="logo"> </aside>
+  <article>
+    <header>Skrivet av <a href ui-sref="users.showUser({endUserId: event.end_user.id})" >{{event.end_user.name}}
+    </a></header>
+    <p class="content"><a href ui-sref="events.showEvent({eventId: event.id})" >{{event.content}}</a></p>
+    <footer>
+    <span class="email">{{event.end_user.email}} </span>
+    <span class="stamp">{{event.created_at}}</span>
+    <span class="location">{{event.position.address}}</span>
+    <span class="tags right" ng-repeat="tag in event.tags">#{{tag.name}},</span>
+    <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
+    <div ng-if="endUserId == event.end_user.id">
+      <a class="btn dng">Ta bort</a>
+      <a class="btn">Redigera</a>
+    </div>
+    </footer>
+  </article>
 </section>

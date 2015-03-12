@@ -9,6 +9,7 @@ $blue: #2a445e;
 $dark-blue: #22364b;
 $red: #ba2025;
 $grey: #ccc;
+$green: #B9F282;
 
 $nav-height:100px;
 
@@ -57,6 +58,7 @@ a, li a {
   &:visited { text-decoration: none; }
   &:hover { text-decoration: none; }
   &:focus { text-decoration: none; }
+  &.active{ color: $dark-orange; }
 }
 hr {
   margin-top: 15px;
@@ -109,10 +111,23 @@ span{
   }
 }
 
+
 /* "Debugging"
 section, aside, header, p {
   outline: 1px solid $grey;
 }*/
+/* ==========================================================================
+  mixins
+========================================================================== */
+@mixin my-header() {
+  letter-spacing: 2px;
+  font-size: 11px;
+  margin-bottom: 15px;
+  border-width: 0px 0px 1px 0px;
+  border-style: dotted;
+  border-color: $grey;
+  color: rgba(0, 0, 0, 1);
+}
 .nav{
   @include outer-container;
   max-width: 100%;
@@ -209,13 +224,7 @@ section, aside, header, p {
     article {
      @include span-columns(10);
       header {
-        letter-spacing: 2px;
-        font-size: 11px;
-        margin-bottom: 15px;
-        border-width: 0px 0px 1px 0px;
-        border-style: dotted;
-        border-color: $grey;
-        color: rgba(0, 0, 0, 1);
+        @include my-header();
       }
       .content{
         font-size: 15px;
@@ -273,13 +282,7 @@ section, aside, header, p {
     article {
      @include span-columns(10);
       header {
-        letter-spacing: 2px;
-        font-size: 11px;
-        margin-bottom: 15px;
-        border-width: 0px 0px 1px 0px;
-        border-style: dotted;
-        border-color: $grey;
-        color: rgba(0, 0, 0, 1);
+        @include my-header();
       }
     }
 }
@@ -288,17 +291,44 @@ section, aside, header, p {
   @include outer-container;
   aside{
     @include fill-parent();
+    article{
+      padding:15px;
+      font-weight: bold;
+      font-size: 14px;
+      color: white;
+      &.flash-danger{
+        background-color:$red;
+      }
+      &.flash-warning{
+        background-color:$dark-orange;
+      }
+      &.flash-info{
+        background-color: $dark-turquoise;
+      }
+      &.flash-success{
+        color: $dark-blue;
+        background-color: $green;
+      }
+    }
   }
 }
-.flash-danger{
-  background-color:$red;
+
+
+.animate-if {
+  overflow: hidden;
 }
-.flash-warning{
-  background-color:$dark-orange;
+
+.animate-if.ng-enter, .animate-if.ng-leave {
+  -webkit-transition:height 0.5s;
+  transition:height 0.5s;
 }
-.flash-info{
-  background-color:green;
+
+.animate-if.ng-enter,
+.animate-if.ng-leave.ng-leave-active {
+  height: 0px;
 }
-.flash-success{
-  background-color: green;
+
+.animate-if.ng-leave,
+.animate-if.ng-enter.ng-enter-active {
+  height:100px;
 }

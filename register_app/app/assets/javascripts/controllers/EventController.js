@@ -1,30 +1,17 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("EventController", ['$scope', '$stateParams', '$resource', 'flash', '$state',
-    function($scope, $stateParams, $resource, flash, $state) {
+controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
+    function($scope, $stateParams, flash, $state, eventService, positionService) {
         $scope.event = {};
-        var Position = $resource('http://api.lvh.me:3000/positions/',{});
-        Position.query({}, function(positions) { $scope.positions = positions; });
-
-        var Event = $resource('http://api.lvh.me:3000/events/:eventId',
-        {
-            eventId: "@id"
-        },{
-            'save':   {method:'PUT'},
-            'create': {method:'POST'}
-        });
 
         if($stateParams.eventId){
-            Event.get({
-                eventId: $stateParams.eventId
-            }, function(event) {
+            eventService.getEvent($stateParams.eventId, function(event) {
                 $scope.event = event
             }, function(httpResponse) {
                 $scope.event = null
                 flash.error = "There is no event with ID " + $stateParams.eventId;
             });
         }
-
 
         $scope.edit = function(){
         }
@@ -35,7 +22,7 @@ controllers.controller("EventController", ['$scope', '$stateParams', '$resource'
                     function(){ $state.go('events.show', { eventId: $scope.event.id }); },
                     onError);
             } else {
-                Event.create($scope.event,
+                eventService.create($scope.event,
                 function(newEvent){ $state.go('events.show', { eventId: $scope.event.id }); },
                 onError);
             }
@@ -43,7 +30,12 @@ controllers.controller("EventController", ['$scope', '$stateParams', '$resource'
 
         function onError(httpResponse){
             console.log(httpResponse);
-            flash.error = "något har gått fel";
+            flash.error = "något oväntat har gått fel";
         }
-    }
-]);
+}]);
+
+controllers.controller("CreateEventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
+    function($scope, $stateParams, flash, $state, eventService, positionService) {
+        $scope.event = {};
+
+}]);

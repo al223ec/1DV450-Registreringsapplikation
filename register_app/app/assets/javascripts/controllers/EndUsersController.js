@@ -1,28 +1,16 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("EndUsersController", ['$scope', '$resource', 'flash',
-    function($scope, $resource, flash) {
-    var User;
+controllers.controller("EndUsersController", ['$scope', 'userService', 'flash',
+    function($scope, userService, flash) {
 
-    User = $resource('http://api.lvh.me:3000/end_users/:endUserId', {
-      endUserId: "@id",
-      format: 'json'
-    });
-
-    User.query({}, function(results) { $scope.users = results; });
-
-    var Event = $resource('http://api.lvh.me:3000/end_users/:endUserId/events', {
-        endUserId: "@id"
-    });
+    userService.getUsers(function(results) { $scope.users = results; });
 
     $scope.getEvents = function(user){
       if(user.events){
         user.showEvents = user.showEvents ? false : true;
         return;
       }
-      Event.query({
-        endUserId: user.id
-      }, function(events){
+      userService.getEvents(user.id, function(events){
         if(events.length == 0){
           flash.error = "Användaren har inte några events";
           return;

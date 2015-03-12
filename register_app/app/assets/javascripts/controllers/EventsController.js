@@ -1,15 +1,9 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("EventsController", [
-  '$scope', '$routeParams', '$location', '$resource', '$http',
-  function($scope, $routeParams, $location, $resource, $http) {
-    var Event;
+controllers.controller("EventsController", ['$scope','$routeParams','eventService',
+  function($scope, $routeParams, eventService) {
 
-    Event = $resource('http://api.lvh.me:3000/events/:eventId', {
-      eventId: "@id",
-      format: 'json'
-    });
-    Event.query({}, function(results) { $scope.events = results; });
+    eventService.getEvents(function(results) { $scope.events = results; }, function(httpResponse){});
     /*
     Kommer implementera denna senare
     $scope.search = function(keywords) {
