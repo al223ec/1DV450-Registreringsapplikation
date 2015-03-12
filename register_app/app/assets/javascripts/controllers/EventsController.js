@@ -10,7 +10,6 @@ controllers.controller("EventsController", [
       format: 'json'
     });
     Event.query({}, function(results) { $scope.events = results; });
-
     /*
     Kommer implementera denna senare
     $scope.search = function(keywords) {

@@ -26,6 +26,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             url: '/events',
             abstract: true,
             templateUrl: 'app.html',
+            controller: 'AppController'
         })
         .state('events.list', {
             url: "/list",

@@ -13,8 +13,7 @@ controllers.controller("EndUserController", ['$scope', '$stateParams', '$resourc
         User.get({
             endUserId: $stateParams.endUserId
         }, function(user) {
-            $scope.user = user
-
+            $scope.user = user;
             Event.query({
                 endUserId: $stateParams.endUserId
             }, function(events){
@@ -22,7 +21,7 @@ controllers.controller("EndUserController", ['$scope', '$stateParams', '$resourc
             }, function(httpResponse) {
                 $scope.user = null
                 flash.error = "Kan inte hitta några events med userid " + $stateParams.endUserId;
-            })
+            });
         }, function(httpResponse) {
             $scope.user = null
             flash.error = "There is no user with ID " + $stateParams.endUserId;
