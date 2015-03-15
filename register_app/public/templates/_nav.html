@@ -15,9 +15,9 @@
     <li>
       <a href ui-sref="users.listUsers" ui-sref-active="active">Users</a>
     </li>
-    <li ng-show="endUserId">
-        <a href ui-sref="profile.showProfile" ui-sref-active="active">Profile</a><br>
-        Inloggad som {{currentUser.name}}
+    <li ng-if="endUserId">
+        <a href ui-sref="profile.showProfile" ui-sref-active="active">Profile</a><span class="dark-blue">
+        Inloggad som</span> <a href ui-sref="profile.showProfile" ui-sref-active="active">{{currentUser.name}}</a>
     </li>
   </ul>
   </section>

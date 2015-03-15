@@ -9,6 +9,7 @@ $blue: #2a445e;
 $dark-blue: #22364b;
 $red: #ba2025;
 $grey: #ccc;
+
 $green: #B9F282;
 
 $nav-height:100px;
@@ -134,6 +135,7 @@ section, aside, header, p {
 /* ==========================================================================
   modules
 ========================================================================== */
+
 .nav{
   @include outer-container;
   max-width: 100%;
@@ -169,8 +171,8 @@ section, aside, header, p {
       }
     }
     ul{
-      @include shift(3);
-      @include span-columns(3);
+      @include shift(2);
+      @include span-columns(4);
       li{
         float:left;
         line-height: $nav-height;
@@ -178,6 +180,11 @@ section, aside, header, p {
         padding-right: 15px;
         &:before{
           content: "| ";
+        }
+        span{
+          &.dark-blue{
+            color: $grey;
+          }
         }
       }
 
@@ -341,6 +348,7 @@ section, aside, header, p {
 }
 .page-footer{
     @include outer-container;
+    margin-top: 20px;
     max-width: 100%;
     max-height: $footer-height;
     background-color: $blue;
@@ -365,8 +373,8 @@ section, aside, header, p {
       }
       aside{
         @include shift(4);
-        @include span-columns(8);
-          color: white;
+        @include span-columns(4);
+          color: $grey;
         }
     }
 }
@@ -393,13 +401,13 @@ section, aside, header, p {
 
 
 // .event-list {
-//     transition: opacity 1.5s;
+//     transition: opacity 0.5s;
 //     &.ng-enter {
 //         opacity:0;
 //     }
 //     &.ng-enter-stagger {
 //         transition-delay: 0.1s;
-//     }
+//       }
 //     &.ng-enter.ng-enter-active {
 //         opacity: 1;
 //     }

@@ -18,6 +18,8 @@ controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$
         }
 
         $scope.save = function(){
+            console.log($scope.event);
+
             if ($scope.event.id) {
                 $scope.event.$save(
                     function(){ $state.go('events.show', { eventId: $scope.event.id }); },

@@ -17,9 +17,9 @@ toerh.directive('myUserLister', function($routeParams, eventService, userService
     };
 
     scope.pageChanged = function(newPage) {
+
       userService.getUsersPerPage(newPage, scope.usersPerPage,
         function(data) {
-          console.log(data);
           scope.totalUsers = data.total_entries;
           scope.users = data.users;
         });

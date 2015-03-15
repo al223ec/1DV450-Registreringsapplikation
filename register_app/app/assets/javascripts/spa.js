@@ -66,7 +66,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         .state('events.listEvents.newEvent', {
             url: '/new',
             templateUrl: "events/create.html",
-            controller: 'CreateEventController',
+            controller: 'EventController',
             data:{
                 requiresLogin: true
             }
