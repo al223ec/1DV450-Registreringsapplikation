@@ -21,6 +21,7 @@
 //= require a0-angular-storage/dist/angular-storage
 //= require angular-jwt/dist/angular-jwt
 //= require angular-ui-router/release/angular-ui-router
+//= require angular-utils-pagination/dirPagination
 //= require angular-rails-templates
 //= require turbolinks
 //= require spa

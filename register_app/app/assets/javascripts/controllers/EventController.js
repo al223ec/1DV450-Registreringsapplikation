@@ -1,4 +1,5 @@
 "use strict";
+
 var controllers = angular.module('controllers');
 controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
     function($scope, $stateParams, flash, $state, eventService, positionService) {
@@ -23,8 +24,8 @@ controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$
                     onError);
             } else {
                 eventService.create($scope.event,
-                function(newEvent){ $state.go('events.show', { eventId: $scope.event.id }); },
-                onError);
+                    function(newEvent){ $state.go('events.show', { eventId: $scope.event.id }); },
+                    onError);
             }
         }
 
@@ -37,5 +38,5 @@ controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$
 controllers.controller("CreateEventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
     function($scope, $stateParams, flash, $state, eventService, positionService) {
         $scope.event = {};
-
+        positionService.getPositions(function(positions){$scope.positions = positions; });
 }]);

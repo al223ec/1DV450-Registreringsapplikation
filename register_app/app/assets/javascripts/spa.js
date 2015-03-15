@@ -9,11 +9,12 @@ var toerh = angular.module('toerh', [
     'angular-flash.flash-alert-directive',
     'angular-storage',
     'angular-jwt',
-    'ui.router'
+    'ui.router',
+    'angularUtils.directives.dirPagination'
     ]);
 
-toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvider', 'jwtInterceptorProvider','$stateProvider','$urlRouterProvider',
-    function($routeProvider, $httpProvider, flashProvider, $locationProvider, jwtInterceptorProvider, $stateProvider, $urlRouterProvider) {
+toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvider', 'jwtInterceptorProvider','$stateProvider','$urlRouterProvider', 'paginationTemplateProvider',
+    function($routeProvider, $httpProvider, flashProvider, $locationProvider, jwtInterceptorProvider, $stateProvider, $urlRouterProvider, paginationTemplateProvider) {
 
         flashProvider.errorClassnames.push("flash-danger")
         flashProvider.warnClassnames.push("flash-warning")
@@ -21,13 +22,6 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         flashProvider.successClassnames.push("flash-success")
 
         $stateProvider
-/*        .state('app', {
-*           url: '',
-*           abstract: true,
-*           templateUrl: 'app.html',
-*           controller: 'AppController'
-*       })
-*/
         .state('profile', {
             url: '/profile',
             abstract: true,
@@ -57,12 +51,11 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'main': {
                     templateUrl: "events/index.html",
-                    controller: 'EventsController'
                 }
             }
         })
         .state('events.showEvent', {
-            url: '/{eventId:[0-9]{1,6}}', //{eventId:[0-9]{1,6}}',
+            url: '/{eventId:[0-9]{1,6}}',
             views: {
                 'main': {
                     templateUrl: "events/show.html",
@@ -70,14 +63,10 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         })
-        .state('events.newEvent', {
+        .state('events.listEvents.newEvent', {
             url: '/new',
-            views: {
-                'main': {
-                    templateUrl: "events/create.html",
-                    controller: 'CreateEventController'
-                }
-            },
+            templateUrl: "events/create.html",
+            controller: 'CreateEventController',
             data:{
                 requiresLogin: true
             }
@@ -105,7 +94,6 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'main': {
                     templateUrl: "users/index.html",
-                    controller: 'EndUsersController'
                 }
             }
         })
@@ -123,6 +111,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         $httpProvider.defaults.headers.common = {
             'Authorization': 'Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t',
         };
+
         jwtInterceptorProvider.tokenGetter = function(store){
             return store.get('jwt');
         }
@@ -133,6 +122,8 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
 
         $urlRouterProvider.otherwise("/events/list");
         // $locationProvider.html5Mode(true);
+        //public folder
+        paginationTemplateProvider.setPath('directives/dirPagination.tpl.html');
     }
 ]);
 
@@ -141,7 +132,7 @@ toerh.run(['$state', 'store', '$rootScope', 'flash', function($state, store, $ro
         if(to.data && to.data.requiresLogin){
             if(!store.get('jwt')){
                 e.preventDefault();
-                $state.go('events.list');
+                $state.go('events.listEvents');
                 console.log("not authenticated");
                 flash.error = "V.g logga in";
             }

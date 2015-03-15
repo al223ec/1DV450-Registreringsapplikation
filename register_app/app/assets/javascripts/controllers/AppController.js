@@ -33,13 +33,19 @@ controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$state
         store.set('jwt', null);
         $scope.endUserId = false;
         $scope.decodedJwt = null;
-        $state.go('events.list');
+        $state.go('events.listEvents');
       }
 
       function loadJwtFromStore(){
         $scope.jwt = store.get('jwt');
         $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt)
         $scope.endUserId = $scope.decodedJwt ? $scope.decodedJwt["end_user_id"] : false;
+
+        $scope.currentUser = {};
+        $scope.currentUser.name = $scope.decodedJwt["name"];
+        $scope.currentUser.email = $scope.decodedJwt["email"];
+        $scope.currentUser.created_at = $scope.decodedJwt["created_at"];
+        $scope.currentUser.id = $scope.decodedJwt["end_user_id"];
       }
 
 }]);

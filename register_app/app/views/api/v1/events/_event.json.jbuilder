@@ -3,7 +3,7 @@
   json.created_at event.created_at
   json.url format_url("events", event.id)
 
-  json.end_user  do
+  json.end_user do
     json.partial! 'api/v1/end_users/end_user', end_user: event.end_user
   end
 

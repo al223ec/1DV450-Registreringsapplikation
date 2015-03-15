@@ -2,8 +2,6 @@
 var controllers = angular.module('controllers');
 controllers.controller("EventsController", ['$scope','$routeParams','eventService',
   function($scope, $routeParams, eventService) {
-
-    eventService.getEvents(function(results) { $scope.events = results; }, function(httpResponse){});
     /*
     Kommer implementera denna senare
     $scope.search = function(keywords) {

@@ -1,9 +1,16 @@
 <section class="form">
-    <h1>Skapa nytt event</h1>
+    <h2>Skapa nytt event</h2>
     <form>
         <aside>
             <label for="content">content</label>
             <input ng-model="event.content" name="content" type="text" autofocus >
+            <section>
+                <select ng-model="event.position_id">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                </select>
+            </section>
         </aside>
         <section>
             <a class="btn" ng-click="save()">Spara</a>
