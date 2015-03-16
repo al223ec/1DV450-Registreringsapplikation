@@ -1,14 +1,14 @@
 "use strict";
 
 var controllers = angular.module('controllers');
-controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
+controllers.controller("CreateEventController", ['$scope', '$stateParams', 'flash', '$state', 'eventService','positionService',
     function($scope, $stateParams, flash, $state, eventService, positionService) {
         $scope.event = {};
         $scope.event.tags = [];
-        $scope.prompt = "Skapa nytt event";
+        $scope.prompt = $stateParams.eventId ? "Skapa nytt event" : "Redigera event";
+        positionService.getPositions(function(positions){$scope.positions = positions; });
 
         if($stateParams.eventId){
-            $scope.prompt = "Redigera event";
             eventService.getEvent($stateParams.eventId, function(event) {
                 $scope.event = event;
                 var stringTags = [];
@@ -27,13 +27,13 @@ controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$
             if ($scope.event.id) {
                 $scope.event.$save(
                     function(){
-                        flash.success = "Eventet sparades!";
+                        flash.success = "Eventet updaterades!";
                         $state.go('events.showEvent', { eventId: $scope.event.id }); },
                     onError);
             } else {
                 eventService.create($scope.event,
                     function(newEvent){
-                        flash.success = "Eventet updaterades!";
+                        flash.success = "Eventet skapades!";
                         $state.go('events.showEvent', { eventId: newEvent.id }); },
                     onError);
             }
@@ -50,9 +50,21 @@ controllers.controller("EventController", ['$scope', '$stateParams', 'flash', '$
 
         function onError(httpResponse){
             console.log(httpResponse);
-            var message = httpResponse.data && httpResponse.data.message ? httpResponse.data.message : ''
+            var message = httpResponse.data && httpResponse.data.message ? httpResponse.data.message : '';
             flash.error = "Ett fel har inträffat ! " + message;
         }
+}]);
 
-        positionService.getPositions(function(positions){$scope.positions = positions; });
+
+controllers.controller("ShowEventController", ['$scope', '$stateParams', 'flash', 'eventService',
+    function($scope, $stateParams, flash, eventService) {
+        //detta skulle kunna flyttas till event directivet
+        if($stateParams.eventId){
+            eventService.getEvent($stateParams.eventId, function(event) {
+                $scope.event = event;
+            },function(httpResponse) {
+                $scope.event = null
+                flash.error = "Det finns inget event med ID " + $stateParams.eventId;
+            });
+        }
 }]);

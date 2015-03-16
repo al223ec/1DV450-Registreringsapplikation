@@ -1,8 +1,8 @@
 "use strict"
 var toerh = angular.module('toerh');
 
-toerh.factory("eventService",['$state', '$http', '$resource','flash',
-  function($state, $http, $resource, flash){
+toerh.factory("eventService",['$http', '$resource','flash',
+  function($http, $resource, flash){
     var Event = $resource('http://api.lvh.me:3000/events/:eventId', {
         eventId: "@id"
     },{
@@ -37,6 +37,6 @@ toerh.factory("eventService",['$state', '$http', '$resource','flash',
       },
       getEventsPerPage: function(pageNumber, eventsPerPage, callback, error){
           Events.get({page: pageNumber, perPage: eventsPerPage}, callback, error ? error : defaultError);
-      }
-  };
+      },
+ };
 }]);

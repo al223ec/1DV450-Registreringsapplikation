@@ -3,15 +3,16 @@ var toerh = angular.module('toerh');
 toerh.directive('myEvent', function(flash, $rootScope, eventService) {
 
   function link(scope, element, attrs) {
-    scope.removeEvent = function(event){
-          eventService.getEvent(event.id, function(event){
-            if(confirm("Bekräfta borttagning!")){
-              event.$delete(
-              function(){
+    scope.removeEvent = function(){
+          eventService.getEvent(scope.event.id,
+            function(event){
+              if(confirm("Bekräfta borttagning!")){
+                event.$delete(
+                function(){
                   element.remove()
                   flash.success = "Eventet togs bort!";
-                  },
-                  onError);
+                },
+                onError);
               }
           });
     }

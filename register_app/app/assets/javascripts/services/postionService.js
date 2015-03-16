@@ -12,11 +12,10 @@ toerh.factory("positionService",['$state', '$http', '$resource','flash',
 
   return {
       getPositions: function(callback, error){
-          Position.query({}, callback, error ? error : defaultError); // function(results) { $scope.events = results; });
+          Position.query({}, callback, error ? error : defaultError);
       },
-      create: function(newEvent, callback, error){
-          Position.create(newEvent, callback, error ? error : defaultError);
+      create: function(position, callback, error){
+          Position.create(position, callback, error ? error : defaultError);
       }
-
   };
 }]);

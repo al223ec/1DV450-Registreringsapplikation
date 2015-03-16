@@ -33,7 +33,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'main': {
                     templateUrl: "profile/show.html",
-                    controller: 'EndUserController'
+                    controller: 'EndUserController' //Hade tänkt att utveckla denna mer med möjlighet att uppdater sin användar information
                 }
             },
             data:{
@@ -59,7 +59,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'main': {
                     templateUrl: "events/show.html",
-                    controller: 'EventController'
+                    controller: 'ShowEventController'
                 }
             }
         })
@@ -68,7 +68,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'createevent': {
                     templateUrl: "events/create.html",
-                    controller: 'EventController',
+                    controller: 'CreateEventController',
                 }
             },
             data:{
@@ -80,7 +80,9 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             views: {
                 'createevent': {
                     templateUrl: "events/create.html",
-                    controller: 'EventController',
+                    resolve: {
+                    },
+                    controller: 'CreateEventController',
                 }
             },
             data:{
@@ -110,7 +112,6 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         });
-//      url: "*path",
 
         $httpProvider.defaults.headers.common = {
             'Authorization': 'Token token=elw6XrzgWYeTLduph8mcr9rxWsIAsigRCJLjQqpHzu8t',

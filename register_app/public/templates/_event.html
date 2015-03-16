@@ -11,7 +11,7 @@
     <span class="tags right" ng-repeat="tag in event.tags">#{{tag.name}},</span>
     <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
     <div ng-if="endUserId == event.end_user.id">
-      <a class="btn dng" href ng-click="removeEvent(event)">Ta bort</a>
+      <a class="btn dng" href ng-click="removeEvent()">Ta bort</a>
       <a class="btn" href ui-sref="events.listEvents.editEvent({eventId: event.id})">Redigera</a>
     </div>
     </footer>
