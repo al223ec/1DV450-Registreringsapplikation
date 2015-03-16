@@ -34,12 +34,12 @@ body, html {
     padding: 0;
     margin: 0;
 }
+textarea, ul{
+  padding: 0;
+  margin: 0;
+}
 ul {
     list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-p {
 }
 a, li a {
   color: $dark-blue;
@@ -96,7 +96,7 @@ hr {
       }
     }
 }
-input{
+input, textarea, select{
   padding: 5px 10px;
   color: #222;
   border: solid 1px $grey;
@@ -308,6 +308,33 @@ section, aside, header, p {
     }
 }
 
+.event-form{
+  @include outer-container;
+  margin-bottom: 10px;
+  section {
+    @include outer-container;
+    section{
+      margin-top: 10px;
+      margin-bottom: 10px;
+      label{
+        @include span-columns(3);
+      }
+      textarea, select, input{
+        @include span-columns(8);
+      }
+      textarea{
+        resize: none;
+      }
+    }
+  }
+  aside {
+    @include outer-container;
+    a{
+      float: right;
+      margin-left: 10px;
+    }
+  }
+}
 .flash {
   @include outer-container;
   aside{

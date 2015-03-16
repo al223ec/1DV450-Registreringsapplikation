@@ -4,4 +4,6 @@ class Tag < ActiveRecord::Base
 
 	validates :name, presence: true, length: { maximum: 40, minimum: 2 },
 			uniqueness: { case_sensitive: false }
+
+  before_save { self.name = name.downcase }
 end

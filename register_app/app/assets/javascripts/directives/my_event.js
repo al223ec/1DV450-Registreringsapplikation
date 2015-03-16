@@ -6,12 +6,12 @@ toerh.directive('myEvent', function() {
   };
 });
 
-toerh.directive('myEventLister', function($routeParams, eventService, userService, flash) {
+toerh.directive('myEventLister', function($routeParams, eventService, userService, flash, $rootScope) {
   function link(scope, element, attrs) {
     scope.events = [];
     scope.totalEvents = 0;
     //OBS måste ändra detta antal i vyn också av någon anledning
-    scope.eventsPerPage = 5; // this should match however many results your API puts on one page
+    scope.eventsPerPage = 5;
     scope.pagination = {
         current: 1
     };
@@ -38,6 +38,8 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
     };
     scope.pageChanged(1);//Hämta data on page load
     console.log("my-event directive builds");
+    //Visa knappar när det är aktuellt
+    scope.endUserId = $rootScope.endUserId;
   }
   return {
     scope: {

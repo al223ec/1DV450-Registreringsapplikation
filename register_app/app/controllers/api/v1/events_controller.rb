@@ -16,6 +16,7 @@ module Api
             save_tags
             super
         end
+
         def query
             if queries = params[:queries]
                 sql = ''
@@ -60,21 +61,19 @@ module Api
             end
 
             def save_tags
-                if @event.tags.nil?
-                    @event.tags = []
-                end
+                @event.tags = []
+                tags = params[:tags]
 
-                tags = params[:event][:tags]
                 if tags
-
-                    tags.each do | index, tag |
-                        tagInDb = Tag.find_by(name: tag)
+                    tags.each do | tag |
+                        tagInDb = Tag.find_by(name: tag["name"].downcase)
                         if tagInDb.nil?
-                            @event.tags.build(name: tag)
+                            @event.tags.build(name: tag["name"])
                         else
-                            if EventTag.where("tag_id: #{tagInDb.id} AND event_id: #{@event.id}").nil? || @event_id.nil?
-                                @event.tags << tagInDb
-                            end
+                            # existing = EventTag.where("tag_id = #{tagInDb.id} AND event_id = #{@event.id}").nil?
+                            # if EventTag.where("tag_id = #{tagInDb.id} AND event_id = #{@event.id}").nil? || @event.id.nil?
+                            @event.tags << tagInDb
+                            #end
                         end
                     end
                 end

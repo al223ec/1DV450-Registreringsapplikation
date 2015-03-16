@@ -1,19 +1,30 @@
-<section class="form">
+<section class="event-form">
     <h2>Skapa nytt event</h2>
     <form>
-        <aside>
-            <label for="content">content</label>
-            <input ng-model="event.content" name="content" type="text" autofocus >
+        <section>
             <section>
-                <select ng-model="event.position_id">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
+                <label for="content">innehåll</label>
+                <textarea maxlength="140" ng-model="event.content" name="content" autofocus placeholder="Max 150 tecken"></textarea>
+            </section>
+            <section>
+                <label for="position">position</label>
+                <select ng-model="event.position" ng-options="position.address for position in positions track by position.id">
                 </select>
             </section>
-        </aside>
-        <section>
-            <a class="btn" ng-click="save()">Spara</a>
+            <section>
+                <label for="selectedTags">valda taggar</label>
+                <div>
+                <span ng-repeat="tag in event.tags">{{tag.name}},</span>
+                </div>
+            </section>
+            <section>
+                <label for="tags">taggar</label>
+                <input ng-model="stringTags" type="text" name="tags" ng-change="selectTag(stringTags)"  placeholder="Välj taggar, separera taggar med ','">
+            </section>
         </section>
+        <aside>
+            <a class="btn dng" ui-sref="events.listEvents">Avbryt</a>
+            <a class="btn" ng-click="save()">Spara</a>
+        </aside>
     </form>
 </section>

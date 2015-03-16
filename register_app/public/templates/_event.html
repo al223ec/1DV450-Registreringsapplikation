@@ -12,7 +12,7 @@
     <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
     <div ng-if="endUserId == event.end_user.id">
       <a class="btn dng">Ta bort</a>
-      <a class="btn">Redigera</a>
+      <a class="btn" href ui-sref="events.listEvents.editEvent({eventId: event.id})">Redigera</a>
     </div>
     </footer>
   </article>

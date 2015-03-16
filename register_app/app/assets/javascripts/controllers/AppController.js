@@ -1,7 +1,7 @@
 "use strict";
 var controllers = angular.module('controllers');
-controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$stateParams', 'flash', '$state', '$http',
-    function($scope, store, jwtHelper, $stateParams, flash, $state, $http) {
+controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$stateParams', 'flash', '$state', '$http', '$rootScope',
+    function($scope, store, jwtHelper, $stateParams, flash, $state, $http, $rootScope) {
 
       //Hämta användaren
       loadJwtFromStore();
@@ -40,6 +40,9 @@ controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$state
         $scope.jwt = store.get('jwt');
         $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt)
         $scope.endUserId = $scope.decodedJwt ? $scope.decodedJwt["end_user_id"] : false;
+        //För att nå detta id i mina direktiv
+        $rootScope.endUserId = $scope.endUserId;
+
         if($scope.endUserId){
           $scope.currentUser = {};
           $scope.currentUser.name = $scope.decodedJwt["name"];

@@ -140,7 +140,6 @@ module Api
 			def authenticate_user
 				@end_user = nil
 				jwt = request.headers['HTTP_JWT']
-				debugger
 				if jwt
 						payload = JWT.decode(jwt, Rails.application.secrets.secret_key_base, "HS512")
 						if payload[0]["expiered"] >= Time.now.to_i
