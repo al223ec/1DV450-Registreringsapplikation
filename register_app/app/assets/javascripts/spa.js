@@ -65,20 +65,27 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         })
         .state('events.listEvents.newEvent', {
             url: '/new',
-            templateUrl: "events/create.html",
-            controller: 'EventController',
+            views: {
+                'createevent': {
+                    templateUrl: "events/create.html",
+                    controller: 'EventController',
+                }
+            },
             data:{
                 requiresLogin: true
             }
         })
         .state('events.listEvents.editEvent',{
             url: '/edit/{eventId:[0-9]{1,6}}',
-            templateUrl: "events/create.html",
-            controller: 'EventController',
+            views: {
+                'createevent': {
+                    templateUrl: "events/create.html",
+                    controller: 'EventController',
+                }
+            },
             data:{
                 requiresLogin: true
             },
-
         })
         .state('users', {
             url: '/users',

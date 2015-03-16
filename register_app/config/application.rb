@@ -35,7 +35,7 @@ module RegisterApp
         origins '*'
         resource '/*',
             :headers => :any,
-            :methods => [:get, :post, :put, :options],
+            :methods => [:get, :post, :put, :delete, :options],
             :if => proc { |env| env['HTTP_HOST'] == 'api.lvh.me:3000' }
        end
     end

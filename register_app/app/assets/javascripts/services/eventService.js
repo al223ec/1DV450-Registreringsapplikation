@@ -7,7 +7,8 @@ toerh.factory("eventService",['$state', '$http', '$resource','flash',
         eventId: "@id"
     },{
         'save':   {method:'PUT'},
-        'create': {method:'POST'}
+        'create': {method:'POST'},
+        'delete': {method: 'DELETE'}
     });
 
     var Events = $resource('http://api.lvh.me:3000/events/?page=:page&per_page=:perPage',{
@@ -16,8 +17,9 @@ toerh.factory("eventService",['$state', '$http', '$resource','flash',
     });
 
     function defaultError(httpResponse){
-        console.log(httpResponse);
-        flash.error = "Ett fel har inträffat ! ";
+        console.log(httpResponse.data);
+        var message = httpResponse.data && httpResponse.data.message ? httpResponse.data.message : ''
+        flash.error = "Ett fel har inträffat ! " + message;
     }
 
   return {

@@ -1,8 +1,35 @@
 "use strict";
 var toerh = angular.module('toerh');
-toerh.directive('myEvent', function() {
+toerh.directive('myEvent', function(flash, $rootScope, eventService) {
+
+  function link(scope, element, attrs) {
+    scope.removeEvent = function(event){
+          eventService.getEvent(event.id, function(event){
+            if(confirm("Bekräfta borttagning!")){
+              event.$delete(
+              function(){
+                  element.remove()
+                  flash.success = "Eventet togs bort!";
+                  },
+                  onError);
+              }
+          });
+    }
+    scope.endUserId = $rootScope.endUserId;
+  }
+
+  function onError(httpResponse){
+    console.log(httpResponse);
+    var message = httpResponse.data && httpResponse.data.message ? httpResponse.data.message : ''
+    flash.error = "Ett fel har inträffat ! " + message;
+  }
+
   return {
-    templateUrl: '/templates/_event.html'
+    templateUrl: '/templates/_event.html',
+    scope: {
+      event: '=event',
+    },
+    link: link,
   };
 });
 
@@ -40,6 +67,10 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
     console.log("my-event directive builds");
     //Visa knappar när det är aktuellt
     scope.endUserId = $rootScope.endUserId;
+
+    scope.removeEvent = function(event){
+      console.log(event);
+    }
   }
   return {
     scope: {

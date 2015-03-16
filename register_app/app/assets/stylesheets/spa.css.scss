@@ -95,6 +95,12 @@ hr {
         border: solid 1px $red;
       }
     }
+    &.hide{
+      &:hover, &:focus{
+        color: $dark-blue;
+        border: solid 1px $dark-blue;
+      }
+    }
 }
 input, textarea, select{
   padding: 5px 10px;
@@ -358,9 +364,15 @@ section, aside, header, p {
         color: $dark-blue;
         background-color: $green;
       }
+      a {
+        &.hide {
+          float: right;
+        }
+      }
     }
   }
 }
+
 
 .pagination{
   @include outer-container;
@@ -446,4 +458,15 @@ li {
       color: $dark-orange;
     }
   }
+}
+
+
+.fade {
+  opacity: 0;
+  -webkit-transition: opacity .15s linear;
+       -o-transition: opacity .15s linear;
+          transition: opacity .15s linear;
+}
+.fade.in {
+  opacity: 1;
 }
