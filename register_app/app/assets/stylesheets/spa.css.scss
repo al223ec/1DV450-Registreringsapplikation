@@ -101,6 +101,12 @@ hr {
         border: solid 1px $dark-blue;
       }
     }
+    &.search{
+      &:hover, &:focus{
+        color: $dark-orange;
+        border: solid 1px $dark-orange;
+      }
+    }
 }
 input, textarea, select{
   padding: 5px 10px;
@@ -160,10 +166,9 @@ section, aside, header, p {
   section {
     @include span-columns(11);
     h1{
-      @include span-columns(6);
+      @include span-columns(4);
       margin: 0;
       font-size: 60px;
-      line-height: $nav-height;
       text-decoration: underline;
       a{
         color:$dark-blue;
@@ -176,12 +181,26 @@ section, aside, header, p {
         }
       }
     }
+    section{
+      padding-top: 37px;
+      @include span-columns(3);
+      input{
+        background-color: $dark-blue;
+        color:white;
+        border-color: $dark-orange;
+        @include span-columns(10);
+      }
+      a{
+        @include span-columns(2);
+      }
+    }
     ul{
-      @include shift(2);
+      @include shift(1);
       @include span-columns(4);
+      padding-top: 37px;
+
       li{
         float:left;
-        line-height: $nav-height;
         padding-left: 15px;
         padding-right: 15px;
         &:before{
@@ -366,6 +385,7 @@ section, aside, header, p {
       }
       a {
         &.hide {
+          line-height: 7px;
           float: right;
         }
       }

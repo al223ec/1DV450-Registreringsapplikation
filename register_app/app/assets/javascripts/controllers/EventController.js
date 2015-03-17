@@ -58,7 +58,6 @@ controllers.controller("CreateEventController", ['$scope', '$stateParams', 'flas
 
 controllers.controller("ShowEventController", ['$scope', '$stateParams', 'flash', 'eventService',
     function($scope, $stateParams, flash, eventService) {
-        //detta skulle kunna flyttas till event directivet
         if($stateParams.eventId){
             eventService.getEvent($stateParams.eventId, function(event) {
                 $scope.event = event;
@@ -67,4 +66,18 @@ controllers.controller("ShowEventController", ['$scope', '$stateParams', 'flash'
                 flash.error = "Det finns inget event med ID " + $stateParams.eventId;
             });
         }
+}]);
+
+controllers.controller("ShowEventByTagController", ['$scope', '$stateParams',
+    function($scope, $stateParams) {
+        $scope.tagId = $stateParams.tagId;
+}]);
+
+controllers.controller("FilterEventController", ['$scope', '$stateParams', '$state',
+    function($scope, $stateParams, $state) {
+
+        $scope.search = function(params){
+            $state.go('events.filterEvents', {params: params})
+        }
+        $scope.params = $stateParams.params;
 }]);

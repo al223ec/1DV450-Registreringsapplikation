@@ -3,9 +3,6 @@ var controllers = angular.module('controllers');
 controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$stateParams', 'flash', '$state', '$http', '$rootScope',
     function($scope, store, jwtHelper, $stateParams, flash, $state, $http, $rootScope) {
 
-      //Hämta användaren
-      loadJwtFromStore();
-
       $scope.setShowLoginForm = function() {
           $scope.showLoginForm = $scope.showLoginForm ? false : true;
       }
@@ -36,20 +33,29 @@ controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$state
         $state.go('events.listEvents');
       }
 
+      loadJwtFromStore();
+      //Hämta användaren
+
       function loadJwtFromStore(){
         $scope.jwt = store.get('jwt');
-        $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt)
+        $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
+
         $scope.endUserId = $scope.decodedJwt ? $scope.decodedJwt["end_user_id"] : false;
+
         //För att nå detta id i mina direktiv
         $rootScope.endUserId = $scope.endUserId;
 
         if($scope.endUserId){
+          var seconds = new Date().getTime() / 1000;
+          if(seconds > $scope.decodedJwt.expiered){
+            flash.error = "JWT sesionen har gått ut, du måste logga in på nytt!"
+            $scope.logout();
+            return;
+          }
+
           $scope.currentUser = {};
           $scope.currentUser.name = $scope.decodedJwt["name"];
         }
-       // $scope.currentUser.email = $scope.decodedJwt["email"];
-       // $scope.currentUser.created_at = $scope.decodedJwt["created_at"];
-       // $scope.currentUser.id = $scope.decodedJwt["end_user_id"];
       }
 
 }]);

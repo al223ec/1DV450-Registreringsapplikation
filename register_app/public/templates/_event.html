@@ -8,7 +8,7 @@
     <span class="email">{{event.end_user.email}} </span>
     <span class="stamp">{{event.created_at}}</span>
     <span class="location">{{event.position.address}}</span>
-    <span class="tags right" ng-repeat="tag in event.tags">#{{tag.name}},</span>
+    <span class="tags right" ng-repeat="tag in event.tags"><a href ui-sref="events.listEventsByTags({tagId: tag.id})">#{{tag.name}}</a>,</span>
     <span class="tags right" ng-if="event.tags[0] == null">Inga taggar</span>
     <div ng-if="endUserId == event.end_user.id">
       <a class="btn dng" href ng-click="removeEvent()">Ta bort</a>

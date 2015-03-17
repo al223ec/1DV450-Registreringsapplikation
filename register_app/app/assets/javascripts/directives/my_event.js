@@ -34,7 +34,7 @@ toerh.directive('myEvent', function(flash, $rootScope, eventService) {
   };
 });
 
-toerh.directive('myEventLister', function($routeParams, eventService, userService, flash, $rootScope) {
+toerh.directive('myEventLister', function($routeParams, eventService, userService, tagService, flash, $rootScope) {
   function link(scope, element, attrs) {
     scope.events = [];
     scope.totalEvents = 0;
@@ -45,38 +45,43 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
     };
 
     scope.pageChanged = function(newPage) {
-      if(scope.userId && scope.userId != 0){
-        userService.getEventsPerPageFilteredByUser(scope.userId, newPage, scope.eventsPerPage,
-          function(data) {
-            scope.totalEvents = data.total_entries;
-            scope.events = data.events;
-
-            if(data.events.length == 0){
-              flash.warn = "Användaren har inga events!";
-            }
-          });
-
-      }else{
-        eventService.getEventsPerPage(newPage, scope.eventsPerPage,
-          function(data) {
-            scope.totalEvents = data.total_entries;
-            scope.events = data.events;
-          });
+      switch(scope.filter){
+        case "user" :
+          if(scope.value && scope.value != 0){
+            userService.getEventsPerPageFilteredByUser(scope.value, newPage, scope.eventsPerPage,
+              function(data) { scope.totalEvents = data.total_entries; scope.events = data.events;
+                if(data.events.length == 0){
+                  flash.warn = "Användaren har inga events!";
+                }
+              });
+          } else {
+            eventService.getEventsPerPage(newPage, scope.eventsPerPage,
+            function(data) { scope.totalEvents = data.total_entries; scope.events = data.events; });
+          }
+          break;
+        case "tag" :
+          tagService.getEvents(scope.value, newPage, scope.eventsPerPage,
+          function(data) { scope.totalEvents = data.total_entries; scope.events = data.events; });
+          break;
+        case "query" :
+          eventService.filterEvents(scope.value, newPage, scope.eventsPerPage,  function(response) { console.log(response); scope.totalEvents = response.data.total_entries; scope.events = response.data.events; });
+          break;
+        default :
+          console.log("Du har använt event lister directive felaktigt skanas värde för filter");
+          break;
       }
-    };
+    }
+
     scope.pageChanged(1);//Hämta data on page load
     console.log("my-event directive builds");
     //Visa knappar när det är aktuellt
     scope.endUserId = $rootScope.endUserId;
-
-    scope.removeEvent = function(event){
-      console.log(event);
-    }
   }
+
   return {
     scope: {
-      userId: '=userid',
-      itemType: '=itemtype'
+      filter: '=filter',
+      value: '=value',
     },
     link: link,
     templateUrl: '/templates/_events_list.html',

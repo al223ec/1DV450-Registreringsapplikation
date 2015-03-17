@@ -26,7 +26,6 @@ module Api
                     sql << "AND content LIKE :q#{query} "
                     query_hash[:"q#{query}"] = "%#{query}%"
                 end
-
                 @events = Event.where("application_id = #{@application.id} " << sql, query_hash).paginate(page: params[:page], per_page: params[:per_page])
                 render :index
             else

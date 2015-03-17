@@ -16,6 +16,12 @@ toerh.factory("eventService",['$http', '$resource','flash',
       perPage: "@perPage"
     });
 
+    var TagEvents = $resource('http://api.lvh.me:3000/tags/:tagId/events/?page=:page&per_page=:perPage',{
+        tagId: "@id",
+        page: "@page",
+        perPage: "@perPage"
+    });
+
     function defaultError(httpResponse){
         console.log(httpResponse.data);
         var message = httpResponse.data && httpResponse.data.message ? httpResponse.data.message : ''
@@ -38,5 +44,10 @@ toerh.factory("eventService",['$http', '$resource','flash',
       getEventsPerPage: function(pageNumber, eventsPerPage, callback, error){
           Events.get({page: pageNumber, perPage: eventsPerPage}, callback, error ? error : defaultError);
       },
+      filterEvents: function(params, pageNumber, eventsPerPage, callback, error){
+          var queries = { queries: params.split(' ') };
+          $http.post('http://api.lvh.me:3000/events/query?page='+pageNumber+'&per_page=' + eventsPerPage, queries)
+          .then(callback, error ? error : defaultError);
+      }
  };
 }]);

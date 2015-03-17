@@ -1,0 +1,10 @@
+<section class="results">
+  <aside>
+    <h1>Filter events</h1>
+    <a ng-if="endUserId" href ui-sref="events.listEvents.newEvent"> Nytt event</a>
+    <div ui-view="createEvent"></div>
+  </aside>
+  <article>
+    <div my-event-lister filter="'query'" value="params"></div>
+  </article>
+</section>

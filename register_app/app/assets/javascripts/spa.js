@@ -46,11 +46,12 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             templateUrl: 'app.html',
             controller: 'AppController'
         })
-        .state('events.listEvents', {
-            url: "/list",
+        .state('events.listEventsByTags', {
+            url: "/tag/{tagId:[0-9]{1,6}}/events",
             views: {
                 'main': {
-                    templateUrl: "events/index.html",
+                    templateUrl: "tags/events.html",
+                    controller: 'ShowEventByTagController'
                 }
             }
         })
@@ -63,10 +64,18 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                 }
             }
         })
+        .state('events.listEvents', {
+            url: "/list",
+            views: {
+                'main': {
+                    templateUrl: "events/index.html",
+                }
+            }
+        })
         .state('events.listEvents.newEvent', {
             url: '/new',
             views: {
-                'createevent': {
+                'createEvent': {
                     templateUrl: "events/create.html",
                     controller: 'CreateEventController',
                 }
@@ -78,7 +87,7 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
         .state('events.listEvents.editEvent',{
             url: '/edit/{eventId:[0-9]{1,6}}',
             views: {
-                'createevent': {
+                'createEvent': {
                     templateUrl: "events/create.html",
                     resolve: {
                     },
@@ -88,6 +97,15 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
             data:{
                 requiresLogin: true
             },
+        })
+        .state('events.filterEvents', {
+            url: "/filter/:params",
+            views: {
+                'main': {
+                    templateUrl: "events/filter.html",
+                    controller: 'FilterEventController'
+                }
+            }
         })
         .state('users', {
             url: '/users',
@@ -138,7 +156,6 @@ toerh.run(['$state', 'store', '$rootScope', 'flash', function($state, store, $ro
             if(!store.get('jwt')){
                 e.preventDefault();
                 $state.go('events.listEvents');
-                console.log("not authenticated");
                 flash.error = "V.g logga in";
             }
         }
