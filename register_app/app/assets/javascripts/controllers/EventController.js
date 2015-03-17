@@ -77,7 +77,8 @@ controllers.controller("FilterEventController", ['$scope', '$stateParams', '$sta
     function($scope, $stateParams, $state) {
 
         $scope.search = function(params){
+            params.replace(' ', '_');
             $state.go('events.filterEvents', {params: params})
         }
-        $scope.params = $stateParams.params;
+        $scope.filterParams = $stateParams.params ? $stateParams.params.replace(' ', '_') : "";
 }]);

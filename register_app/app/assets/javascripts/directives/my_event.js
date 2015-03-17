@@ -64,7 +64,12 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
           function(data) { scope.totalEvents = data.total_entries; scope.events = data.events; });
           break;
         case "query" :
-          eventService.filterEvents(scope.value, newPage, scope.eventsPerPage,  function(response) { console.log(response); scope.totalEvents = response.data.total_entries; scope.events = response.data.events; });
+          eventService.filterEvents(scope.value, newPage, scope.eventsPerPage,
+            //Denna använder http post i dagsläget
+            function(response) {
+              scope.totalEvents = response.data.total_entries;
+              scope.events = response.data.events;
+            });
           break;
         default :
           console.log("Du har använt event lister directive felaktigt skanas värde för filter");
@@ -82,6 +87,7 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
     scope: {
       filter: '=filter',
       value: '=value',
+      id: '=id',
     },
     link: link,
     templateUrl: '/templates/_events_list.html',

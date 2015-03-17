@@ -1,18 +1,3 @@
-<!--
-<section class="search">
-    <h1>Find Events</h1>
-    <form>
-        <aside>
-            <label for="keywords" class="sr-only">Keywords</label>
-            <input ng-model="keywords" name="keywords" type="text" autofocus class="form-control" placeholder="Search for event, e.g. Baked Potato seperate words with ',' plz">
-        </aside>
-        <section>
-            <a class="btn" ng-click="search(keywords)">Search</a>
-        </section>
-    </form>
-</section>
-<hr>
--->
 <section class="results">
   <aside>
     <h1>Event timeline</h1>
@@ -21,6 +6,6 @@
     <div ui-view="createEvent"></div>
   </aside>
   <article>
-    <div my-event-lister filter="'user'" value="0"></div>
+    <div my-event-lister filter="'user'" value="0" id="unique"></div>
   </article>
 </section>

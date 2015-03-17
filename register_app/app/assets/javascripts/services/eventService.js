@@ -45,7 +45,7 @@ toerh.factory("eventService",['$http', '$resource','flash',
           Events.get({page: pageNumber, perPage: eventsPerPage}, callback, error ? error : defaultError);
       },
       filterEvents: function(params, pageNumber, eventsPerPage, callback, error){
-          var queries = { queries: params.split(' ') };
+          var queries = { queries: params.split('_') };
           $http.post('http://api.lvh.me:3000/events/query?page='+pageNumber+'&per_page=' + eventsPerPage, queries)
           .then(callback, error ? error : defaultError);
       }

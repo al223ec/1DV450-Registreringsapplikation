@@ -1,6 +1,6 @@
 <ul>
-  <li dir-paginate="event in events | itemsPerPage: 5" total-items="totalEvents" class="event-list" pagination-id="'userId' + userId">
+  <li dir-paginate="event in events | itemsPerPage: 5" total-items="totalEvents" class="event-list" pagination-id="'id' + value">
     <div my-event event="event"></div>
   </li>
 </ul>
-<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="'userId' + userId"></dir-pagination-controls>
+<dir-pagination-controls on-page-change="pageChanged(newPageNumber)" pagination-id="'id' + value"></dir-pagination-controls>

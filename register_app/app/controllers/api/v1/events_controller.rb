@@ -47,6 +47,7 @@ module Api
                     { application_id: @application.id, end_user_id: user_id }
                 elsif !params[:tag_id].nil?
                     # om man når denna kontroller via /tags/:id/events
+                    # Denna returnerar inte alla taggar utan endast den akutella taggaen
                     tag_id = params[:tag_id].to_i
                     { tags: { id: tag_id }, application_id: @application.id }
                 else
