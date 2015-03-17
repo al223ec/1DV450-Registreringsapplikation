@@ -87,7 +87,6 @@ toerh.directive('myEventLister', function($routeParams, eventService, userServic
     scope: {
       filter: '=filter',
       value: '=value',
-      id: '=id',
     },
     link: link,
     templateUrl: '/templates/_events_list.html',
