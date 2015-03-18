@@ -1,15 +1,19 @@
 <section class="event-form">
     <h2>{{prompt}}</h2>
-    <form>
+    <form name="myEventForm">
         <section>
             <section>
                 <label for="content">innehåll</label>
-                <textarea maxlength="140" ng-model="event.content" name="content" autofocus placeholder="Max 150 tecken"></textarea>
+                <textarea maxlength="140" ng-model="event.content" name="content" autofocus placeholder="Max 150 tecken" ng-minlength="4" ng-maxlength="150" required></textarea>
+                <span class="error" ng-show="myEventForm.content.$error.minlength">För kort, innehållet får inte vara kortare än 4 tecken.</span>
+                <span class="error" ng-show="myEventForm.content.$error.maxlength">Too long!</span>
+                <span class="error" ng-show="myEventForm.content.$error.required">Innehåll är obligatorikskt</span>
             </section>
             <section>
                 <label for="position">position</label>
-                <select ng-model="event.position" ng-options="position.address for position in positions track by position.id">
+                <select ng-model="event.position" name="position" ng-options="position.address for position in positions track by position.id" required>
                 </select>
+                <span class="error" ng-show="myEventForm.position.$error.required">Position är obligatorikskt, vg välj position.</span>
             </section>
             <section>
                 <label for="selectedTags">valda taggar</label>
@@ -20,11 +24,12 @@
             <section>
                 <label for="tags">taggar</label>
                 <input ng-model="stringTags" type="text" name="tags" ng-change="selectTag(stringTags)"  placeholder="Välj taggar, separera taggar med ','">
+                <span class="error" ng-show="myEventForm.tags.$error.myTagValidation">Taggen är antingen kortare än 2 tecken eller längre än 40.</span>
             </section>
         </section>
         <aside>
             <a class="btn dng" ui-sref="events.listEvents">Avbryt</a>
-            <a class="btn" ng-click="save()">Spara</a>
+            <a class="btn" ng-click="save(myEventForm)">Spara</a>
         </aside>
     </form>
 </section>

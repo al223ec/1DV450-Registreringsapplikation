@@ -124,6 +124,9 @@ span{
   &.email{
     font-style: strong;
   }
+  &.error{
+    color: $dark-orange;
+  }
 }
 
 
@@ -349,6 +352,10 @@ section, aside, header, p {
       }
       textarea{
         resize: none;
+      }
+      span {
+        @include shift(3);
+        @include span-columns(8);
       }
     }
   }

@@ -22,20 +22,33 @@ controllers.controller("CreateEventController", ['$scope', '$stateParams', 'flas
             });
         }
 
-        $scope.save = function(){
-            $scope.event.position_id = $scope.event.position.id;
-            if ($scope.event.id) {
-                $scope.event.$save(
-                    function(){
-                        flash.success = "Eventet updaterades!";
-                        $state.go('events.showEvent', { eventId: $scope.event.id }); },
-                    onError);
-            } else {
-                eventService.create($scope.event,
-                    function(newEvent){
-                        flash.success = "Eventet skapades!";
-                        $state.go('events.showEvent', { eventId: newEvent.id }); },
-                    onError);
+        $scope.save = function(myEventForm){
+            var tagsValidated = true;
+            $scope.event.tags.forEach(function(tag){
+                if(tag.name.length > 40 || tag.name.length < 2) {
+                    tagsValidated = false;
+                    myEventForm.tags.$setValidity('myTagValidation', false);
+                }
+            });
+            // Ta bort gammal validering från föregående post
+            if(tagsValidated){
+                myEventForm.tags.$setValidity('myTagValidation', true);
+            }
+            if(myEventForm.$valid){
+                $scope.event.position_id = $scope.event.position ? $scope.event.position.id : null;
+                if ($scope.event.id) {
+                    $scope.event.$save(
+                        function(){
+                            flash.success = "Eventet updaterades!";
+                            $state.go('events.showEvent', { eventId: $scope.event.id }); },
+                        onError);
+                } else {
+                    eventService.create($scope.event,
+                        function(newEvent){
+                            flash.success = "Eventet skapades!";
+                            $state.go('events.showEvent', { eventId: newEvent.id }); },
+                        onError);
+                }
             }
         }
 
