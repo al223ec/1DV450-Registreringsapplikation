@@ -28,7 +28,7 @@ Jag har också implementerat en annan felhantering som jag fick input för under
 <h4>Reflektion</h4>
 <p>
 Jag har i min implementation av en SPA försökt visa på fördelarna med REST och ett HATEOAS tänk. Jag har valt att inte använda mig av en kart tjänst, har utvecklat två applikationer tidigare med hjälp av google maps, jag har valt att mer fokusera på andra aspekter av applikationen, där jag personligen känner att jag har större möjlighet att fördjupa min förståelse för AngularJs. <br>
-Jag hade tänkt att implementera en karta i mån av tid, tid som inte fanns där innan det var färdigt.
+Jag hade tänkt att implementera en karta i mån av tid, tid som inte fanns där innan det var färdigt. Man kan därför i applikationen inte skapa nya positioner.
 </p>
 <p>
 Det finns också förberett för browser tester med hjälp av phantom.js och teaspoon samt möjlighet att skriva rspec tester. Har inte hunnit skriva några tester för frontend trots det, var mycket annat under den här perioden som har tagit väldigt mycket tid.<br>
