@@ -1,3 +1,43 @@
+<h2>SPA</h2>
+<h4>Installation</h4>
+<p>
+	Kör bundle install "rake db:migrate" och "rake db:seed" följt av "rails s".<br>
+	Api:et har routingen api.lvh.me:3000<br>
+	Vill man köra testerna måste man köra rake db:migrate RAILS_ENV=test
+</p>
+<p>
+	Tidigare har det varit problem med "gem 'bcrypt', '3.1.7'" och 	gem 'sqlite3', '1.3.9' men dessa har uppdateras i gem filen så det bör inte bli några problem.
+</p>
+<p>
+	SPA nås via lvh.me:3000/spa. För att komma igång måste korrekt token sättas i spa.js, fås när man seedar databasen. Välj den token som hamnar sist i tabellen, för det är den applikationen som har en test-user knuten till sig. <br>
+	spa.js hittas i app/assets/javascripts där också hela SPA koden är placerad.
+</p>
+<p>
+	För att logga in ange end_user@mail.com pw: foobar. Det går att logga in med vilken som helst av de skapade användarna med de får en random email address, lösenordet är dock alltid password.
+</p>
+<h4>Förändringar i Api:et</h4>
+<p>
+Har inte behövt göra några stora förändringar alls, det enda jag förändrat är att förändra hur objekten ser ut istället för event:{} returneras {}. Detta för att det är ganska fult att skriva event.event när man hämtar ut events och ska loopa igenom dessa.<br>
+Dessutom för att kunna hantera pagineringen adderade jag en total_entries property.
+</p>
+<p>
+Det som borde tillkomma är att man optimerar och förbättrar sökfunktionene i API:et i dagsläget ställs bara "like" frågor till databasen vilket inte ger så väldigt bra svar alla gånger. <br>
+Sedan finns det en bugg när man hämtar ut event filtrerade på tags, dessa får endast den aktuella taggen knuten till sig. Detta beror på sättet jag hämtar ut events från databasen, hämtar ut event med den aktuella taggen och tar inte med om det finns några andra taggar. <br>
+Jag har också implementerat en annan felhantering som jag fick input för under den senaste peer review.
+</p>
+<h4>Reflektion</h4>
+<p>
+Jag har i min implementation av en SPA försökt visa på fördelarna med REST och ett HATEOAS tänk. Jag har valt att inte använda mig av en kart tjänst, har utvecklat två applikationer tidigare med hjälp av google maps, jag har valt att mer fokusera på andra aspekter av applikationen, där jag personligen känner att jag har större möjlighet att fördjupa min förståelse för AngularJs. <br>
+Jag hade tänkt att implementera en karta i mån av tid, tid som inte fanns där innan det var färdigt. Man kan därför i applikationen inte skapa nya positioner.
+</p>
+<p>
+Det finns också förberett för browser tester med hjälp av phantom.js och teaspoon samt möjlighet att skriva rspec tester. Har inte hunnit skriva några tester för frontend trots det, var mycket annat under den här perioden som har tagit väldigt mycket tid.<br>
+Jag önskar att jag haft mer tid att kunna genomföra automatiserade tester för front-end, jag känner att jag utvecklas mycket som programmerare, med större möjlighet att reflektera och skriva bättre kod när jag har möjlighet att också skriva tester för min kod.
+</p>
+<p>
+Jag har också haft problem med testernas databas, får inte till att browser testerna använder testdatabasen utan de använder också development databasen vilket inte är önskvärt.
+</p>
+
 <h2>Api:et</h2>
 <p>
 	Kör bundle install "rake db:migrate" och "rake db:seed" följt av "rails s".<br>

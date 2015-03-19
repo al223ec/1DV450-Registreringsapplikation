@@ -25,5 +25,19 @@ module RegisterApp
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
+
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'components')
+    config.assets.paths << Rails.root.join("vendor","assets", "components","bootstrap-sass-official","assets","fonts")
+
+    # TODO::Begränsa de sidor som får genomföra requests
+    config.middleware.insert_before 0, "Rack::Cors" do
+      allow do
+        origins '*'
+        resource '/*',
+            :headers => :any,
+            :methods => [:get, :post, :put, :delete, :options],
+            :if => proc { |env| env['HTTP_HOST'] == 'api.lvh.me:3000' }
+       end
+    end
   end
 end

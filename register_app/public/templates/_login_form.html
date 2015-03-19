@@ -1,0 +1,15 @@
+<section class="login-form">
+    <h1>Logga in</h1>
+    <span class="stamp">För att kunna skapa </span>
+    <form>
+        <aside>
+            <label for="email">Email</label>
+            <input ng-model="end_user.email" name="email" type="email" autofocus >
+            <label for="password">Password</label>
+            <input ng-model="end_user.password" name="password" type="password" autofocus >
+        </aside>
+        <section>
+            <a class="btn" ng-click="login(end_user)">Logga in</a>
+        </section>
+    </form>
+</section>

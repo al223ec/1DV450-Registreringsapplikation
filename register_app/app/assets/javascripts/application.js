@@ -13,5 +13,16 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
+//= require angular/angular
+//= require angular-route/angular-route
+//= require angular-resource/angular-resource
+//= require angular-flash/dist/angular-flash
+//= require angular-animate/angular-animate
+//= require a0-angular-storage/dist/angular-storage
+//= require angular-jwt/dist/angular-jwt
+//= require angular-ui-router/release/angular-ui-router
+//= require angular-utils-pagination/dirPagination
+//= require angular-rails-templates
 //= require turbolinks
+//= require spa
 //= require_tree .

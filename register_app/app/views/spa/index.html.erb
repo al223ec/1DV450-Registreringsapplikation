@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base href="/">
+        <title>TOERH SPA</title>
+        <%= stylesheet_link_tag    'spa', media: 'all', 'data-turbolinks-track' => false %>
+        <%= javascript_include_tag 'application', 'data-turbolinks-track' => false %>
+        <%= csrf_meta_tags %>
+    </head>
+    <body>
+        <div ng-app="toerh">
+            <div ui-view></div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,14 @@
+<section class="user" ng-if="user">
+<aside><img src="/toerh.png" alt="logo"> </aside>
+<article>
+<header>{{user.email}}</header>
+<h2><a href ui-sref="users.showUser({endUserId: user.id})" >{{user.name}}</a></h2>
+<span class="right"><a href ng-click="setShowEvents(user)"> Inlägg </a></span>
+  <ul ng-if="user.showEvents">
+    <li>
+      <div my-event-lister filter="'user'" value="user.id"></div>
+    </li>
+  </ul>
+</div>
+</article>
+</section>

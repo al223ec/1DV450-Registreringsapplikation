@@ -1,0 +1,28 @@
+<section class="user-profile" ng-if="user">
+<aside><img src="/toerh.png" alt="logo"> </aside>
+<article>
+<header>{{user.email}}</header>
+  <h2>{{user.name}}</h2>
+  <span>Användaren skapades:</span>
+  <span class="stamp">
+    {{user.created_at}}
+  </span>
+<!--   <div ng-if="endUserId == user.id">
+    <a class="btn dng">
+      Ta bort
+    </a>
+    <a class="btn">
+      Redigera
+    </a>
+  </div> -->
+  <section>
+  <h2>Events av {{user.name}}</h2>
+  <span class="right"><a href ng-click="setShowEvents(user)">Visa </a></span>
+    <ul ng-if="user.showEvents">
+      <li>
+        <div my-event-lister filter="'user'" value="user.id" ></div>
+      </li>
+    </ul>
+  </section>
+</article>
+</section>

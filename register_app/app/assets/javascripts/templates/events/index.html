@@ -1,0 +1,11 @@
+<section class="results">
+  <aside>
+    <h1>Event timeline</h1>
+    <span class="stamp">Vad nu det är</span>
+    <a ng-if="endUserId" href ui-sref="events.listEvents.newEvent"> Nytt event</a>
+    <div ui-view="createEvent"></div>
+  </aside>
+  <article>
+    <div my-event-lister filter="'user'" value="0"></div>
+  </article>
+</section>
