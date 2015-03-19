@@ -129,6 +129,20 @@ toerh.config(['$routeProvider', '$httpProvider', 'flashProvider','$locationProvi
                     controller: 'EndUserController'
                 }
             }
+        })
+        .state('app', {
+            url: '/app',
+            abstract: true,
+            templateUrl: 'app.html',
+            controller: 'AppController'
+        })
+        .state('app.about', {
+            url: '/om',
+            views: {
+                'main': {
+                    templateUrl: "about/index.html",
+                }
+            }
         });
 
         $httpProvider.defaults.headers.common = {

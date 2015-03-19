@@ -17,9 +17,9 @@ controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$state
         .success(function(data){
           $scope.showLoginForm = false;
           store.set('jwt', data.jwt);
-          flash.success = "Inloggningen lyckades";
           loadJwtFromStore();
           $state.go('events.listEvents', {}, {reload: true});
+          flash.success = "Inloggningen lyckades";
         }).error(function(reason){
           flash.error = "Inloggningen misslyckades";
           console.log(reason);
@@ -40,7 +40,6 @@ controllers.controller("AppController", ['$scope', "store", "jwtHelper", '$state
       function loadJwtFromStore(){
         $scope.jwt = store.get('jwt');
         $scope.decodedJwt = $scope.jwt && jwtHelper.decodeToken($scope.jwt);
-
         $scope.endUserId = $scope.decodedJwt ? $scope.decodedJwt["end_user_id"] : false;
         //För att nå detta id i mina direktiv
         $rootScope.endUserId = $scope.endUserId;
