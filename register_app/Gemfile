@@ -6,7 +6,7 @@ gem 'faker',                '1.4.2'
 gem 'will_paginate',           '3.0.7'
 gem 'bootstrap-will_paginate', '0.0.10'
 gem 'sass-rails',           '5.0.1'
-# gem 'bootstrap-sass',       '3.2.0.0' # denna bör laddas via bower
+gem 'bootstrap-sass',       '3.2.0.0' # denna bör laddas via bower
 gem 'uglifier',             '2.5.3'
 gem 'coffee-rails',         '4.1.0'
 gem 'jquery-rails',         '4.0.3' # denna bör också laddas via bower
@@ -55,8 +55,8 @@ group :test do
 end
 
 group :production do
-	#https://github.com/Crowdtilt/CrowdtiltOpen/issues/168
-	#Verkar saknas stöd för dessa i windows
+  #https://github.com/Crowdtilt/CrowdtiltOpen/issues/168
+  #Verkar saknas stöd för dessa i windows
   #gem 'pg',             '0.17.1'
   #gem 'rails_12factor', '0.0.2'
   #gem 'unicorn',        '4.8.3'
