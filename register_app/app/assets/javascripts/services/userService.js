@@ -1,26 +1,26 @@
 "use strict"
 var toerh = angular.module('toerh');
 
-toerh.factory("userService",['$state', '$http', '$resource','flash',
-  function($state, $http, $resource, flash){
-    var Events = $resource('http://api.lvh.me:3000/end_users/:endUserId/events',{
+toerh.factory("userService",['$state', '$http', '$resource','flash', 'myConfig',
+  function($state, $http, $resource, flash, myConfig){
+    var Events = $resource(myConfig.baseUrl +'/end_users/:endUserId/events',{
       page: "@page"
     });
 
-    var EventsPagination = $resource('http://api.lvh.me:3000/end_users/:endUserId/events?page=:page&per_page=:perPage',{
+    var EventsPagination = $resource(myConfig.baseUrl +'/end_users/:endUserId/events?page=:page&per_page=:perPage',{
       page: "@page",
       perPage: "@perPage",
       endUserId: "@id"
     });
 
-    var User = $resource('http://api.lvh.me:3000/end_users/:endUserId', {
+    var User = $resource(myConfig.baseUrl +'/end_users/:endUserId', {
         endUserId: "@id"
     },{
         'save':   {method:'PUT'},
         'create': {method:'POST'}
     });
 
-    var UserPagination = $resource('http://api.lvh.me:3000/end_users/?page=:page&per_page=:perPage',{
+    var UserPagination = $resource(myConfig.baseUrl +'/end_users/?page=:page&per_page=:perPage',{
       page: "@page",
       perPage: "@perPage"
     });

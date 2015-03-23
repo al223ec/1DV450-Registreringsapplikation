@@ -1,9 +1,9 @@
 "use strict"
 var toerh = angular.module('toerh');
 
-toerh.factory("positionService",['$state', '$http', '$resource','flash',
-  function($state, $http, $resource, flash){
-    var Position = $resource('http://api.lvh.me:3000/positions/',{});
+toerh.factory("positionService",['$state', '$http', '$resource','flash', 'myConfig',
+  function($state, $http, $resource, flash, myConfig){
+    var Position = $resource(myConfig.baseUrl +'/positions/',{});
 
     function defaultError(httpResponse){
         console.log(httpResponse);

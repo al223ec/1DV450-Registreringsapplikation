@@ -1,10 +1,10 @@
 "use strict"
 var toerh = angular.module('toerh');
 
-toerh.factory("tagService",['$http', '$resource','flash',
-  function($http, $resource, flash){
+toerh.factory("tagService",['$http', '$resource','flash', 'myConfig',
+  function($http, $resource, flash, myConfig){
 
-    var TagEvents = $resource('http://api.lvh.me:3000/tags/:tagId/events/?page=:page&per_page=:perPage',{
+    var TagEvents = $resource(myConfig.baseUrl +'/tags/:tagId/events/?page=:page&per_page=:perPage',{
         tagId: "@id",
         page: "@page",
         perPage: "@perPage"
