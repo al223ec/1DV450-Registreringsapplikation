@@ -1,9 +1,9 @@
 "use strict"
 var toerh = angular.module('toerh');
 
-toerh.factory("eventService",['$http', '$resource','flash',
-  function($http, $resource, flash){
-    var Event = $resource('http://api.lvh.me:3000/events/:eventId', {
+toerh.factory("eventService",['$http', '$resource','flash', 'myConfig',
+  function($http, $resource, flash, myConfig){
+    var Event = $resource(myConfig.baseUrl +'/events/:eventId', {
         eventId: "@id"
     },{
         'save':   {method:'PUT'},
@@ -11,12 +11,12 @@ toerh.factory("eventService",['$http', '$resource','flash',
         'delete': {method: 'DELETE'}
     });
 
-    var Events = $resource('http://api.lvh.me:3000/events/?page=:page&per_page=:perPage',{
+    var Events = $resource(myConfig.baseUrl +'/events/?page=:page&per_page=:perPage',{
       page: "@page",
       perPage: "@perPage"
     });
 
-    var TagEvents = $resource('http://api.lvh.me:3000/tags/:tagId/events/?page=:page&per_page=:perPage',{
+    var TagEvents = $resource(myConfig.baseUrl +'/tags/:tagId/events/?page=:page&per_page=:perPage',{
         tagId: "@id",
         page: "@page",
         perPage: "@perPage"
@@ -46,7 +46,7 @@ toerh.factory("eventService",['$http', '$resource','flash',
       },
       filterEvents: function(params, pageNumber, eventsPerPage, callback, error){
           var queries = { queries: params.split('_') };
-          $http.post('http://api.lvh.me:3000/events/query?page='+pageNumber+'&per_page=' + eventsPerPage, queries)
+          $http.post(myConfig.baseUrl +'/events/query?page='+pageNumber+'&per_page=' + eventsPerPage, queries)
           .then(callback, error ? error : defaultError);
       }
  };

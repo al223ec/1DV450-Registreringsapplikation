@@ -175,4 +175,9 @@ toerh.run(['$state', 'store', '$rootScope', 'flash', function($state, store, $ro
         }
     })
 }]);
+
+toerh.constant("myConfig", {
+    "baseUrl": "http://api.lvh.me:3000",
+});
+
 var controllers = angular.module('controllers', []);
